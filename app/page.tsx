@@ -46,8 +46,12 @@ export default function Home() {
             From Custom Web Development to AWS Cloud Integration, AMS IT Services delivers premium technology solutions tailored to your success.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="lg" className="h-12 px-8">Explores Services</Button>
-            <Button size="lg" variant="outline" className="h-12 px-8 border-primary text-primary hover:bg-primary/5">Get in Touch</Button>
+            <Button size="lg" className="h-12 px-8" asChild>
+              <Link href="/services">Explore Services</Link>
+            </Button>
+            <Button size="lg" variant="outline" className="h-12 px-8 border-primary text-primary hover:bg-primary/5" asChild>
+              <Link href="/contact">Get in Touch</Link>
+            </Button>
           </div>
         </div>
 
