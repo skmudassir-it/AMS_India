@@ -28,20 +28,20 @@ export function Footer() {
                     <div>
                         <h4 className="font-semibold mb-4 text-primary">Main Features</h4>
                         <ul className="space-y-2 text-sm text-foreground/80">
-                            <li>Custom Web Development</li>
-                            <li>E-commerce Solutions</li>
-                            <li>Web App Development</li>
+                            <li><Link href="/services/custom-web-development" className="hover:text-primary transition-colors">Custom Web Development</Link></li>
+                            <li><Link href="/services/e-commerce-solutions" className="hover:text-primary transition-colors">E-commerce Solutions</Link></li>
+                            <li><Link href="/services/web-app-development" className="hover:text-primary transition-colors">Web App Development</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-semibold mb-4 text-primary">Services</h4>
                         <ul className="space-y-2 text-sm text-foreground/80">
-                            <li>Mobile App Development</li>
-                            <li>SEO Optimization</li>
-                            <li>Software Testing</li>
-                            <li>AWS Cloud Integration</li>
-                            <li>Backend Automation</li>
+                            <li><Link href="/services/mobile-app-development" className="hover:text-primary transition-colors">Mobile App Development</Link></li>
+                            <li><Link href="/services/seo-optimization" className="hover:text-primary transition-colors">SEO Optimization</Link></li>
+                            <li><Link href="/services/software-testing" className="hover:text-primary transition-colors">Software Testing</Link></li>
+                            <li><Link href="/services/aws-cloud-integration" className="hover:text-primary transition-colors">AWS Cloud Integration</Link></li>
+                            <li><Link href="/services/backend-automation" className="hover:text-primary transition-colors">Backend Automation</Link></li>
                         </ul>
                     </div>
 
