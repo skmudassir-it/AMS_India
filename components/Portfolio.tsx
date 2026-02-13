@@ -174,7 +174,7 @@ export function Portfolio() {
                         title={project.title}
                     >
                         <li
-                            className="hk_web_height tabs-web-dsgn relative overflow-hidden rounded-lg bg-white transition-all duration-300 hover:-translate-y-1 aspect-[16/11] list-none border border-black/5 shadow-sm hover:shadow-xl"
+                            className="hk_web_height tabs-web-dsgn relative w-full overflow-hidden rounded-lg bg-white transition-all duration-300 hover:-translate-y-1 aspect-[16/11] list-none border border-black/5 shadow-sm hover:shadow-xl"
                             style={{
                                 backgroundImage: `url('${project.image}')`,
                                 backgroundSize: '100% auto',
@@ -223,7 +223,6 @@ export function Portfolio() {
 
             <style jsx>{`
         .hk_web_height {
-          min-height: 320px;
           transition: background-position 6s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.5s ease;
         }
         .hk_web_height:hover {
