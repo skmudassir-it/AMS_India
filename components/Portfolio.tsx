@@ -18,7 +18,6 @@ const projects = [
     // E-commerce
     { title: "Volt Electronics", category: "E-commerce", image: "/websites_Assets/Volt Electronics.jpg" },
     { title: "Luxe Threads", category: "E-commerce", image: "/websites_Assets/Luxe Threads.jpg" },
-    { title: "Glow Essence", category: "E-commerce", image: "/websites_Assets/Glow Essence.jpg" },
     { title: "Pet Pulse", category: "E-commerce", image: "/websites_Assets/Pet Pulse.jpg" },
     { title: "Artisanal Attic", category: "E-commerce", image: "/websites_Assets/Artisanal Attic.jpg" },
     { title: "Hike & Peak", category: "E-commerce", image: "/websites_Assets/Hike & Peak.jpg" },
@@ -33,7 +32,6 @@ const projects = [
     { title: "Crave & Co.", category: "Food", image: "/websites_Assets/Crave & Co_.jpg" },
     { title: "Vine & Vessel", category: "Food", image: "/websites_Assets/Vine & Vessel.jpg" },
     { title: "The Morning Grind", category: "Food", image: "/websites_Assets/The Morning Grind.jpg" },
-    { title: "Harvest Table", category: "Food", image: "/websites_Assets/Harvest Table.jpg" },
     { title: "Urban Bites", category: "Food", image: "/websites_Assets/Urban Bites.jpg" },
     { title: "Knead & Dough", category: "Food", image: "/websites_Assets/Knead & Dough.jpg" },
     { title: "Sizzle & Spice", category: "Food", image: "/websites_Assets/Sizzle & Spice.jpg" },
@@ -49,7 +47,6 @@ const projects = [
     { title: "Nano Circuit", category: "Manufacturing", image: "/websites_Assets/Nano Circuit.jpg" },
     { title: "Fabri-Gate", category: "Manufacturing", image: "/websites_Assets/Fabri-Gate.jpg" },
     { title: "Hydra-Tech", category: "Manufacturing", image: "/websites_Assets/Hydra-Tech.jpg" },
-    { title: "Print-O-Metric", category: "Manufacturing", image: "/websites_Assets/Print-O-Metric.jpg" },
     { title: "Automotive Pro", category: "Manufacturing", image: "/websites_Assets/Automotive Pro.jpg" },
     { title: "Clear-Stream", category: "Manufacturing", image: "/websites_Assets/Clear-Stream.jpg" },
     { title: "Build-A-Box", category: "Manufacturing", image: "/websites_Assets/Build-A-Box.jpg" },
@@ -124,7 +121,6 @@ const projects = [
     { title: "Music Note", category: "Education", image: "/websites_Assets/Music Note.jpg" },
     { title: "Green Academy", category: "Education", image: "/websites_Assets/Green Academy.jpg" },
     { title: "Culinaria", category: "Education", image: "/websites_Assets/Culinaria.jpg" },
-    { title: "Art Beat", category: "Education", image: "/websites_Assets/Art Beat.jpg" },
     { title: "Trade Tech", category: "Education", image: "/websites_Assets/Trade Tech.jpg" },
 ]
 
