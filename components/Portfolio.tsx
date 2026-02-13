@@ -159,8 +159,8 @@ export function Portfolio() {
                 ))}
             </div>
 
-            {/* Projects Grid - Using the requested structure */}
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-12 gap-y-16 w-full list-none">
+            {/* Projects Grid - Matching Dense Layout from Reference */}
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 w-full list-none px-2">
                 {filteredProjects.map((project, idx) => (
                     <a
                         key={`${project.title}-${idx}`}
@@ -174,7 +174,7 @@ export function Portfolio() {
                         title={project.title}
                     >
                         <li
-                            className="hk_web_height tabs-web-dsgn relative overflow-hidden rounded-xl bg-secondary/5 transition-all duration-300 hover:-translate-y-2 aspect-[4/5] list-none border border-border/40 shadow-sm hover:shadow-2xl"
+                            className="hk_web_height tabs-web-dsgn relative overflow-hidden rounded-lg bg-white transition-all duration-300 hover:-translate-y-1 aspect-[16/11] list-none border border-black/5 shadow-sm hover:shadow-xl"
                             style={{
                                 backgroundImage: `url('${project.image}')`,
                                 backgroundSize: '100% auto',
@@ -182,9 +182,11 @@ export function Portfolio() {
                             }}
                             data-src={project.image}
                         >
-                            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 z-10">
-                                <span className="text-white/60 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{project.category}</span>
-                                <h3 className="text-white text-base font-semibold">{project.title}</h3>
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-4 z-10">
+                                <div className="text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <span className="text-white/80 text-[10px] font-bold uppercase tracking-[0.2em] block mb-2">{project.category}</span>
+                                    <h3 className="text-white text-base font-semibold">{project.title}</h3>
+                                </div>
                             </div>
                         </li>
                     </a>
@@ -212,7 +214,7 @@ export function Portfolio() {
                             <img
                                 src={selectedImage}
                                 alt="Project Full View"
-                                className="w-full h-auto object-contain block ring-1 ring-white/10"
+                                className="w-full h-auto object-contain block"
                             />
                         </div>
                     </div>
@@ -221,7 +223,7 @@ export function Portfolio() {
 
             <style jsx>{`
         .hk_web_height {
-          min-height: 480px;
+          min-height: 320px;
           transition: background-position 6s cubic-bezier(0.45, 0.05, 0.55, 0.95), transform 0.5s ease;
         }
         .hk_web_height:hover {
