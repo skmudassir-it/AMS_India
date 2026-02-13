@@ -5,6 +5,7 @@ import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, La
 
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
+import AnimatedStats from "@/components/AnimatedStats"
 
 export default function Home() {
   const mainFeatures = [
@@ -35,31 +36,50 @@ export default function Home() {
   ]
 
   return (
-    <div className="flex flex-col gap-20 pb-20">
+    <div className="flex flex-col pb-20">
+      {/* Announcement Bar */}
+      <div className="w-full bg-[#BB290E] text-white py-2.5 px-4 text-center text-sm font-semibold tracking-wide z-[100] relative overflow-hidden">
+        <div className="absolute inset-0 bg-white/10 animate-pulse" />
+        <span className="relative">🚀 Limited Time Offer: Get a Free Business Strategy Consultation with Every Project!</span>
+      </div>
+
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-accent/20 to-secondary/10">
-        <div className="container px-4 text-center space-y-8 relative z-10">
+      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-white">
+        {/* Background Image with Gradient Overlay */}
+        <div
+          className="absolute inset-0 z-0 opacity-20"
+          style={{
+            backgroundImage: "url('/hero-bg.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/40 to-white z-0" />
+
+        <div className="container px-4 text-center space-y-12 relative z-10 pt-20">
           <div className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
             Innovating from India for the World
           </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-foreground tracking-tight max-w-4xl mx-auto">
-            Empowering Your Business with <span className="text-primary">Next-Gen IT Solutions</span>
+          <h1 className="text-5xl md:text-8xl font-extrabold text-foreground tracking-tight max-w-5xl mx-auto leading-tight">
+            Empowering Your Business with <br /><span className="text-[#BB290E]">Next-Gen IT Solutions</span>
           </h1>
-          <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto font-medium">
             From Custom Web Development to AWS Cloud Integration, AMS IT Services delivers premium technology solutions tailored to your success.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="lg" className="h-12 px-8" asChild>
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
+            <Button size="lg" className="h-14 px-10 text-lg bg-[#BB290E] hover:bg-[#96210b] shadow-xl hover:shadow-[#BB290E]/20 transition-all" asChild>
               <Link href="/services">Explore Services</Link>
             </Button>
-            <Button size="lg" variant="outline" className="h-12 px-8 border-primary text-primary hover:bg-primary/5" asChild>
+            <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-[#BB290E] text-[#BB290E] hover:bg-[#BB290E]/5 transition-all" asChild>
               <Link href="/contact">Get in Touch</Link>
             </Button>
           </div>
         </div>
 
-        {/* Animated background element */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -z-1" />
+        {/* Stats Grid Under Hero Content */}
+        <div className="w-full relative z-10 mt-12 mb-8">
+          <AnimatedStats />
+        </div>
       </section>
 
       {/* Main Features */}

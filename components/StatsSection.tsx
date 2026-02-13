@@ -18,23 +18,25 @@ const logos = [
     { name: 'Google DeepMind', src: '/logos/google-deepmind.svg' },
 ];
 
-const stats = [
-    { label: 'Website Developed', value: '987+' },
-    { label: 'Logo Design', value: '3487+' },
-    { label: 'Mobile Application Developed', value: '74+' },
-    { label: 'Ecommerce Website Developed', value: '878+' },
-];
-
 const StatsSection = () => {
     return (
         <section className="py-20 bg-white overflow-hidden">
             <div className="container mx-auto px-4">
+                {/* Trust Bar */}
+                <div className="text-center mb-16">
+                    <p className="text-xl text-gray-700 font-medium">
+                        We rated <span className="font-bold underline decoration-primary decoration-2">4.7 out of 5</span>{' '}
+                        <span className="text-yellow-400">★★★★★</span>{' '}
+                        served <span className="font-bold">1200+</span> satisfied customers.
+                    </p>
+                </div>
+
                 {/* Logo Marquee */}
-                <div className="relative mb-16">
+                <div className="relative">
                     <div className="flex overflow-hidden group">
-                        <div className="flex animate-marquee whitespace-nowrap items-center py-4">
+                        <div className="flex animate-marquee whitespace-nowrap items-center py-8">
                             {[...logos, ...logos].map((logo, index) => (
-                                <div key={index} className="mx-8 w-32 h-12 relative grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center">
+                                <div key={index} className="mx-12 w-40 h-16 relative grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                                     <img
                                         src={logo.src}
                                         alt={logo.name}
@@ -45,36 +47,8 @@ const StatsSection = () => {
                         </div>
                     </div>
                     {/* Fades */}
-                    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
-                    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
-                </div>
-
-                {/* Trust Bar */}
-                <div className="text-center mb-20">
-                    <p className="text-lg text-gray-700 font-medium">
-                        We rated <span className="font-bold underline decoration-primary decoration-2">4.7 out of 5</span>{' '}
-                        <span className="text-yellow-400">★★★★★</span>{' '}
-                        served <span className="font-bold">1200+</span> satisfied customers.
-                    </p>
-                </div>
-
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-                    {stats.map((stat, index) => (
-                        <div key={index} className="text-center group">
-                            <div className="text-5xl md:text-6xl font-bold text-[#b42106] mb-3 transition-transform duration-300 group-hover:scale-110">
-                                {stat.value}
-                            </div>
-                            <p className="text-sm md:text-base font-semibold text-gray-800 leading-tight">
-                                {stat.label.split(' ').map((word, i) => (
-                                    <React.Fragment key={i}>
-                                        {word}
-                                        <br />
-                                    </React.Fragment>
-                                ))}
-                            </p>
-                        </div>
-                    ))}
+                    <div className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white to-transparent z-10"></div>
+                    <div className="absolute inset-y-0 right-0 w-48 bg-gradient-to-l from-white to-transparent z-10"></div>
                 </div>
             </div>
 
@@ -84,7 +58,7 @@ const StatsSection = () => {
           100% { transform: translateX(-50%); }
         }
         .animate-marquee {
-          animation: marquee 30s linear infinite;
+          animation: marquee 40s linear infinite;
         }
         .animate-marquee:hover {
           animation-play-state: paused;
