@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, Layers, ShieldCheck } from "lucide-react"
 
 import { Portfolio } from "@/components/Portfolio"
+import StatsSection from "@/components/StatsSection"
 
 export default function Home() {
   const mainFeatures = [
@@ -86,6 +87,9 @@ export default function Home() {
 
       {/* Portfolio Section */}
       <Portfolio />
+
+      {/* Partners and Stats Section */}
+      <StatsSection />
 
       {/* Service Grid Highlight */}
       <section className="bg-secondary/20 py-20">
