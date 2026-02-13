@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, Layers, ShieldCheck } from "lucide-react"
 
+import { Portfolio } from "@/components/Portfolio"
+
 export default function Home() {
   const mainFeatures = [
     {
@@ -81,6 +83,9 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Portfolio Section */}
+      <Portfolio />
 
       {/* Service Grid Highlight */}
       <section className="bg-secondary/20 py-20">
