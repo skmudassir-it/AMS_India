@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import Script from "next/script";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +37,20 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Script
+          id="mautic-tracking"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d,t,u,n,a,m){w['MauticTrackingObject']=n;
+                w[n]=w[n]||function(){(w[n].q=w[n].q||[]).push(arguments)},a=d.createElement(t),
+                m=d.getElementsByTagName(t)[0];a.async=1;a.src=u;m.parentNode.insertBefore(a,m)
+              })(window,document,'script','${process.env.NEXT_PUBLIC_MAUTIC_URL}/mtc.js','mt');
+
+              mt('send', 'pageview');
+            `,
+          }}
+        />
       </body>
     </html>
   );

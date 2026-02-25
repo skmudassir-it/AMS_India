@@ -16,39 +16,48 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Contact Form */}
                 <Card className="p-4 md:p-8">
-                    <form className="space-y-6">
+                    <form
+                        method="post"
+                        action={`${process.env.NEXT_PUBLIC_MAUTIC_URL}/form/submit?formId=${process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID}`}
+                        id="mautic_contact_form"
+                        className="space-y-6"
+                    >
+                        <input type="hidden" name="mauticform[formId]" value={process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID} />
+                        <input type="hidden" name="mauticform[messenger]" value="1" />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">First Name</label>
-                                <Input placeholder="John" />
+                                <Input name="mauticform[firstname]" placeholder="John" required />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">Last Name</label>
-                                <Input placeholder="Doe" />
+                                <Input name="mauticform[lastname]" placeholder="Doe" required />
                             </div>
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm font-medium">Email Address</label>
-                            <Input type="email" placeholder="john@example.com" />
+                            <Input type="email" name="mauticform[email]" placeholder="john@example.com" required />
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm font-medium">Service Interested In</label>
-                            <select className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
-                                <option>Custom Web Development</option>
-                                <option>E-commerce Solutions</option>
-                                <option>Mobile App Development</option>
-                                <option>SEO Optimization</option>
-                                <option>Other Services</option>
+                            <select name="mauticform[service_interested_in]" className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
+                                <option value="Custom Web Development">Custom Web Development</option>
+                                <option value="E-commerce Solutions">E-commerce Solutions</option>
+                                <option value="Mobile App Development">Mobile App Development</option>
+                                <option value="SEO Optimization">SEO Optimization</option>
+                                <option value="Other Services">Other Services</option>
                             </select>
                         </div>
                         <div className="space-y-2">
                             <label className="text-sm font-medium">Your Message</label>
                             <textarea
+                                name="mauticform[message]"
                                 className="w-full min-h-[150px] p-3 rounded-md border border-input bg-background text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                                 placeholder="How can we help you?"
+                                required
                             ></textarea>
                         </div>
-                        <Button className="w-full h-12 gap-2 text-lg">
+                        <Button type="submit" className="w-full h-12 gap-2 text-lg">
                             Send Message <Send className="h-4 w-4" />
                         </Button>
                     </form>

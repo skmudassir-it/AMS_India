@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, Layers, ShieldCheck } from "lucide-react"
@@ -6,8 +7,11 @@ import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, La
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
 import AnimatedStats from "@/components/AnimatedStats"
+import { getBlogPosts } from "@/lib/blog"
+import { ArrowRight } from "lucide-react"
 
-export default function Home() {
+export default async function Home() {
+  const blogPosts = await getBlogPosts()
   const mainFeatures = [
     {
       title: "Custom Web Development",
@@ -58,10 +62,10 @@ export default function Home() {
 
         <div className="container px-4 text-center space-y-12 relative z-10 pt-20">
           <div className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
-            Innovating from India for the World
+            Driving Global Excellence through Innovation
           </div>
           <h1 className="text-5xl md:text-8xl font-extrabold text-foreground tracking-tight max-w-5xl mx-auto leading-tight">
-            Empowering Your Business with <br /><span className="text-[#BB290E]">Next-Gen IT Solutions</span>
+            Empowering Your Business with <br /><span className="text-[#BB290E]">AMS IT Services</span>
           </h1>
           <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto font-medium">
             From Custom Web Development to AWS Cloud Integration, AMS IT Services delivers premium technology solutions tailored to your success.
@@ -134,6 +138,49 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Latest Blog Posts Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+          <div className="space-y-2">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary">Latest from Our Blog</h2>
+            <p className="text-foreground/60 max-w-xl">Stay informed with our latest industrial insights and tech updates.</p>
+          </div>
+          <Button variant="outline" className="border-[#BB290E] text-[#BB290E] hover:bg-[#BB290E]/5" asChild>
+            <Link href="/blog">View All Posts</Link>
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {blogPosts.slice(0, 3).map((post) => (
+            <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex flex-col space-y-4">
+              <div className="relative h-64 rounded-2xl overflow-hidden shadow-md">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="bg-[#BB290E] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                    {post.category}
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <h3 className="text-xl font-bold group-hover:text-[#BB290E] transition-colors line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-foreground/60 text-sm line-clamp-2 leading-relaxed">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center gap-2 pt-2 text-[#BB290E] font-bold text-sm">
+                  Read More <ArrowRight className="w-4 h-4" />
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 

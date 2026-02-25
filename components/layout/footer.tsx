@@ -48,10 +48,43 @@ export function Footer() {
                     <div className="space-y-4">
                         <h4 className="font-semibold text-primary">Newsletter</h4>
                         <p className="text-xs text-foreground/70">Subscribe to get the latest updates and news.</p>
-                        <div className="flex gap-2">
-                            <Input placeholder="Email Address" className="bg-white/50" />
-                            <Button size="sm">Subscribe</Button>
-                        </div>
+                        <form
+                            method="post"
+                            action={`${process.env.NEXT_PUBLIC_MAUTIC_URL}/form/submit?formId=${process.env.NEXT_PUBLIC_MAUTIC_NEWSLETTER_FORM_ID}`}
+                            id="mautic_newsletter_form"
+                            className="space-y-3"
+                        >
+                            <input type="hidden" name="mauticform[formId]" value={process.env.NEXT_PUBLIC_MAUTIC_NEWSLETTER_FORM_ID} />
+                            <input type="hidden" name="mauticform[messenger]" value="1" />
+                            <Input
+                                type="email"
+                                name="mauticform[email]"
+                                required
+                                placeholder="E-mail"
+                                className="bg-white/50 border-primary/20 focus:border-primary"
+                            />
+                            <Input
+                                type="text"
+                                name="mauticform[firstname]"
+                                placeholder="Name (optional)"
+                                className="bg-white/50 border-primary/20 focus:border-primary"
+                            />
+                            <div className="flex items-center gap-2">
+                                <input
+                                    id="footer-sub"
+                                    type="checkbox"
+                                    name="mauticform[footer_subscription]"
+                                    defaultChecked
+                                    className="w-4 h-4 rounded border-primary/30 text-primary focus:ring-primary accent-primary"
+                                />
+                                <label htmlFor="footer-sub" className="text-[10px] text-foreground/70 cursor-pointer hover:text-primary transition-colors">
+                                    Footer subscription
+                                </label>
+                            </div>
+                            <Button type="submit" size="sm" className="w-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all active:scale-[0.98]">
+                                Subscribe
+                            </Button>
+                        </form>
                     </div>
                 </div>
 
