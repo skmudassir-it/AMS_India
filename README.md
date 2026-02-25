@@ -31,6 +31,20 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Deployment Steps:
+
+1.  **Push your code** to a GitHub repository.
+2.  **Import the project** in Vercel.
+3.  **Configure Environment Variables**: This is a CRITICAL step. In the Vercel project settings, add the following variables from your `.env.local`:
+    *   `NEXT_PUBLIC_SUPABASE_URL`
+    *   `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+4.  **Deploy**: Vercel will build and deploy your application.
+
+### Troubleshooting "Failed to collect page data":
+If you see an error like `Failed to collect page data for /blog/[slug]`, it means the build process tried to fetch data from Supabase but couldn't. This is usually because:
+-   The Environment Variables are not added to Vercel.
+-   The Supabase URL or Key is incorrect.
+
+Ensure these variables are added in **Vercel -> Project Settings -> Environment Variables**.
