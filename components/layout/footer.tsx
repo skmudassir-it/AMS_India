@@ -29,19 +29,20 @@ export function Footer() {
                         <h4 className="font-semibold mb-4 text-primary">Main Features</h4>
                         <ul className="space-y-2 text-sm text-foreground/80">
                             <li><Link href="/services/custom-web-development" className="hover:text-primary transition-colors">Custom Web Development</Link></li>
-                            <li><Link href="/services/e-commerce-solutions" className="hover:text-primary transition-colors">E-commerce Solutions</Link></li>
+                            <li><Link href="/services/mobile-app-development" className="hover:text-primary transition-colors">Mobile App Development</Link></li>
                             <li><Link href="/services/web-app-development" className="hover:text-primary transition-colors">Web App Development</Link></li>
+                            <li><Link href="/services/e-commerce-solutions" className="hover:text-primary transition-colors">E-commerce Solutions</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-semibold mb-4 text-primary">Services</h4>
                         <ul className="space-y-2 text-sm text-foreground/80">
-                            <li><Link href="/services/mobile-app-development" className="hover:text-primary transition-colors">Mobile App Development</Link></li>
                             <li><Link href="/services/seo-optimization" className="hover:text-primary transition-colors">SEO Optimization</Link></li>
+                            <li><Link href="/services/digital-marketing" className="hover:text-primary transition-colors">Digital Marketing</Link></li>
+                            <li><Link href="/services/crm" className="hover:text-primary transition-colors">CRM Development</Link></li>
+                            <li><Link href="/services/content-writing" className="hover:text-primary transition-colors">Content Writing</Link></li>
                             <li><Link href="/services/software-testing" className="hover:text-primary transition-colors">Software Testing</Link></li>
-                            <li><Link href="/services/aws-cloud-integration" className="hover:text-primary transition-colors">AWS Cloud Integration</Link></li>
-                            <li><Link href="/services/backend-automation" className="hover:text-primary transition-colors">Backend Automation</Link></li>
                         </ul>
                     </div>
 

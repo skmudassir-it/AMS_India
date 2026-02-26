@@ -1,80 +1,196 @@
 import { Button } from "@/components/ui/button"
-import { Code2, CheckCircle, Smartphone, Globe, Layers } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import {
+    Code2,
+    Globe,
+    Cpu,
+    Zap,
+    ShieldCheck,
+    Database,
+    Layout,
+    Search,
+    Settings,
+    Workflow,
+    Rocket,
+    CheckCircle2,
+    BarChart3,
+    Cloud,
+    Terminal
+} from "lucide-react"
 import Link from "next/link"
 
 export default function CustomWebDevPage() {
-    const benefits = [
-        "Fully tailored to your business needs",
-        "High-performance and clean codebase",
-        "Scalable architecture for future growth",
-        "Modern UI/UX focused on conversions",
-        "Seamless integration with third-party tools"
+    const scopeItems = [
+        { title: "Bespoke Web Apps", desc: "Custom-built applications tailored to your unique business logic and workflows.", icon: Code2 },
+        { title: "Dynamic Platforms", desc: "High-performance websites designed for scalability and user engagement.", icon: Globe },
+        { title: "API Integration", desc: "Seamless connectivity between your web systems and third-party services.", icon: Cpu },
+        { title: "Cloud Solutions", desc: "Secure and robust architectures hosted on industry-leading cloud platforms.", icon: Cloud }
+    ]
+
+    const processSteps = [
+        { step: "01", title: "Discovery", desc: "Deep dive into your requirements and business goals.", icon: Search },
+        { step: "02", title: "Architecture", desc: "Designing a scalable and future-proof system structure.", icon: Database },
+        { step: "03", title: "Agile Dev", desc: "Iterative development with complete transparency and feedback.", icon: Terminal },
+        { step: "04", title: "QA Testing", desc: "Rigorous testing to ensure bug-free and smooth performance.", icon: ShieldCheck },
+        { step: "05", title: "Deployment", desc: "Seamless launch and post-deployment support.", icon: Rocket }
+    ]
+
+    const webFeatures = [
+        { title: "Next.js Excellence", icon: Zap, desc: "Leveraging the power of React and Next.js for lightning-fast sites." },
+        { title: "SEO Optimization", icon: BarChart3, desc: "Built-in SEO best practices to ensure your site is found." },
+        { title: "Responsive UI", icon: Layout, desc: "Perfectly optimized experiences for desktop, tablet, and mobile covers." },
+        { title: "Secure Backend", icon: Settings, desc: "Industry-standard security protocols to protect your data." }
     ]
 
     return (
-        <div className="container mx-auto px-4 py-20">
-            <div className="max-w-5xl mx-auto">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
-                    <div className="space-y-6">
-                        <div className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-widest">
-                            Tailor-made Digital Solutions
+        <div className="bg-white">
+            {/* Hero Section */}
+            <section className="container mx-auto px-4 py-24 md:py-32">
+                <div className="flex flex-col lg:flex-row gap-16 items-center">
+                    <div className="flex-1 space-y-8">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-black uppercase tracking-[0.2em]">
+                            <Code2 className="h-4 w-4" /> Engineering Excellence
                         </div>
-                        <h1 className="text-4xl md:text-7xl font-extrabold text-primary tracking-tight">
-                            Custom Web <span className="text-foreground">Development</span>
+                        <h1 className="text-6xl md:text-8xl font-black text-primary leading-[0.9] tracking-tighter italic">
+                            Custom <br />
+                            <span className="text-blue-600">Web Dev.</span>
                         </h1>
-                        <p className="text-lg text-foreground/70 leading-relaxed">
-                            We don't do generic templates. We build bespoke web experiences that reflect your brand identity and drive measurable business results.
+                        <p className="text-xl text-slate-600 leading-relaxed max-w-xl font-medium">
+                            We don&apos;t use templates. We build bespoke digital experiences that reflect your brand identity and drive measurable results.
                         </p>
-                        <div className="flex gap-4">
-                            <Button size="lg" asChild>
-                                <Link href="/contact">Discuss Your Vision</Link>
+                        <div className="flex flex-wrap gap-4 pt-4">
+                            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 rounded-full px-12 h-16 text-lg font-black italic shadow-2xl shadow-blue-500/20" asChild>
+                                <Link href="/contact">Build Your Vision</Link>
                             </Button>
                         </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-accent/40 rounded-2xl p-6 aspect-square flex flex-col items-center justify-center gap-4">
-                            <Code2 className="h-10 w-10 text-primary" />
-                            <span className="font-bold text-sm">Full-Stack Experts</span>
-                        </div>
-                        <div className="bg-secondary/40 rounded-2xl p-6 aspect-square flex flex-col items-center justify-center gap-4 translate-y-8">
-                            <Globe className="h-10 w-10 text-primary" />
-                            <span className="font-bold text-sm">SEO Friendly</span>
-                        </div>
-                        <div className="bg-secondary/40 rounded-2xl p-6 aspect-square flex flex-col items-center justify-center gap-4">
-                            <Smartphone className="h-10 w-10 text-primary" />
-                            <span className="font-bold text-sm">Responsive Design</span>
-                        </div>
-                        <div className="bg-accent/40 rounded-2xl p-6 aspect-square flex flex-col items-center justify-center gap-4 translate-y-8">
-                            <Layers className="h-10 w-10 text-primary" />
-                            <span className="font-bold text-sm">Modern Stack</span>
+                    <div className="flex-1 relative">
+                        <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-[100px] rounded-full" />
+                        <div className="relative aspect-square bg-slate-50 rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden p-12">
+                            <div className="grid grid-cols-2 gap-6 h-full">
+                                <div className="bg-white rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform rotate-3">
+                                    <Globe className="h-12 w-12 text-blue-600" />
+                                    <div className="h-2 bg-slate-100 rounded-full w-full" />
+                                    <div className="h-2 bg-slate-100 rounded-full w-2/3" />
+                                </div>
+                                <div className="bg-blue-600 rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform -rotate-3 translate-y-8">
+                                    <Terminal className="h-12 w-12 text-white" />
+                                    <div className="h-2 bg-white/20 rounded-full w-full" />
+                                    <div className="h-2 bg-white/20 rounded-full w-2/3" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div className="py-20 border-t border-secondary/20">
-                    <h2 className="text-3xl font-bold text-primary mb-12 text-center">Our Custom Solution Benefits</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                        {benefits.map((benefit, idx) => (
-                            <div key={idx} className="flex items-center gap-4 p-6 bg-white rounded-2xl shadow-sm border border-primary/5 hover:border-primary/20 transition-all">
-                                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                                    <CheckCircle className="h-6 w-6 text-primary" />
+            {/* What We Do - Scope */}
+            <section className="bg-slate-50 py-24 md:py-32">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-3xl mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black text-primary italic mb-6">What We Do.</h2>
+                        <p className="text-xl text-slate-600 font-medium">Full-stack solutions for ambitious digital projects.</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {scopeItems.map((item, idx) => (
+                            <Card key={idx} className="bg-white p-10 rounded-[3rem] border-none shadow-xl hover:scale-105 transition-transform duration-500">
+                                <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-blue-500 mb-8">
+                                    <item.icon className="h-8 w-8" />
                                 </div>
-                                <span className="text-lg font-medium text-foreground/80">{benefit}</span>
+                                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* How We Do - Process */}
+            <section className="container mx-auto px-4 py-24 md:py-32">
+                <div className="text-center max-w-4xl mx-auto mb-20 space-y-6">
+                    <h2 className="text-5xl md:text-6xl font-black text-primary italic">How We Do It.</h2>
+                    <p className="text-xl text-slate-600">A systematic approach to building reliable software.</p>
+                </div>
+                <div className="relative">
+                    <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 hidden lg:block" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative z-10">
+                        {processSteps.map((item, idx) => (
+                            <div key={idx} className="flex flex-col items-center group">
+                                <div className="w-20 h-20 bg-white border-2 border-slate-100 rounded-full flex items-center justify-center text-primary font-black text-xl mb-6 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300 shadow-xl">
+                                    {item.step}
+                                </div>
+                                <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                                <p className="text-center text-slate-500 text-sm">{item.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
+            </section>
 
-                <div className="bg-accent/30 rounded-[3rem] p-10 md:p-20 text-center space-y-8">
-                    <h2 className="text-3xl md:text-5xl font-bold text-primary">Your Dream Website Starts Here</h2>
-                    <p className="text-lg text-foreground/60 max-w-2xl mx-auto leading-relaxed">
-                        Whether you need a complex landing page or a full-scale corporate portal, our team has the expertise to deliver it.
-                    </p>
-                    <Button variant="default" size="lg" className="h-14 px-10 rounded-full" asChild>
-                        <Link href="/contact">Get a Custom Quote</Link>
-                    </Button>
+            {/* Tech Highlights - Features */}
+            <section className="bg-slate-900 py-24 md:py-32 rounded-[4rem] mx-4 mb-24 overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/10 to-transparent pointer-events-none" />
+                <div className="container mx-auto px-12 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                        <div className="space-y-10">
+                            <h2 className="text-5xl md:text-7xl font-black text-white italic leading-none">
+                                Cutting-Edge <br />
+                                <span className="text-blue-500">Tech Stack.</span>
+                            </h2>
+                            <p className="text-xl text-slate-400 font-medium">
+                                We utilize the latest tools and frameworks to ensure your web application is fast, secure, and future-proof.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {webFeatures.map((item, idx) => (
+                                    <div key={idx} className="flex gap-4">
+                                        <div className="shrink-0 w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-blue-500">
+                                            <item.icon className="h-6 w-6" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h4 className="text-lg font-bold text-white">{item.title}</h4>
+                                            <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="relative hidden lg:block">
+                            <Card className="bg-white/5 border-white/10 backdrop-blur-xl p-12 rounded-[3.5rem] shadow-4xl transform -rotate-3">
+                                <div className="space-y-8">
+                                    <div className="flex justify-between items-center text-white/40">
+                                        <Terminal className="h-8 w-8" />
+                                        <CheckCircle2 className="h-8 w-8" />
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div className="h-4 bg-blue-600 rounded-full w-3/4" />
+                                        <div className="h-4 bg-white/10 rounded-full w-full" />
+                                        <div className="h-4 bg-white/10 rounded-full w-5/6" />
+                                    </div>
+                                    <div className="pt-8">
+                                        <div className="w-full h-16 bg-white rounded-3xl" />
+                                    </div>
+                                </div>
+                            </Card>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="container mx-auto px-4 py-24 mb-20">
+                <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-12 md:p-24 rounded-[4rem] text-center space-y-10 shadow-3xl relative overflow-hidden">
+                    <Rocket className="absolute -top-10 -right-10 w-64 h-64 text-white opacity-5" />
+                    <h2 className="text-4xl md:text-7xl font-black text-white italic leading-none">Ready to scale your business?</h2>
+                    <p className="text-xl text-blue-100 max-w-2xl mx-auto font-medium opacity-80">
+                        Let&apos;s build a custom web solution that delivers real impact and sustainable growth.
+                    </p>
+                    <div className="pt-6">
+                        <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-slate-50 rounded-full px-16 h-20 text-2xl font-black italic shadow-2xl" asChild>
+                            <Link href="/contact">Get Started Today</Link>
+                        </Button>
+                    </div>
+                </div>
+            </section>
         </div>
     )
 }

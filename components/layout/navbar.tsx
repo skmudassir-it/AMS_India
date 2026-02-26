@@ -16,15 +16,11 @@ export function Navbar() {
         { name: "Mobile App Development", href: "/services/mobile-app-development" },
         { name: "Digital Marketing", href: "/services/digital-marketing" },
         { name: "SEO Marketing", href: "/services/seo-optimization" },
-        { name: "PPC Marketing", href: "/services/ppc-marketing" },
-        { name: "SMM Marketing", href: "/services/smm-marketing" },
         { name: "CRM", href: "/services/crm" },
-        { name: "LMS", href: "/services/lms" },
         { name: "Content Writing", href: "/services/content-writing" },
         { name: "Web Content", href: "/services/web-content" },
-        { name: "Amazon Automation", href: "/services/amazon-automation" },
         { name: "Articles", href: "/services/articles" },
-        { name: "Blogs", href: "/services/blogs" }
+        { name: "Blog Posts", href: "/services/blog-posts" }
     ]
 
     return (

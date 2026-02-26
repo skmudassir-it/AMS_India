@@ -30,19 +30,9 @@ export default async function PostPage({ params }: PostPageProps) {
         <div className="flex flex-col min-h-screen">
             {/* Post Hero */}
             <section className="relative h-[60vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-accent/20">
-                {post.image ? (
-                    <Image
-                        src={post.image}
-                        alt={post.title}
-                        fill
-                        className="object-cover"
-                        priority
-                    />
-                ) : (
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
-                        <span className="text-white/10 font-bold text-9xl">AMS</span>
-                    </div>
-                )}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
+                    <span className="text-white/10 font-bold text-9xl">AMS</span>
+                </div>
                 <div className="absolute inset-0 bg-black/50 z-10" />
                 <div className="container px-4 relative z-20 text-center text-white space-y-6">
                     <Link
@@ -148,19 +138,10 @@ export default async function PostPage({ params }: PostPageProps) {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {relatedPosts.map((rPost) => (
                                 <Link key={rPost.slug} href={`/blog/${rPost.slug}`} className="group flex flex-col space-y-4">
-                                    <div className="relative h-64 rounded-2xl overflow-hidden shadow-md bg-accent/20">
-                                        {rPost.image ? (
-                                            <Image
-                                                src={rPost.image}
-                                                alt={rPost.title}
-                                                fill
-                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                            />
-                                        ) : (
-                                            <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
-                                                <span className="text-primary/10 font-bold text-4xl">AMS</span>
-                                            </div>
-                                        )}
+                                    <div className="relative h-24 rounded-2xl overflow-hidden shadow-md bg-accent/20">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
+                                            <span className="text-primary/10 font-bold text-4xl">AMS</span>
+                                        </div>
                                         <div className="absolute top-4 left-4">
                                             <span className="bg-[#BB290E] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                                                 {rPost.category}

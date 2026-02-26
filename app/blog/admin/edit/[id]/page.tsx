@@ -1,9 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState, use } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { createBlogPost } from "@/lib/blog"
+import { getBlogPostById, updateBlogPost, BlogPost } from "@/lib/blog"
 import { mirrorImage } from "@/lib/image-proxy"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,73 +12,94 @@ import { Textarea } from "@/components/ui/textarea"
 import { ArrowLeft, Loader2, Save } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 
-export default function NewPostPage() {
+interface EditPostPageProps {
+    params: Promise<{
+        id: string
+    }>
+}
+
+export default function EditPostPage({ params }: EditPostPageProps) {
+    const { id } = use(params)
     const router = useRouter()
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
-    const [formData, setFormData] = useState({
-        title: "",
-        slug: "",
-        excerpt: "",
-        content: "",
-        image: "",
-        author: "",
-        category: "",
-        date: new Date().toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-        })
-    })
+    const [fetching, setFetching] = useState(true)
+    const [formData, setFormData] = useState<BlogPost | null>(null)
 
-    // Auto-generate slug from title
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const title = e.target.value
-        const slug = title
-            .toLowerCase()
-            .replace(/[^\w ]+/g, "")
-            .replace(/ +/g, "-")
+    useEffect(() => {
+        loadPost()
+    }, [id])
 
-        setFormData({ ...formData, title, slug })
+    async function loadPost() {
+        setFetching(true)
+        try {
+            const post = await getBlogPostById(id)
+            if (post) {
+                setFormData(post)
+            } else {
+                toast({
+                    title: "Error",
+                    description: "Blog post not found.",
+                    variant: "destructive",
+                })
+                router.push("/blog/admin")
+            }
+        } catch (error) {
+            toast({
+                title: "Error",
+                description: "Failed to load blog post.",
+                variant: "destructive",
+            })
+        } finally {
+            setFetching(false)
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        if (!formData || !formData.id) return
         setLoading(true)
 
         try {
-            // Mirror the image to your secure server if it's an external URL
             let finalImageUrl = formData.image
             if (formData.image && formData.image.startsWith('http') && !formData.image.includes('18.226.187.11')) {
                 toast({
                     title: "Image Processing",
-                    description: "Mirroring external image to your secure server...",
+                    description: "Mirroring external image...",
                 })
                 try {
                     finalImageUrl = await mirrorImage(formData.image)
                 } catch (mirrorError) {
-                    console.error("Mirroring failed, using original URL", mirrorError)
-                    // We continue even if mirroring fails to not block post creation
-                    // but we might want to warn the user
+                    console.error("Mirroring failed", mirrorError)
                 }
             }
 
-            await createBlogPost({ ...formData, image: finalImageUrl })
+            await updateBlogPost(formData.id, { ...formData, image: finalImageUrl })
             toast({
                 title: "Success",
-                description: "Blog post created successfully!",
+                description: "Blog post updated successfully!",
             })
             router.push("/blog/admin")
         } catch (error: any) {
             toast({
                 title: "Error",
-                description: error.message || "Failed to create blog post.",
+                description: error.message || "Failed to update blog post.",
                 variant: "destructive",
             })
         } finally {
             setLoading(false)
         }
     }
+
+    if (fetching) {
+        return (
+            <div className="container mx-auto px-4 py-20 min-h-screen flex items-center justify-center">
+                <Loader2 className="w-8 h-8 animate-spin text-[#BB290E]" />
+            </div>
+        )
+    }
+
+    if (!formData) return null
 
     return (
         <div className="container mx-auto px-4 py-20 min-h-screen">
@@ -90,8 +111,8 @@ export default function NewPostPage() {
                             Back to Dashboard
                         </Link>
                     </Button>
-                    <h1 className="text-3xl font-bold text-primary">Create New Blog Post</h1>
-                    <p className="text-foreground/60">Fill out the form below to publish a new post.</p>
+                    <h1 className="text-3xl font-bold text-primary">Edit Blog Post</h1>
+                    <p className="text-foreground/60">Update the details of your blog post.</p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
@@ -100,9 +121,8 @@ export default function NewPostPage() {
                             <Label htmlFor="title">Post Title</Label>
                             <Input
                                 id="title"
-                                placeholder="e.g. 10 Tips for Web Performance"
                                 value={formData.title}
-                                onChange={handleTitleChange}
+                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                 required
                             />
                         </div>
@@ -110,9 +130,8 @@ export default function NewPostPage() {
                             <Label htmlFor="slug">Slug (URL path)</Label>
                             <Input
                                 id="slug"
-                                placeholder="e.g. 10-tips-web-performance"
                                 value={formData.slug}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, slug: e.target.value })}
+                                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
                                 required
                             />
                         </div>
@@ -120,9 +139,8 @@ export default function NewPostPage() {
                             <Label htmlFor="author">Author Name</Label>
                             <Input
                                 id="author"
-                                placeholder="e.g. Mudassir Shaik"
                                 value={formData.author}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, author: e.target.value })}
+                                onChange={(e) => setFormData({ ...formData, author: e.target.value })}
                                 required
                             />
                         </div>
@@ -130,21 +148,19 @@ export default function NewPostPage() {
                             <Label htmlFor="category">Category</Label>
                             <Input
                                 id="category"
-                                placeholder="e.g. Technology, Web Design"
                                 value={formData.category}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, category: e.target.value })}
+                                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                                 required
                             />
                         </div>
                     </div>
 
                     <div className="space-y-2">
-                        <Label htmlFor="image">Featured Image URL</Label>
+                        <Label htmlFor="image">Featured Image URL (Optional)</Label>
                         <Input
                             id="image"
-                            placeholder="https://images.unsplash.com/... (Optional)"
                             value={formData.image}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, image: e.target.value })}
+                            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                         />
                     </div>
 
@@ -152,24 +168,19 @@ export default function NewPostPage() {
                         <Label htmlFor="excerpt">Short Excerpt</Label>
                         <Textarea
                             id="excerpt"
-                            placeholder="A brief summary for the blog listing page..."
                             value={formData.excerpt}
-                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, excerpt: e.target.value })}
+                            onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
                             className="resize-none h-24"
                             required
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <div className="flex items-center justify-between mb-2">
-                            <Label htmlFor="content">Full Content (HTML allowed)</Label>
-                            <span className="text-xs text-gray-400">Use standard HTML tags for formatting.</span>
-                        </div>
+                        <Label htmlFor="content">Full Content (HTML allowed)</Label>
                         <Textarea
                             id="content"
-                            placeholder="<p>Write your blog post here...</p>"
                             value={formData.content}
-                            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setFormData({ ...formData, content: e.target.value })}
+                            onChange={(e) => setFormData({ ...formData, content: e.target.value })}
                             className="min-h-[400px] font-mono text-sm"
                             required
                         />
@@ -183,12 +194,12 @@ export default function NewPostPage() {
                             {loading ? (
                                 <>
                                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                    Creating...
+                                    Saving...
                                 </>
                             ) : (
                                 <>
                                     <Save className="w-4 h-4 mr-2" />
-                                    Publish Post
+                                    Save Changes
                                 </>
                             )}
                         </Button>

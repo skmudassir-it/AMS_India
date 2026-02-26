@@ -1,95 +1,195 @@
 import { Button } from "@/components/ui/button"
-import { Code, CheckCircle, Database, Layers, Monitor, Search } from "lucide-react"
+import { Card, CardContent } from "@/components/ui/card"
+import {
+    Monitor,
+    Code,
+    Layers,
+    Database,
+    Zap,
+    Rocket,
+    CheckCircle2,
+    Search,
+    Workflow,
+    Activity,
+    Cpu,
+    Globe,
+    Lock,
+    BarChart3
+} from "lucide-react"
 import Link from "next/link"
 
 export default function WebAppDevPage() {
-    const stacks = [
-        { title: "Frontend Excellence", items: ["React", "Next.js", "Vue.js", "Tailwind CSS"] },
-        { title: "Backend Powerhouse", items: ["Node.js", "Python", "PHP/Laravel", "Go"] },
-        { title: "Database Systems", items: ["PostgreSQL", "MongoDB", "MySQL", "Redis"] },
-        { title: "DevOps & Cloud", items: ["Docker", "Kubernetes", "AWS", "Google Cloud"] }
+    const scopeItems = [
+        { title: "SaaS Platforms", desc: "Building scalable, multi-tenant software as a service applications.", icon: Globe },
+        { title: "Enterprise Apps", desc: "Custom internal tools and dashboards to streamline corporate workflows.", icon: Layers },
+        { title: "PWA Development", desc: "Installable web apps that work offline and feel like native mobile apps.", icon: Code },
+        { title: "API Systems", desc: "High-performance REST and GraphQL backends for cross-platform data.", icon: Database }
+    ]
+
+    const processSteps = [
+        { step: "01", title: "Discovery", desc: "Deep diving into your business logic and user requirements.", icon: Search },
+        { step: "02", title: "Architecture", desc: "Designing a scalable frontend-backend-database blueprint.", icon: Workflow },
+        { step: "03", title: "Iteration", desc: "Agile sprints with weekly demos to ensure perfect alignment.", icon: Activity },
+        { step: "04", title: "Optimization", desc: "Rigorous performance tuning and security hardening.", icon: BarChart3 },
+        { step: "05", title: "Scale", desc: "Launching on AWS or Vercel with automated scaling enabled.", icon: Rocket }
+    ]
+
+    const webAppFeatures = [
+        { title: "Real-time Sync", icon: Zap, desc: "Instant data updates across all users via WebSocket technology." },
+        { title: "Ironclad Security", icon: Lock, desc: "Secure authentication, JWT handling, and data encryption." },
+        { title: "Cloud Ready", icon: Globe, desc: "Built for global scale using modern serverless or k8s clusters." },
+        { title: "High Perf", icon: Cpu, desc: "Optimized hydration and rendering for sub-second page loads." }
     ]
 
     return (
-        <div className="container mx-auto px-4 py-20">
-            <div className="max-w-6xl mx-auto">
-                <div className="flex flex-col items-center text-center space-y-6 mb-24">
-                    <div className="w-16 h-16 bg-accent flex items-center justify-center rounded-2xl mb-4">
-                        <Monitor className="h-10 w-10 text-primary" />
-                    </div>
-                    <h1 className="text-4xl md:text-7xl font-extrabold text-primary tracking-tight">
-                        Web App <span className="text-foreground">Development</span>
-                    </h1>
-                    <p className="text-xl text-foreground/70 max-w-3xl leading-relaxed">
-                        We build feature-rich, high-performance web applications that solve complex business challenges. From SaaS platforms to enterprise intranets, we deliver excellence.
-                    </p>
-                    <Button size="lg" asChild>
-                        <Link href="/contact">Build My Web App</Link>
-                    </Button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24 font-medium">
-                    {stacks.map((stack, idx) => (
-                        <div key={idx} className="p-8 pb-12 rounded-3xl bg-secondary/10 space-y-6 relative overflow-hidden group hover:bg-primary/5 transition-colors">
-                            <h3 className="text-lg font-bold text-primary mb-4 z-10 relative">{stack.title}</h3>
-                            <ul className="space-y-3 z-10 relative">
-                                {stack.items.map((item, i) => (
-                                    <li key={i} className="flex items-center gap-2 text-sm text-foreground/70">
-                                        <span className="w-1.5 h-1.5 bg-primary rounded-full shrink-0" />
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-                            <div className="absolute right-0 bottom-0 opacity-10 group-hover:opacity-20 transition-opacity translate-x-1/4 translate-y-1/4">
-                                <Code className="w-32 h-32 text-primary" />
-                            </div>
+        <div className="bg-white">
+            {/* Hero Section */}
+            <section className="container mx-auto px-4 py-24 md:py-32">
+                <div className="flex flex-col lg:flex-row gap-16 items-center">
+                    <div className="flex-1 space-y-8">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 text-xs font-black uppercase tracking-[0.2em]">
+                            <Monitor className="h-4 w-4" /> Feature Rich Apps
                         </div>
-                    ))}
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-10">
-                    <div className="space-y-8">
-                        <h2 className="text-3xl md:text-5xl font-bold text-primary leading-tight">Complex Problems, <br /> Intelligent Solutions</h2>
-                        <p className="text-lg text-foreground/70 leading-relaxed">
-                            Our web application development process focuses on performance, scalability, and maintainability. We work closely with your team to understand the technical and business constraints, delivering a solution that exceeds expectations.
+                        <h1 className="text-6xl md:text-8xl font-black text-primary leading-[0.9] tracking-tighter italic">
+                            Web App <br />
+                            <span className="text-blue-600">Dev.</span>
+                        </h1>
+                        <p className="text-xl text-slate-600 leading-relaxed max-w-xl font-medium">
+                            Complex problems, elegant solutions. We build high-performance web applications that solve real business challenges and delight users at scale.
                         </p>
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-4">
-                                <CheckCircle className="h-6 w-6 text-primary" />
-                                <span className="font-bold">Agile Development Process</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <CheckCircle className="h-6 w-6 text-primary" />
-                                <span className="font-bold">Scalable SaaS Architecture</span>
-                            </div>
-                            <div className="flex items-center gap-4">
-                                <CheckCircle className="h-6 w-6 text-primary" />
-                                <span className="font-bold">Secure User Authentication</span>
+                        <div className="flex flex-wrap gap-4 pt-4">
+                            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 rounded-full px-12 h-16 text-lg font-black italic shadow-2xl shadow-blue-500/20" asChild>
+                                <Link href="/contact">Start Developing</Link>
+                            </Button>
+                        </div>
+                    </div>
+                    <div className="flex-1 relative">
+                        <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
+                        <div className="relative aspect-square bg-slate-50 rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden p-12">
+                            <div className="grid grid-cols-2 gap-6 h-full">
+                                <div className="bg-white rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform rotate-3">
+                                    <Code className="h-12 w-12 text-blue-600" />
+                                    <div className="h-2 bg-slate-100 rounded-full w-full" />
+                                    <div className="h-2 bg-slate-100 rounded-full w-2/3" />
+                                </div>
+                                <div className="bg-blue-600 rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform -rotate-3 translate-y-8">
+                                    <Layers className="h-12 w-12 text-white" />
+                                    <div className="h-2 bg-white/20 rounded-full w-full" />
+                                    <div className="h-2 bg-white/20 rounded-full w-2/3" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="bg-white p-10 rounded-3xl border-2 border-primary/10 shadow-xl space-y-6">
-                        <h3 className="text-2xl font-bold text-primary">Core Technical Specs</h3>
-                        <div className="space-y-4">
-                            <div className="p-4 bg-accent/20 rounded-xl flex items-center justify-between">
-                                <span className="font-bold">Uptime Guarantee</span>
-                                <span className="text-primary font-black uppercase text-xs">99.9%</span>
+                </div>
+            </section>
+
+            {/* What We Do - Scope */}
+            <section className="bg-slate-50 py-24 md:py-32">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-3xl mb-16">
+                        <h2 className="text-4xl md:text-5xl font-black text-primary italic mb-6">What We Do.</h2>
+                        <p className="text-xl text-slate-600 font-medium">Bespoke functional web solutions for the modern enterprise.</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {scopeItems.map((item, idx) => (
+                            <Card key={idx} className="bg-white p-10 rounded-[3rem] border-none shadow-xl hover:scale-105 transition-transform duration-500">
+                                <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center text-blue-500 mb-8">
+                                    <item.icon className="h-8 w-8" />
+                                </div>
+                                <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
+                                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+                            </Card>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* How We Do - Process */}
+            <section className="container mx-auto px-4 py-24 md:py-32">
+                <div className="text-center max-w-4xl mx-auto mb-20 space-y-6">
+                    <h2 className="text-5xl md:text-6xl font-black text-primary italic">How We Do It.</h2>
+                    <p className="text-xl text-slate-600">A rigorous, engineering-first approach to building software.</p>
+                </div>
+                <div className="relative">
+                    <div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2 hidden lg:block" />
+                    <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-12 relative z-10">
+                        {processSteps.map((item, idx) => (
+                            <div key={idx} className="flex flex-col items-center group">
+                                <div className="w-20 h-20 bg-white border-2 border-slate-100 rounded-full flex items-center justify-center text-primary font-black text-xl mb-6 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300 shadow-xl">
+                                    {item.step}
+                                </div>
+                                <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                                <p className="text-center text-slate-500 text-sm">{item.desc}</p>
                             </div>
-                            <div className="p-4 bg-accent/20 rounded-xl flex items-center justify-between">
-                                <span className="font-bold">Response Time</span>
-                                <span className="text-primary font-black uppercase text-xs">&lt; 100ms</span>
-                            </div>
-                            <div className="p-4 bg-accent/20 rounded-xl flex items-center justify-between">
-                                <span className="font-bold">Scalability</span>
-                                <span className="text-primary font-black uppercase text-xs">Infinite</span>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Performance Highlights - Features */}
+            <section className="bg-slate-900 py-24 md:py-32 rounded-[4rem] mx-4 mb-24 overflow-hidden relative">
+                <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/10 to-transparent pointer-events-none" />
+                <div className="container mx-auto px-12 relative z-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                        <div className="space-y-10">
+                            <h2 className="text-5xl md:text-7xl font-black text-white italic leading-none">
+                                Enterprise <br />
+                                <span className="text-blue-500">Grade Power.</span>
+                            </h2>
+                            <p className="text-xl text-slate-400 font-medium">
+                                We utilize modern tech stacks like Next.js, Go, and AWS to ensure your application is as fast as it is secure.
+                            </p>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                {webAppFeatures.map((item, idx) => (
+                                    <div key={idx} className="flex gap-4">
+                                        <div className="shrink-0 w-12 h-12 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-blue-500">
+                                            <item.icon className="h-6 w-6" />
+                                        </div>
+                                        <div className="space-y-1">
+                                            <h4 className="text-lg font-bold text-white">{item.title}</h4>
+                                            <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
-                        <Button className="w-full h-12" variant="outline" asChild>
-                            <Link href="/contact">Technical Specification Sheet</Link>
+                        <div className="relative hidden lg:block">
+                            <Card className="bg-white/5 border-white/10 backdrop-blur-xl p-12 rounded-[3.5rem] shadow-4xl transform rotate-3">
+                                <div className="space-y-8">
+                                    <div className="flex justify-between items-center text-white/40">
+                                        <Monitor className="h-8 w-8" />
+                                        <CheckCircle2 className="h-8 w-8" />
+                                    </div>
+                                    <div className="space-y-4">
+                                        <div className="h-4 bg-blue-600 rounded-full w-3/4" />
+                                        <div className="h-4 bg-white/10 rounded-full w-full" />
+                                        <div className="h-4 bg-white/10 rounded-full w-5/6" />
+                                    </div>
+                                    <div className="pt-8">
+                                        <div className="w-full h-16 bg-white rounded-3xl" />
+                                    </div>
+                                </div>
+                            </Card>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="container mx-auto px-4 py-24 mb-20">
+                <div className="bg-gradient-to-br from-blue-600 to-blue-800 p-12 md:p-24 rounded-[4rem] text-center space-y-10 shadow-3xl relative overflow-hidden">
+                    <Rocket className="absolute -top-10 -right-10 w-64 h-64 text-white opacity-5" />
+                    <h2 className="text-4xl md:text-7xl font-black text-white italic leading-none">Ready to build your next app?</h2>
+                    <p className="text-xl text-blue-100 max-w-2xl mx-auto font-medium opacity-80">
+                        Let's transform your vision into a production-ready web application with expert engineering and design.
+                    </p>
+                    <div className="pt-6">
+                        <Button variant="secondary" size="lg" className="bg-white text-blue-600 hover:bg-slate-50 rounded-full px-16 h-20 text-2xl font-black italic shadow-2xl" asChild>
+                            <Link href="/contact">Get started now</Link>
                         </Button>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     )
 }

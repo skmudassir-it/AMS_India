@@ -21,7 +21,7 @@ export default function ServicesPage() {
         {
             category: "Optimization & Content",
             description: "Increase visibility and engage your audience with expert marketing and content.",
-            items: ["SEO Optimization", "Content Strategy", "Blog & Articles", "Digital Marketing"],
+            items: ["SEO Optimization", "Content Strategy", "Blog Posts & Articles", "Digital Marketing"],
             icon: Search,
             href: "/services/seo-optimization"
         },

@@ -49,6 +49,24 @@ export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
 }
 
 /**
+ * Fetch a single blog post by its ID
+ */
+export async function getBlogPostById(id: string): Promise<BlogPost | undefined> {
+    const { data, error } = await supabase
+        .from('blogs')
+        .select('*')
+        .eq('id', id)
+        .single()
+
+    if (error) {
+        console.error('Error fetching blog post by ID:', error)
+        return undefined
+    }
+
+    return data
+}
+
+/**
  * Create a new blog post
  */
 export async function createBlogPost(post: Omit<BlogPost, 'id' | 'created_at'>) {

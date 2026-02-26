@@ -32,6 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
+        {/* Announcement Bar */}
+        <div className="w-full bg-[#BB290E] text-white py-2.5 px-4 text-center text-sm font-semibold tracking-wide z-[100] relative overflow-hidden">
+          <div className="absolute inset-0 bg-white/10 animate-pulse" />
+          <span className="relative">🚀 Limited Time Offer: Get a Free Business Strategy Consultation with Every Project!</span>
+        </div>
         <Navbar />
         <main className="flex-1">
           {children}

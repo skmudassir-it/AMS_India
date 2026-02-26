@@ -41,11 +41,7 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col pb-20">
-      {/* Announcement Bar */}
-      <div className="w-full bg-[#BB290E] text-white py-2.5 px-4 text-center text-sm font-semibold tracking-wide z-[100] relative overflow-hidden">
-        <div className="absolute inset-0 bg-white/10 animate-pulse" />
-        <span className="relative">🚀 Limited Time Offer: Get a Free Business Strategy Consultation with Every Project!</span>
-      </div>
+
 
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-white">
@@ -155,19 +151,10 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.slice(0, 3).map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex flex-col space-y-4">
-              <div className="relative h-64 rounded-2xl overflow-hidden shadow-md bg-accent/20">
-                {post.image ? (
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
-                    <span className="text-primary/10 font-bold text-4xl">AMS</span>
-                  </div>
-                )}
+              <div className="relative h-24 rounded-2xl overflow-hidden shadow-md bg-accent/20">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
+                  <span className="text-primary/10 font-bold text-2xl">AMS</span>
+                </div>
                 <div className="absolute top-4 left-4">
                   <span className="bg-[#BB290E] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     {post.category}
