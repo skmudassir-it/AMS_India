@@ -1,8 +1,7 @@
 import Link from "next/link"
-import { SafeImage as Image } from "@/components/ui/safe-image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, Layers, ShieldCheck } from "lucide-react"
+import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Layers, ShieldCheck } from "lucide-react"
 
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
@@ -183,11 +182,11 @@ export default async function Home() {
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-bold">Ready to Start Your Project?</h2>
             <p className="text-primary-foreground/80 max-w-xl mx-auto text-lg mt-4">
-              Let's build something amazing together. Our expert team is ready to transform your ideas into reality.
+              Let&apos;s build something amazing together. Our expert team is ready to transform your ideas into reality.
             </p>
             <div className="mt-10">
-              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90">
-                Contact Us Now
+              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90" asChild>
+                <Link href="/contact">Contact Us Now</Link>
               </Button>
             </div>
           </div>

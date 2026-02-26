@@ -1,9 +1,41 @@
+"use client"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react"
 
 export default function ContactPage() {
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+    const [errorMessage, setErrorMessage] = useState("")
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault()
+        setStatus("loading")
+        setErrorMessage("")
+
+        const formData = new FormData(e.currentTarget)
+        const formUrl = `${process.env.NEXT_PUBLIC_MAUTIC_URL}/form/submit?formId=${process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID}`
+
+        try {
+            await fetch(formUrl, {
+                method: "POST",
+                body: formData,
+                mode: 'no-cors' // Use no-cors as Mautic redirect might cause CORS issues on the client
+            })
+
+            // With no-cors, we can't see the response status, but if the catch block isn't hit, 
+            // the request was sent successfully.
+            setStatus("success")
+            e.currentTarget.reset()
+        } catch (error) {
+            console.error("Form submission error:", error)
+            setStatus("error")
+            setErrorMessage("Something went wrong. Please try again or contact us directly.")
+        }
+    }
+
     return (
         <div className="container mx-auto px-4 py-20">
             <div className="text-center mb-16 space-y-4">
@@ -16,51 +48,110 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Contact Form */}
                 <Card className="p-4 md:p-8">
-                    <form
-                        method="post"
-                        action={`${process.env.NEXT_PUBLIC_MAUTIC_URL}/form/submit?formId=${process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID}`}
-                        id="mautic_contact_form"
-                        className="space-y-6"
-                    >
-                        <input type="hidden" name="mauticform[formId]" value={process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID} />
-                        <input type="hidden" name="mauticform[messenger]" value="1" />
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium">First Name</label>
-                                <Input name="mauticform[firstname]" placeholder="John" required />
+                    {status === "success" ? (
+                        <div className="flex flex-col items-center justify-center py-12 text-center space-y-4 animate-in fade-in zoom-in duration-300">
+                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                                <CheckCircle2 className="h-8 w-8 text-green-600" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-primary">Thank You!</h3>
+                            <p className="text-foreground/70 max-w-sm mx-auto">
+                                Your message has been received. Our team will get back to you within 24 hours.
+                            </p>
+                            <Button
+                                variant="outline"
+                                onClick={() => setStatus("idle")}
+                                className="mt-4"
+                            >
+                                Send Another Message
+                            </Button>
+                        </div>
+                    ) : (
+                        <form
+                            onSubmit={handleSubmit}
+                            id="mautic_contact_form"
+                            className="space-y-6"
+                        >
+                            <input type="hidden" name="mauticform[formId]" value={process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID} />
+                            <input type="hidden" name="mauticform[messenger]" value="1" />
+
+                            {status === "error" && (
+                                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center gap-3 animate-in fade-in slide-in-from-top-1">
+                                    <AlertCircle className="h-5 w-5" />
+                                    <p className="text-sm font-medium">{errorMessage}</p>
+                                </div>
+                            )}
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-foreground/80">First Name</label>
+                                    <Input
+                                        name="mauticform[firstname]"
+                                        placeholder="John"
+                                        required
+                                        disabled={status === "loading"}
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-foreground/80">Last Name</label>
+                                    <Input
+                                        name="mauticform[lastname]"
+                                        placeholder="Doe"
+                                        required
+                                        disabled={status === "loading"}
+                                    />
+                                </div>
                             </div>
                             <div className="space-y-2">
-                                <label className="text-sm font-medium">Last Name</label>
-                                <Input name="mauticform[lastname]" placeholder="Doe" required />
+                                <label className="text-sm font-medium text-foreground/80">Email Address</label>
+                                <Input
+                                    type="email"
+                                    name="mauticform[email]"
+                                    placeholder="john@example.com"
+                                    required
+                                    disabled={status === "loading"}
+                                />
                             </div>
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">Email Address</label>
-                            <Input type="email" name="mauticform[email]" placeholder="john@example.com" required />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">Service Interested In</label>
-                            <select name="mauticform[service_interested_in]" className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
-                                <option value="Custom Web Development">Custom Web Development</option>
-                                <option value="E-commerce Solutions">E-commerce Solutions</option>
-                                <option value="Mobile App Development">Mobile App Development</option>
-                                <option value="SEO Optimization">SEO Optimization</option>
-                                <option value="Other Services">Other Services</option>
-                            </select>
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium">Your Message</label>
-                            <textarea
-                                name="mauticform[message]"
-                                className="w-full min-h-[150px] p-3 rounded-md border border-input bg-background text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                                placeholder="How can we help you?"
-                                required
-                            ></textarea>
-                        </div>
-                        <Button type="submit" className="w-full h-12 gap-2 text-lg">
-                            Send Message <Send className="h-4 w-4" />
-                        </Button>
-                    </form>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-foreground/80">Service Interested In</label>
+                                <select
+                                    name="mauticform[service_interested_in]"
+                                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
+                                    disabled={status === "loading"}
+                                >
+                                    <option value="Custom Web Development">Custom Web Development</option>
+                                    <option value="E-commerce Solutions">E-commerce Solutions</option>
+                                    <option value="Mobile App Development">Mobile App Development</option>
+                                    <option value="SEO Optimization">SEO Optimization</option>
+                                    <option value="Other Services">Other Services</option>
+                                </select>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium text-foreground/80">Your Message</label>
+                                <textarea
+                                    name="mauticform[message]"
+                                    className="w-full min-h-[150px] p-3 rounded-md border border-input bg-background text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:opacity-50"
+                                    placeholder="How can we help you?"
+                                    required
+                                    disabled={status === "loading"}
+                                ></textarea>
+                            </div>
+                            <Button
+                                type="submit"
+                                className="w-full h-12 gap-2 text-lg font-bold shadow-lg hover:shadow-primary/20"
+                                disabled={status === "loading"}
+                            >
+                                {status === "loading" ? (
+                                    <>
+                                        Sending... <Loader2 className="h-5 w-5 animate-spin" />
+                                    </>
+                                ) : (
+                                    <>
+                                        Send Message <Send className="h-4 w-4" />
+                                    </>
+                                )}
+                            </Button>
+                        </form>
+                    )}
                 </Card>
 
                 {/* Contact info & Map placeholder */}
