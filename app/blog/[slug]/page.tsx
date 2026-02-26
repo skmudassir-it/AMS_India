@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
-import { getBlogPost } from "@/lib/blog"
+import { getBlogPost, getBlogPosts } from "@/lib/blog"
 import { Button } from "@/components/ui/button"
-import { Calendar, User, ArrowLeft, Share2, Facebook, Twitter, Linkedin } from "lucide-react"
+import { Calendar, User, ArrowLeft, Share2, Facebook, Twitter, Linkedin, ArrowRight } from "lucide-react"
 
 interface PostPageProps {
     params: Promise<{
@@ -18,6 +18,13 @@ export default async function PostPage({ params }: PostPageProps) {
     if (!post) {
         notFound()
     }
+
+    // Get all posts and pick 3 random ones excluding current
+    const allPosts = await getBlogPosts()
+    const relatedPosts = allPosts
+        .filter(p => p.slug !== slug)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -112,6 +119,48 @@ export default async function PostPage({ params }: PostPageProps) {
                     </aside>
                 </div>
             </article>
+
+            {/* Related Posts Section */}
+            {relatedPosts.length > 0 && (
+                <section className="bg-gray-50 py-20 border-t border-gray-100">
+                    <div className="container mx-auto px-4">
+                        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+                            <div className="space-y-2">
+                                <h2 className="text-3xl md:text-4xl font-bold text-primary">More from Our Blog</h2>
+                                <p className="text-foreground/60 max-w-xl">Check out our other latest insights and tech updates.</p>
+                            </div>
+                            <Button variant="outline" className="border-[#BB290E] text-[#BB290E] hover:bg-[#BB290E]/5" asChild>
+                                <Link href="/blog">View All Posts</Link>
+                            </Button>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            {relatedPosts.map((rPost) => (
+                                <Link key={rPost.slug} href={`/blog/${rPost.slug}`} className="group flex flex-col space-y-4">
+                                    <div className="relative h-64 rounded-2xl overflow-hidden shadow-md bg-accent/20 flex items-center justify-center">
+                                        <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent" />
+                                        <div className="absolute top-4 left-4">
+                                            <span className="bg-[#BB290E] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
+                                                {rPost.category}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <h3 className="text-xl font-bold group-hover:text-[#BB290E] transition-colors line-clamp-2">
+                                            {rPost.title}
+                                        </h3>
+                                        <p className="text-foreground/60 text-sm line-clamp-2 leading-relaxed">
+                                            {rPost.excerpt}
+                                        </p>
+                                        <div className="flex items-center gap-2 pt-2 text-[#BB290E] font-bold text-sm">
+                                            Read More <ArrowRight className="w-4 h-4" />
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
             {/* Contact CTA */}
             <section className="bg-primary text-white py-20 px-4">
