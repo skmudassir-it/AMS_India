@@ -4,6 +4,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createBlogPost } from "@/lib/blog"
+import { mirrorImage } from "@/lib/image-proxy"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -46,7 +47,23 @@ export default function NewPostPage() {
         setLoading(true)
 
         try {
-            await createBlogPost(formData)
+            // Mirror the image to your secure server if it's an external URL
+            let finalImageUrl = formData.image
+            if (formData.image && formData.image.startsWith('http') && !formData.image.includes('18.226.187.11')) {
+                toast({
+                    title: "Image Processing",
+                    description: "Mirroring external image to your secure server...",
+                })
+                try {
+                    finalImageUrl = await mirrorImage(formData.image)
+                } catch (mirrorError) {
+                    console.error("Mirroring failed, using original URL", mirrorError)
+                    // We continue even if mirroring fails to not block post creation
+                    // but we might want to warn the user
+                }
+            }
+
+            await createBlogPost({ ...formData, image: finalImageUrl })
             toast({
                 title: "Success",
                 description: "Blog post created successfully!",

@@ -155,8 +155,19 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.slice(0, 3).map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex flex-col space-y-4">
-              <div className="relative h-64 rounded-2xl overflow-hidden shadow-md bg-accent/20 flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent" />
+              <div className="relative h-64 rounded-2xl overflow-hidden shadow-md bg-accent/20">
+                {post.image ? (
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
+                    <span className="text-primary/10 font-bold text-4xl">AMS</span>
+                  </div>
+                )}
                 <div className="absolute top-4 left-4">
                   <span className="bg-[#BB290E] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     {post.category}
