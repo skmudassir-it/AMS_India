@@ -10,30 +10,29 @@ import { useState, useEffect } from "react"
 export function SafeImage({ src, alt, ...props }: ImageProps) {
     const [useStandardImg, setUseStandardImg] = useState(false)
 
-    // Trusted hosts that are configured in next.config.ts
-    const trustedHosts = [
-        '18.226.187.11',
-        'huggingface.co',
-        'cdn-thumbnails.huggingface.co',
-        'images.unsplash.com'
-    ]
+    // Calculate trusted status synchronously to prevent first-render crashes
+    const isTrusted = (() => {
+        if (typeof src !== 'string' || !src.startsWith('http')) return true;
+        try {
+            const url = new URL(src);
+            const trustedHosts = [
+                '18.226.187.11',
+                'images.unsplash.com'
+            ];
 
-    useEffect(() => {
-        if (typeof src === 'string' && src.startsWith('http')) {
-            try {
-                const url = new URL(src)
-                const isTrusted = trustedHosts.some(host => url.hostname === host)
-                if (!isTrusted) {
-                    setUseStandardImg(true)
-                }
-            } catch (e) {
-                // If URL parsing fails, stick to Image and let it handle/error if needed
-                console.error("Failed to parse image URL:", src)
-            }
+            // Check explicit trusted hosts
+            if (trustedHosts.some(host => url.hostname === host)) return true;
+
+            // Regex for all huggingface.co subdomains
+            if (/^(.+\.)?huggingface\.co$/.test(url.hostname)) return true;
+
+            return false;
+        } catch (e) {
+            return true; // If parsing fails, let standard Image try (might be relative or blob)
         }
-    }, [src])
+    })();
 
-    if (useStandardImg && typeof src === 'string') {
+    if (!isTrusted && typeof src === 'string') {
         // Fallback to standard img for unconfigured hosts
         // We replicate some of the basic classes/styles Next.js Image would apply
         const { fill, className, ...rest } = props as any
