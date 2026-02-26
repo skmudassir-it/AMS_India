@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Image from "next/image"
+import { SafeImage as Image } from "@/components/ui/safe-image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Settings, Layers, ShieldCheck } from "lucide-react"

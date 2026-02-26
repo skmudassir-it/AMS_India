@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import Image from "next/image"
+import { SafeImage as Image } from "@/components/ui/safe-image"
 import Link from "next/link"
 import { getBlogPost, getBlogPosts } from "@/lib/blog"
 import { Button } from "@/components/ui/button"
