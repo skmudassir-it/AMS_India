@@ -22,14 +22,8 @@ export default async function PostPage({ params }: PostPageProps) {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Post Hero */}
-            <section className="relative h-[60vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden">
-                <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover"
-                    priority
-                />
+            <section className="relative h-[60vh] min-h-[400px] flex flex-col items-center justify-center overflow-hidden bg-accent/10">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/10 via-transparent to-black/20" />
                 <div className="absolute inset-0 bg-black/50 z-10" />
                 <div className="container px-4 relative z-20 text-center text-white space-y-6">
                     <Link
