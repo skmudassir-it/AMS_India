@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { createBlogPost } from "@/lib/blog"
@@ -16,6 +16,13 @@ export default function NewPostPage() {
     const router = useRouter()
     const { toast } = useToast()
     const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        const auth = localStorage.getItem("admin_authenticated")
+        if (auth !== "true") {
+            router.push("/blog/admin")
+        }
+    }, [router])
+
     const [formData, setFormData] = useState({
         title: "",
         slug: "",

@@ -5,17 +5,20 @@ import Image from 'next/image';
 
 const logos = [
     { name: 'Wordpress', src: '/logos/wordpress.svg' },
-    { name: 'Amazon', src: '/logos/amazon.svg' },
-    { name: 'GoDaddy', src: '/logos/godaddy.svg' },
+    { name: 'Amazon', src: '/logos/Amazon_logo.svg.png' },
+    { name: 'GoDaddy', src: '/logos/Godaddy-logo.png' },
     { name: 'Shopify', src: '/logos/shopify.svg' },
-    { name: 'Squarespace', src: '/logos/squarespace.svg' },
-    { name: 'Wix', src: '/logos/wix.svg' },
-    { name: 'Hostinger', src: '/logos/hostinger.svg' },
+    { name: 'Squarespace', src: '/logos/Squarespace.png' },
+    { name: 'Wix', src: '/logos/wix.png' },
+    { name: 'Hostinger', src: '/logos/Hostinger_Logo.png' },
     { name: 'n8n', src: '/logos/n8n.svg' },
-    { name: 'AWS', src: '/logos/aws.svg' },
-    { name: 'Docker', src: '/logos/docker.svg' },
-    { name: 'JavaScript', src: '/logos/javascript.svg' },
-    { name: 'Google DeepMind', src: '/logos/google-deepmind.svg' },
+    { name: 'AWS', src: '/logos/Amazon_Web_Services-Logo.wine.svg' },
+    { name: 'Docker', src: '/logos/docker.jpeg' },
+    { name: 'JavaScript', src: '/logos/javascript.webp' },
+    { name: 'HTML', src: '/logos/html.svg' },
+    { name: 'CSS', src: '/logos/css.png' },
+    { name: 'OpenClaw', src: '/logos/openclaw.webp' },
+    { name: 'Antigravity', src: '/logos/antigravity.png' },
 ];
 
 const StatsSection = () => {

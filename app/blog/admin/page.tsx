@@ -18,11 +18,35 @@ import { useToast } from "@/components/ui/use-toast"
 export default function AdminDashboard() {
     const [posts, setPosts] = useState<BlogPost[]>([])
     const [loading, setLoading] = useState(true)
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [pin, setPin] = useState("")
+    const [error, setError] = useState("")
     const { toast } = useToast()
 
     useEffect(() => {
-        loadPosts()
+        const auth = localStorage.getItem("admin_authenticated")
+        if (auth === "true") {
+            setIsAuthenticated(true)
+            loadPosts()
+        } else {
+            setLoading(false)
+        }
     }, [])
+
+    async function handlePinSubmit(e: React.FormEvent) {
+        e.preventDefault()
+        const correctPin = process.env.NEXT_PUBLIC_ADMIN_PIN || "0970"
+
+        if (pin === correctPin) {
+            setIsAuthenticated(true)
+            localStorage.setItem("admin_authenticated", "true")
+            setLoading(true)
+            loadPosts()
+        } else {
+            setError("Invalid PIN. Please try again.")
+            setPin("")
+        }
+    }
 
     async function loadPosts() {
         setLoading(true)
@@ -59,6 +83,37 @@ export default function AdminDashboard() {
         }
     }
 
+    if (!isAuthenticated) {
+        return (
+            <div className="container mx-auto px-4 py-20 min-h-screen flex items-center justify-center">
+                <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 border border-gray-100">
+                    <div className="text-center mb-8">
+                        <h1 className="text-2xl font-bold text-primary mb-2">Admin Access</h1>
+                        <p className="text-foreground/60">Enter your PIN to manage blog posts.</p>
+                    </div>
+
+                    <form onSubmit={handlePinSubmit} className="space-y-4">
+                        <div>
+                            <input
+                                type="password"
+                                value={pin}
+                                onChange={(e) => setPin(e.target.value)}
+                                placeholder="Enter PIN"
+                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 text-center text-2xl tracking-[1em]"
+                                maxLength={4}
+                                autoFocus
+                            />
+                            {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
+                        </div>
+                        <Button type="submit" className="w-full bg-[#BB290E] hover:bg-[#96210b] py-6 text-lg">
+                            Access Dashboard
+                        </Button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="container mx-auto px-4 py-20 min-h-screen">
             <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
@@ -78,6 +133,16 @@ export default function AdminDashboard() {
                             <Plus className="w-4 h-4 mr-2" />
                             Create New Post
                         </Link>
+                    </Button>
+                    <Button
+                        variant="ghost"
+                        className="text-foreground/60 hover:text-red-600"
+                        onClick={() => {
+                            localStorage.removeItem("admin_authenticated")
+                            setIsAuthenticated(false)
+                        }}
+                    >
+                        Logout
                     </Button>
                 </div>
             </div>
@@ -143,3 +208,4 @@ export default function AdminDashboard() {
         </div>
     )
 }
+

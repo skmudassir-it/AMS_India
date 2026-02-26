@@ -27,8 +27,13 @@ export default function EditPostPage({ params }: EditPostPageProps) {
     const [formData, setFormData] = useState<BlogPost | null>(null)
 
     useEffect(() => {
-        loadPost()
-    }, [id])
+        const auth = localStorage.getItem("admin_authenticated")
+        if (auth !== "true") {
+            router.push("/blog/admin")
+        } else {
+            loadPost()
+        }
+    }, [id, router])
 
     async function loadPost() {
         setFetching(true)
