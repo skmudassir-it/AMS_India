@@ -65,19 +65,12 @@ export default function WebAppDevPage() {
                     </div>
                     <div className="flex-1 relative">
                         <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
-                        <div className="relative aspect-square bg-slate-50 rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden p-12">
-                            <div className="grid grid-cols-2 gap-6 h-full">
-                                <div className="bg-white rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform rotate-3">
-                                    <Code className="h-12 w-12 text-blue-600" />
-                                    <div className="h-2 bg-slate-100 rounded-full w-full" />
-                                    <div className="h-2 bg-slate-100 rounded-full w-2/3" />
-                                </div>
-                                <div className="bg-blue-600 rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform -rotate-3 translate-y-8">
-                                    <Layers className="h-12 w-12 text-white" />
-                                    <div className="h-2 bg-white/20 rounded-full w-full" />
-                                    <div className="h-2 bg-white/20 rounded-full w-2/3" />
-                                </div>
-                            </div>
+                        <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
+                            <img
+                                src="/services/web-app-development.png"
+                                alt="Web App Development"
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                     </div>
                 </div>

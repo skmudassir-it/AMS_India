@@ -66,19 +66,12 @@ export default function DigitalMarketingPage() {
                     </div>
                     <div className="flex-1 relative">
                         <div className="absolute -inset-10 bg-gradient-to-tr from-orange-500/20 to-yellow-500/20 blur-[100px] rounded-full" />
-                        <div className="relative aspect-square bg-slate-50 rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden p-12">
-                            <div className="grid grid-cols-2 gap-6 h-full">
-                                <div className="bg-white rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform rotate-3">
-                                    <Megaphone className="h-12 w-12 text-orange-600" />
-                                    <div className="h-2 bg-slate-100 rounded-full w-full" />
-                                    <div className="h-2 bg-slate-100 rounded-full w-2/3" />
-                                </div>
-                                <div className="bg-orange-600 rounded-3xl shadow-xl p-6 flex flex-col justify-center items-center gap-4 transform -rotate-3 translate-y-8">
-                                    <Target className="h-12 w-12 text-white" />
-                                    <div className="h-2 bg-white/20 rounded-full w-full" />
-                                    <div className="h-2 bg-white/20 rounded-full w-2/3" />
-                                </div>
-                            </div>
+                        <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
+                            <img
+                                src="/services/digital-marketing.png"
+                                alt="Digital Marketing"
+                                className="w-full h-full object-cover"
+                            />
                         </div>
                     </div>
                 </div>
