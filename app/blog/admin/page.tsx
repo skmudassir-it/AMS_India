@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react"
 import Link from "next/link"
-import { getBlogPosts, deleteBlogPost, BlogPost } from "@/lib/blog"
+import { getBlogPosts, BlogPost } from "@/lib/blog"
+import { deleteBlogPostAction } from "./actions"
 import { Button } from "@/components/ui/button"
 import {
     Table,
@@ -68,7 +69,7 @@ export default function AdminDashboard() {
         if (!confirm("Are you sure you want to delete this post?")) return
 
         try {
-            await deleteBlogPost(id)
+            await deleteBlogPostAction(id)
             setPosts(posts.filter((p) => p.id !== id))
             toast({
                 title: "Success",

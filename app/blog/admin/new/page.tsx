@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { createBlogPost } from "@/lib/blog"
+import { createBlogPostAction } from "../actions"
 import { mirrorImage } from "@/lib/image-proxy"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -70,7 +70,7 @@ export default function NewPostPage() {
                 }
             }
 
-            await createBlogPost({ ...formData, image: finalImageUrl })
+            await createBlogPostAction({ ...formData, image: finalImageUrl })
             toast({
                 title: "Success",
                 description: "Blog post created successfully!",

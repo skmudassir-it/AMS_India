@@ -3,7 +3,8 @@
 import { useEffect, useState, use } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { getBlogPostById, updateBlogPost, BlogPost } from "@/lib/blog"
+import { getBlogPostById, BlogPost } from "@/lib/blog"
+import { updateBlogPostAction } from "../../actions"
 import { mirrorImage } from "@/lib/image-proxy"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -79,7 +80,7 @@ export default function EditPostPage({ params }: EditPostPageProps) {
                 }
             }
 
-            await updateBlogPost(formData.id, { ...formData, image: finalImageUrl })
+            await updateBlogPostAction(formData.id, { ...formData, image: finalImageUrl })
             toast({
                 title: "Success",
                 description: "Blog post updated successfully!",
