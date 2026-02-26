@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'huggingface.co',
+        hostname: '**.huggingface.co',
       },
     ],
   },
