@@ -32,9 +32,9 @@ export const metadata: Metadata = {
         title: "Mobile App UI/UX Design | AMS IT Services",
         description: "Intuitive and beautiful mobile app designs for iOS and Android — from wireframes to pixel-perfect prototypes.",
         url: "https://amsitservices.com/services/mobile-app-design",
-        images: [{ url: "/services/og-mobile-design.jpg", width: 1200, height: 630, alt: "Mobile App Design" }],
+        images: [{ url: "/services/mobile-app-design.png", width: 1200, height: 630, alt: "Mobile App Design" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-mobile-design.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/mobile-app-design.png"] },
 }
 
 export default function MobileAppDesignPage() {
@@ -86,7 +86,7 @@ export default function MobileAppDesignPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-red-500/20 to-orange-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-mobile-design.jpg"
+                                src="/services/mobile-app-design.png"
                                 alt="Mobile App Design"
                                 className="w-full h-full object-cover"
                             />

@@ -29,9 +29,9 @@ export const metadata: Metadata = {
         title: "Digital Marketing Services | AMS IT Services",
         description: "PPC, social media, and content marketing strategies that drive qualified leads and grow your business.",
         url: "https://amsitservices.com/services/digital-marketing",
-        images: [{ url: "/services/og-digital-marketing.jpg", width: 1200, height: 630, alt: "Digital Marketing Services" }],
+        images: [{ url: "/services/digital-marketing.png", width: 1200, height: 630, alt: "Digital Marketing Services" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-digital-marketing.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/digital-marketing.png"] },
 }
 
 export default function DigitalMarketingPage() {
@@ -83,7 +83,7 @@ export default function DigitalMarketingPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-orange-500/20 to-yellow-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-digital-marketing.jpg"
+                                src="/services/digital-marketing.png"
                                 alt="Digital Marketing"
                                 className="w-full h-full object-cover"
                             />

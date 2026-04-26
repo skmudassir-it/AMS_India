@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "AWS Cloud Integration | AMS IT Services",
         description: "Secure cloud migration, AWS architecture, and DevOps automation for scalable business growth.",
         url: "https://amsitservices.com/services/aws-cloud-integration",
-        images: [{ url: "/services/og-aws-cloud.jpg", width: 1200, height: 630, alt: "AWS Cloud Integration" }],
+        images: [{ url: "/services/aws-cloud.png", width: 1200, height: 630, alt: "AWS Cloud Integration" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-aws-cloud.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/aws-cloud.png"] },
 }
 
 export default function AWSCloudPage() {
@@ -82,7 +82,7 @@ export default function AWSCloudPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-sky-500/20 to-blue-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-aws-cloud.jpg"
+                                src="/services/aws-cloud.png"
                                 alt="AWS Cloud Integration"
                                 className="w-full h-full object-cover"
                             />

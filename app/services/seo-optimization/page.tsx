@@ -29,9 +29,9 @@ export const metadata: Metadata = {
         title: "SEO Optimization Services | AMS IT Services",
         description: "Boost your Google rankings with data-driven SEO strategies. Proven ROI from keyword research to technical SEO.",
         url: "https://amsitservices.com/services/seo-optimization",
-        images: [{ url: "/services/og-seo.jpg", width: 1200, height: 630, alt: "SEO Optimization Services" }],
+        images: [{ url: "/services/seo-optimization.png", width: 1200, height: 630, alt: "SEO Optimization Services" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-seo.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/seo-optimization.png"] },
 }
 
 export default function SEOPage() {
@@ -83,7 +83,7 @@ export default function SEOPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-emerald-500/20 to-teal-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-seo.jpg"
+                                src="/services/seo-optimization.png"
                                 alt="SEO Optimization"
                                 className="w-full h-full object-cover"
                             />

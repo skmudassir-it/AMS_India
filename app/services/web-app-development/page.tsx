@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "Web App Development | AMS IT Services",
         description: "Custom SaaS platforms, dashboards, and portals built with React and Next.js for high performance.",
         url: "https://amsitservices.com/services/web-app-development",
-        images: [{ url: "/services/og-web-app.jpg", width: 1200, height: 630, alt: "Web App Development" }],
+        images: [{ url: "/services/web-app-development.png", width: 1200, height: 630, alt: "Web App Development" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-web-app.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/web-app-development.png"] },
 }
 
 export default function WebAppDevPage() {
@@ -82,7 +82,7 @@ export default function WebAppDevPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-web-app.jpg"
+                                src="/services/web-app-development.png"
                                 alt="Web App Development"
                                 className="w-full h-full object-cover"
                             />

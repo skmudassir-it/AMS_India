@@ -30,9 +30,9 @@ export const metadata: Metadata = {
         title: "E-commerce Solutions | AMS IT Services",
         description: "Launch and scale your online store with expert Shopify, WooCommerce, and custom e-commerce development.",
         url: "https://amsitservices.com/services/e-commerce-solutions",
-        images: [{ url: "/services/og-ecommerce.jpg", width: 1200, height: 630, alt: "E-commerce Solutions" }],
+        images: [{ url: "/services/ecommerce-solutions.png", width: 1200, height: 630, alt: "E-commerce Solutions" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-ecommerce.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/ecommerce-solutions.png"] },
 }
 
 export default function ECommercePage() {
@@ -84,7 +84,7 @@ export default function ECommercePage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-pink-500/20 to-purple-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-ecommerce.jpg"
+                                src="/services/ecommerce-solutions.png"
                                 alt="E-commerce Solutions"
                                 className="w-full h-full object-cover"
                             />

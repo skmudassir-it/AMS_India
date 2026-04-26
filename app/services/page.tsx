@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ShoppingCart, Server, Code, CheckCircle, Cpu, Shield, BarChart, FileJson, Database, RefreshCw, Smartphone, Search, Cloud } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 export const metadata: Metadata = {
     title: "IT Services | Web, Mobile, SEO & Cloud Solutions",
@@ -63,6 +64,9 @@ export default function ServicesPage() {
         }
     ]
 
+    const firstHalf = allServices.slice(0, 3)
+    const secondHalf = allServices.slice(3)
+
     return (
         <div className="container mx-auto px-4 py-20">
             <div className="max-w-3xl mb-16 space-y-4">
@@ -73,7 +77,59 @@ export default function ServicesPage() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {allServices.map((service, idx) => (
+                {firstHalf.map((service, idx) => (
+                    <Link key={idx} href={service.href}>
+                        <Card className="group hover:border-primary transition-colors h-full cursor-pointer">
+                            <CardHeader>
+                                <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center mb-4 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                                    <service.icon className="h-6 w-6" />
+                                </div>
+                                <CardTitle className="text-2xl">{service.category}</CardTitle>
+                                <p className="text-sm text-foreground/60">{service.description}</p>
+                            </CardHeader>
+                            <CardContent>
+                                <ul className="space-y-2">
+                                    {service.items.map((item, i) => (
+                                        <li key={i} className="flex items-center gap-2 text-sm text-foreground/80">
+                                            <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </CardContent>
+                        </Card>
+                    </Link>
+                ))}
+            </div>
+
+            {/* Mid-page feature banner */}
+            <div className="my-16 rounded-3xl overflow-hidden relative">
+                <Image
+                    src="/about-feature.jpg"
+                    alt="AMS IT Services — end-to-end digital solutions"
+                    width={1400}
+                    height={500}
+                    className="w-full h-72 md:h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent flex flex-col justify-center px-10 md:px-20">
+                    <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-2">End-to-End Digital Solutions</p>
+                    <h2 className="text-3xl md:text-5xl font-bold text-white leading-tight max-w-xl">
+                        Everything Your Business Needs to Grow Online
+                    </h2>
+                    <p className="mt-4 text-white/80 max-w-lg text-base md:text-lg">
+                        From building your first website to scaling enterprise infrastructure — our team delivers results that move the needle.
+                    </p>
+                    <Link
+                        href="/contact"
+                        className="mt-6 inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-full w-fit hover:bg-primary/90 transition-colors"
+                    >
+                        Start a Project
+                    </Link>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {secondHalf.map((service, idx) => (
                     <Link key={idx} href={service.href}>
                         <Card className="group hover:border-primary transition-colors h-full cursor-pointer">
                             <CardHeader>

@@ -11,7 +11,7 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="space-y-4">
                         <Link href="/" className="flex items-center gap-2">
-                            <Image src="/logo-icon.jpg" alt="AMS IT Services" width={36} height={36} className="rounded-lg object-cover" />
+                            <Image src="/logo.jpg" alt="AMS IT Services" width={36} height={36} className="rounded-md" />
                             <h3 className="text-lg font-bold text-primary">AMS IT Services</h3>
                         </Link>
                         <p className="text-sm text-foreground/80 leading-relaxed">

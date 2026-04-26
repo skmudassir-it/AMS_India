@@ -29,9 +29,9 @@ export const metadata: Metadata = {
         title: "Article Writing Services | AMS IT Services",
         description: "Long-form, SEO-driven articles and thought leadership content that build your brand authority.",
         url: "https://amsitservices.com/services/articles",
-        images: [{ url: "/services/og-content-writing.jpg", width: 1200, height: 630, alt: "Article Writing Services" }],
+        images: [{ url: "/services/articles.png", width: 1200, height: 630, alt: "Article Writing Services" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-content-writing.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/articles.png"] },
 }
 
 export default function ArticlesPage() {
@@ -83,7 +83,7 @@ export default function ArticlesPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-content-writing.jpg"
+                                src="/services/articles.png"
                                 alt="Industry Articles"
                                 className="w-full h-full object-cover"
                             />

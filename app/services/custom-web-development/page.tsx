@@ -29,9 +29,9 @@ export const metadata: Metadata = {
         title: "Custom Web Development | AMS IT Services",
         description: "Bespoke web apps, dynamic platforms, and API integrations built with React, Next.js, and Laravel.",
         url: "https://amsitservices.com/services/custom-web-development",
-        images: [{ url: "/services/og-web-development.jpg", width: 1200, height: 630, alt: "Custom Web Development" }],
+        images: [{ url: "/services/custom-web-development.png", width: 1200, height: 630, alt: "Custom Web Development" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-web-development.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/custom-web-development.png"] },
 }
 
 export default function CustomWebDevPage() {
@@ -83,7 +83,7 @@ export default function CustomWebDevPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-web-development.jpg"
+                                src="/services/custom-web-development.png"
                                 alt="Custom Web Development"
                                 className="w-full h-full object-cover"
                             />

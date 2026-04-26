@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "Custom CRM Development | AMS IT Services",
         description: "Build a CRM tailored to your business — automate pipelines, track customers, and grow revenue.",
         url: "https://amsitservices.com/services/crm",
-        images: [{ url: "/services/og-crm.jpg", width: 1200, height: 630, alt: "CRM Development" }],
+        images: [{ url: "/services/crm.png", width: 1200, height: 630, alt: "CRM Development" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-crm.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/crm.png"] },
 }
 
 export default function CRMPage() {
@@ -82,7 +82,7 @@ export default function CRMPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-crm.jpg"
+                                src="/services/crm.png"
                                 alt="CRM Solutions"
                                 className="w-full h-full object-cover"
                             />

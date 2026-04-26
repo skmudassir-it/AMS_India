@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "Blog Post Writing Services | AMS IT Services",
         description: "SEO-optimised blog posts written by experts to grow your audience and organic search rankings.",
         url: "https://amsitservices.com/services/blog-posts",
-        images: [{ url: "/blog-og.jpg", width: 1200, height: 630, alt: "Blog Post Writing Services" }],
+        images: [{ url: "/services/blog-posts.png", width: 1200, height: 630, alt: "Blog Post Writing Services" }],
     },
-    twitter: { card: "summary_large_image", images: ["/blog-og.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/blog-posts.png"] },
 }
 
 export default function BlogPostsPage() {
@@ -82,7 +82,7 @@ export default function BlogPostsPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-rose-500/20 to-red-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/blog-og.jpg"
+                                src="/services/blog-posts.png"
                                 alt="Blog Posts"
                                 className="w-full h-full object-cover"
                             />

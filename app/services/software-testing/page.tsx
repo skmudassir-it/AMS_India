@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "Software Testing & QA | AMS IT Services",
         description: "End-to-end QA and software testing services — manual, automated, and performance testing for bug-free releases.",
         url: "https://amsitservices.com/services/software-testing",
-        images: [{ url: "/services/og-software-testing.jpg", width: 1200, height: 630, alt: "Software Testing QA" }],
+        images: [{ url: "/services/software-testing.png", width: 1200, height: 630, alt: "Software Testing QA" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-software-testing.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/software-testing.png"] },
 }
 
 export default function TestingPage() {
@@ -82,7 +82,7 @@ export default function TestingPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-rose-500/20 to-red-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-software-testing.jpg"
+                                src="/services/software-testing.png"
                                 alt="Software Testing"
                                 className="w-full h-full object-cover"
                             />

@@ -29,9 +29,9 @@ export const metadata: Metadata = {
         title: "Mobile App Development | AMS IT Services",
         description: "Custom iOS, Android, and cross-platform mobile apps built to scale. Expert team in India & USA.",
         url: "https://amsitservices.com/services/mobile-app-development",
-        images: [{ url: "/services/og-mobile-app.jpg", width: 1200, height: 630, alt: "Mobile App Development" }],
+        images: [{ url: "/services/mobile-app-development.png", width: 1200, height: 630, alt: "Mobile App Development" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-mobile-app.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/mobile-app-development.png"] },
 }
 
 export default function MobileAppDevPage() {
@@ -83,7 +83,7 @@ export default function MobileAppDevPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-mobile-app.jpg"
+                                src="/services/mobile-app-development.png"
                                 alt="Mobile App Development"
                                 className="w-full h-full object-cover"
                             />

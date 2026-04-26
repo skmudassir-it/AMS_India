@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "Backend Automation & APIs | AMS IT Services",
         description: "Custom APIs, n8n workflow automation, and backend infrastructure to scale your business operations.",
         url: "https://amsitservices.com/services/backend-automation",
-        images: [{ url: "/services/og-backend-automation.jpg", width: 1200, height: 630, alt: "Backend Automation" }],
+        images: [{ url: "/services/backend-automation.png", width: 1200, height: 630, alt: "Backend Automation" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-backend-automation.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/backend-automation.png"] },
 }
 
 export default function BackendAutomationPage() {
@@ -82,7 +82,7 @@ export default function BackendAutomationPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-slate-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-backend-automation.jpg"
+                                src="/services/backend-automation.png"
                                 alt="Backend Automation"
                                 className="w-full h-full object-cover"
                             />

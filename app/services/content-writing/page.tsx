@@ -28,9 +28,9 @@ export const metadata: Metadata = {
         title: "Content Writing Services | AMS IT Services",
         description: "SEO-optimised blogs, web copy, and articles written by experts that rank and convert.",
         url: "https://amsitservices.com/services/content-writing",
-        images: [{ url: "/services/og-content-writing.jpg", width: 1200, height: 630, alt: "Content Writing Services" }],
+        images: [{ url: "/services/content-writing.png", width: 1200, height: 630, alt: "Content Writing Services" }],
     },
-    twitter: { card: "summary_large_image", images: ["/services/og-content-writing.jpg"] },
+    twitter: { card: "summary_large_image", images: ["/services/content-writing.png"] },
 }
 
 export default function ContentWritingPage() {
@@ -82,7 +82,7 @@ export default function ContentWritingPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-green-500/20 to-emerald-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/og-content-writing.jpg"
+                                src="/services/content-writing.png"
                                 alt="Content Writing"
                                 className="w-full h-full object-cover"
                             />
