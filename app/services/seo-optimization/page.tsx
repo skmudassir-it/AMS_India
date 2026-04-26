@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -18,6 +19,20 @@ import {
     Gauge
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "SEO Optimization Services | Rank Higher on Google",
+    description: "Data-driven SEO optimization to boost search rankings, increase organic traffic, and grow your online presence. Proven results by AMS IT Services.",
+    keywords: ["SEO optimization", "search engine optimization", "Google ranking", "organic traffic", "SEO agency India", "local SEO services"],
+    alternates: { canonical: "https://amsitservices.com/services/seo-optimization" },
+    openGraph: {
+        title: "SEO Optimization Services | AMS IT Services",
+        description: "Boost your Google rankings with data-driven SEO strategies. Proven ROI from keyword research to technical SEO.",
+        url: "https://amsitservices.com/services/seo-optimization",
+        images: [{ url: "/services/og-seo.jpg", width: 1200, height: 630, alt: "SEO Optimization Services" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-seo.jpg"] },
+}
 
 export default function SEOPage() {
     const scopeItems = [

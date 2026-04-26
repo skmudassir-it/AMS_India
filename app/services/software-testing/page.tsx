@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     BarChart
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Software Testing & QA Services | Manual & Automated Testing",
+    description: "Comprehensive software testing and quality assurance — manual, automated, performance, and security testing. Ship bug-free software with AMS IT Services.",
+    keywords: ["software testing", "QA services", "automated testing", "manual testing", "quality assurance India", "Selenium testing", "performance testing"],
+    alternates: { canonical: "https://amsitservices.com/services/software-testing" },
+    openGraph: {
+        title: "Software Testing & QA | AMS IT Services",
+        description: "End-to-end QA and software testing services — manual, automated, and performance testing for bug-free releases.",
+        url: "https://amsitservices.com/services/software-testing",
+        images: [{ url: "/services/og-software-testing.jpg", width: 1200, height: 630, alt: "Software Testing QA" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-software-testing.jpg"] },
+}
 
 export default function TestingPage() {
     const scopeItems = [

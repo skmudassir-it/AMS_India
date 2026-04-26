@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -18,6 +19,20 @@ import {
     Lock
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Mobile App Development | iOS, Android & Cross-Platform",
+    description: "Professional iOS and Android mobile app development. AMS IT Services builds high-performance cross-platform apps using React Native and Flutter.",
+    keywords: ["mobile app development", "iOS app development", "Android app development", "React Native developer", "Flutter development India"],
+    alternates: { canonical: "https://amsitservices.com/services/mobile-app-development" },
+    openGraph: {
+        title: "Mobile App Development | AMS IT Services",
+        description: "Custom iOS, Android, and cross-platform mobile apps built to scale. Expert team in India & USA.",
+        url: "https://amsitservices.com/services/mobile-app-development",
+        images: [{ url: "/services/og-mobile-app.jpg", width: 1200, height: 630, alt: "Mobile App Development" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-mobile-app.jpg"] },
+}
 
 export default function MobileAppDevPage() {
     const scopeItems = [

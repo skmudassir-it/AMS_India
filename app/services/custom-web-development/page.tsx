@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -18,6 +19,20 @@ import {
     Terminal
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Custom Web Development Services | React, Next.js & Laravel",
+    description: "Expert custom web development using React, Next.js, Laravel, and PHP. AMS IT Services builds bespoke web apps, dynamic platforms, and cloud-ready solutions.",
+    keywords: ["custom web development", "React development", "Next.js developer", "Laravel development", "web app development India"],
+    alternates: { canonical: "https://amsitservices.com/services/custom-web-development" },
+    openGraph: {
+        title: "Custom Web Development | AMS IT Services",
+        description: "Bespoke web apps, dynamic platforms, and API integrations built with React, Next.js, and Laravel.",
+        url: "https://amsitservices.com/services/custom-web-development",
+        images: [{ url: "/services/og-web-development.jpg", width: 1200, height: 630, alt: "Custom Web Development" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-web-development.jpg"] },
+}
 
 export default function CustomWebDevPage() {
     const scopeItems = [

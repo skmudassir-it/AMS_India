@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     Edit3
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Content Writing Services | SEO Blogs, Web Copy & Articles",
+    description: "Professional SEO-optimised content writing — blog posts, web copy, articles, and product descriptions that engage audiences and drive conversions.",
+    keywords: ["content writing services", "SEO content writing", "blog writing", "copywriting India", "web content writing", "article writing service"],
+    alternates: { canonical: "https://amsitservices.com/services/content-writing" },
+    openGraph: {
+        title: "Content Writing Services | AMS IT Services",
+        description: "SEO-optimised blogs, web copy, and articles written by experts that rank and convert.",
+        url: "https://amsitservices.com/services/content-writing",
+        images: [{ url: "/services/og-content-writing.jpg", width: 1200, height: 630, alt: "Content Writing Services" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-content-writing.jpg"] },
+}
 
 export default function ContentWritingPage() {
     const scopeItems = [

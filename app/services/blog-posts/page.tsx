@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     PenTool
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Blog Post Writing Services | SEO Blog Content",
+    description: "Professional blog post writing services — keyword-researched, SEO-optimised blog content that attracts readers, builds authority, and ranks on Google.",
+    keywords: ["blog post writing", "SEO blog writing", "content marketing", "blog writing service India", "blog ghostwriting", "WordPress blog content"],
+    alternates: { canonical: "https://amsitservices.com/services/blog-posts" },
+    openGraph: {
+        title: "Blog Post Writing Services | AMS IT Services",
+        description: "SEO-optimised blog posts written by experts to grow your audience and organic search rankings.",
+        url: "https://amsitservices.com/services/blog-posts",
+        images: [{ url: "/blog-og.jpg", width: 1200, height: 630, alt: "Blog Post Writing Services" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/blog-og.jpg"] },
+}
 
 export default function BlogPostsPage() {
     const scopeItems = [

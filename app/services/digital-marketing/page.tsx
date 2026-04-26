@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -18,6 +19,20 @@ import {
     PieChart
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Digital Marketing Services | PPC, Social Media & Growth",
+    description: "Full-spectrum digital marketing including PPC advertising, social media management, and content strategy. Drive qualified leads with AMS IT Services.",
+    keywords: ["digital marketing", "PPC advertising", "social media marketing", "Google Ads", "Facebook Ads", "digital marketing agency India"],
+    alternates: { canonical: "https://amsitservices.com/services/digital-marketing" },
+    openGraph: {
+        title: "Digital Marketing Services | AMS IT Services",
+        description: "PPC, social media, and content marketing strategies that drive qualified leads and grow your business.",
+        url: "https://amsitservices.com/services/digital-marketing",
+        images: [{ url: "/services/og-digital-marketing.jpg", width: 1200, height: 630, alt: "Digital Marketing Services" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-digital-marketing.jpg"] },
+}
 
 export default function DigitalMarketingPage() {
     const scopeItems = [

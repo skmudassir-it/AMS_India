@@ -90,7 +90,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t text-center text-xs text-foreground/60">
-                    <p>&copy; {new Date().getFullYear()} AMS IT Services. All rights reserved. Based in Hyderabad, India.</p>
+                    <p>&copy; 2026 AMS IT Services. All rights reserved. Based in India &amp; USA.</p>
                 </div>
             </div>
         </footer>

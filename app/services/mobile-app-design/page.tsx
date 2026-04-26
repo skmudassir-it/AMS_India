@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -21,6 +22,20 @@ import {
     Workflow
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Mobile App UI/UX Design Services | iOS & Android",
+    description: "Professional mobile app UI/UX design for iOS and Android. AMS IT Services creates intuitive, visually stunning interfaces that delight users and drive engagement.",
+    keywords: ["mobile app design", "UI UX design", "iOS app design", "Android app design", "Figma design India", "app wireframing"],
+    alternates: { canonical: "https://amsitservices.com/services/mobile-app-design" },
+    openGraph: {
+        title: "Mobile App UI/UX Design | AMS IT Services",
+        description: "Intuitive and beautiful mobile app designs for iOS and Android — from wireframes to pixel-perfect prototypes.",
+        url: "https://amsitservices.com/services/mobile-app-design",
+        images: [{ url: "/services/og-mobile-design.jpg", width: 1200, height: 630, alt: "Mobile App Design" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-mobile-design.jpg"] },
+}
 
 export default function MobileAppDesignPage() {
     const scopeItems = [

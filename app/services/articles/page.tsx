@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -18,6 +19,20 @@ import {
     GraduationCap
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Article Writing Services | Long-form SEO Content",
+    description: "Expert long-form article writing — thought leadership pieces, industry guides, and SEO-optimised articles that build authority and drive organic traffic.",
+    keywords: ["article writing service", "long-form content", "thought leadership content", "SEO articles", "ghostwriting India", "industry articles"],
+    alternates: { canonical: "https://amsitservices.com/services/articles" },
+    openGraph: {
+        title: "Article Writing Services | AMS IT Services",
+        description: "Long-form, SEO-driven articles and thought leadership content that build your brand authority.",
+        url: "https://amsitservices.com/services/articles",
+        images: [{ url: "/services/og-content-writing.jpg", width: 1200, height: 630, alt: "Article Writing Services" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-content-writing.jpg"] },
+}
 
 export default function ArticlesPage() {
     const scopeItems = [

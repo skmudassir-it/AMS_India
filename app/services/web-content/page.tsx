@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     Palette
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Web Content Writing Services | Landing Pages & Product Copy",
+    description: "Compelling web content writing for landing pages, homepages, and product pages. Conversion-focused copy that ranks on Google and turns visitors into customers.",
+    keywords: ["web content writing", "landing page copywriting", "website copy", "product page content", "conversion copywriting India"],
+    alternates: { canonical: "https://amsitservices.com/services/web-content" },
+    openGraph: {
+        title: "Web Content Writing | AMS IT Services",
+        description: "High-converting website copy and landing page content that ranks and drives sales.",
+        url: "https://amsitservices.com/services/web-content",
+        images: [{ url: "/services/og-content-writing.jpg", width: 1200, height: 630, alt: "Web Content Writing" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-content-writing.jpg"] },
+}
 
 export default function WebContentPage() {
     const scopeItems = [

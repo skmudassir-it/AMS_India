@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     Clock
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Backend Automation & API Development | n8n, REST & GraphQL",
+    description: "Custom backend automation, REST/GraphQL API development, and workflow automation with n8n. AMS IT Services streamlines your business operations end-to-end.",
+    keywords: ["backend automation", "API development", "REST API", "GraphQL API", "n8n automation", "workflow automation India", "backend development"],
+    alternates: { canonical: "https://amsitservices.com/services/backend-automation" },
+    openGraph: {
+        title: "Backend Automation & APIs | AMS IT Services",
+        description: "Custom APIs, n8n workflow automation, and backend infrastructure to scale your business operations.",
+        url: "https://amsitservices.com/services/backend-automation",
+        images: [{ url: "/services/og-backend-automation.jpg", width: 1200, height: 630, alt: "Backend Automation" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-backend-automation.jpg"] },
+}
 
 export default function BackendAutomationPage() {
     const scopeItems = [

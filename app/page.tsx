@@ -1,3 +1,5 @@
+import { readFileSync } from "fs"
+import { join } from "path"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -6,11 +8,47 @@ import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Layers, Shie
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
 import AnimatedStats from "@/components/AnimatedStats"
+import HeroMotionGraph from "@/components/HeroMotionGraph"
+import HeroVideoBackground from "@/components/HeroVideoBackground"
 import { getBlogPosts } from "@/lib/blog"
 import { ArrowRight } from "lucide-react"
 
+function getHeroVideoUrl(): string | null {
+  try {
+    // Prefer local copy; fall back to CDN URL stored in meta JSON
+    const localPath = join(process.cwd(), "public/hero.mp4")
+    const localFs = readFileSync(localPath)
+    if (localFs) return "/hero.mp4"
+  } catch { /* no local file */ }
+  try {
+    const raw = readFileSync(join(process.cwd(), "public/hero-video-meta.json"), "utf-8")
+    return JSON.parse(raw).url ?? null
+  } catch {
+    return null
+  }
+}
+
+export const metadata = {
+  title: "AMS IT Services | Custom Web & Mobile Development",
+  description:
+    "AMS IT Services builds custom websites, mobile apps, e-commerce stores, and cloud solutions. Expert team based in India & USA delivering world-class digital products.",
+  keywords: [
+    "custom web development", "mobile app development", "e-commerce solutions",
+    "SEO services", "AWS cloud", "IT company India", "Next.js developers",
+  ],
+  alternates: { canonical: "https://amsitservices.com" },
+  openGraph: {
+    title: "AMS IT Services | Custom Web & Mobile Development",
+    description: "Premium web, mobile, and cloud solutions tailored to your business. 185+ websites built, 21+ mobile apps delivered.",
+    url: "https://amsitservices.com",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "AMS IT Services" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og-image.jpg"] },
+}
+
 export default async function Home() {
   const blogPosts = await getBlogPosts()
+  const heroVideoUrl = getHeroVideoUrl()
   const mainFeatures = [
     {
       title: "Custom Web Development",
@@ -43,42 +81,73 @@ export default async function Home() {
 
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-white">
-        {/* Background Image with Gradient Overlay */}
-        <div
-          className="absolute inset-0 z-0 opacity-20"
-          style={{
-            backgroundImage: "url('/hero-bg.png')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/0 via-white/40 to-white z-0" />
+      <section
+        className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #050d1a 0%, #0c1a35 50%, #070f22 100%)' }}
+      >
+        {/* fal.ai generated video background (with canvas fallback overlay) */}
+        {heroVideoUrl
+          ? <HeroVideoBackground src={heroVideoUrl} />
+          : <HeroMotionGraph />
+        }
 
-        <div className="container px-4 text-center space-y-12 relative z-10 pt-20">
-          <div className="inline-block px-4 py-1.5 mb-4 text-xs font-semibold tracking-wider text-primary uppercase bg-primary/10 rounded-full">
+        {/* Radial glow (sits above video, below content) */}
+        <div
+          className="absolute inset-0 z-[2]"
+          style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(30,58,138,0.2) 0%, transparent 70%)' }}
+        />
+
+        <div className="container px-4 text-center space-y-10 relative z-[3] pt-20">
+          <div className="inline-block px-5 py-2 text-xs font-semibold tracking-widest text-blue-300 uppercase bg-blue-500/10 border border-blue-500/20 rounded-full backdrop-blur-sm">
             Driving Global Excellence through Innovation
           </div>
-          <h1 className="text-5xl md:text-8xl font-extrabold text-foreground tracking-tight max-w-5xl mx-auto leading-tight">
-            Empowering Your Business with <br /><span className="text-[#BB290E]">AMS IT Services</span>
+          <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight max-w-5xl mx-auto leading-tight text-white">
+            Empowering Your Business with{' '}
+            <br />
+            <span
+              className="inline-block"
+              style={{
+                background: 'linear-gradient(90deg, #f97316 0%, #BB290E 50%, #ef4444 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              AMS IT Services
+            </span>
           </h1>
-          <p className="text-xl md:text-2xl text-foreground/70 max-w-3xl mx-auto font-medium">
+          <p className="text-xl md:text-2xl text-white/60 max-w-3xl mx-auto font-medium leading-relaxed">
             From Custom Web Development to AWS Cloud Integration, AMS IT Services delivers premium technology solutions tailored to your success.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
-            <Button size="lg" className="h-14 px-10 text-lg bg-[#BB290E] hover:bg-[#96210b] shadow-xl hover:shadow-[#BB290E]/20 transition-all" asChild>
+            <Button
+              size="lg"
+              className="h-14 px-10 text-lg bg-[#BB290E] hover:bg-[#96210b] shadow-xl hover:shadow-[#BB290E]/30 transition-all"
+              asChild
+            >
               <Link href="/services">Explore Services</Link>
             </Button>
-            <Button size="lg" variant="outline" className="h-14 px-10 text-lg border-[#BB290E] text-[#BB290E] hover:bg-[#BB290E]/5 transition-all" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="h-14 px-10 text-lg border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-all"
+              asChild
+            >
               <Link href="/contact">Get in Touch</Link>
             </Button>
           </div>
         </div>
 
-        {/* Stats Grid Under Hero Content */}
-        <div className="w-full relative z-10 mt-12 mb-8">
-          <AnimatedStats />
+        {/* Stats Grid */}
+        <div className="w-full relative z-[3] mt-12 mb-8">
+          <AnimatedStats dark />
         </div>
+
+        {/* Bottom fade to page background */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-24 z-[2]"
+          style={{ background: 'linear-gradient(to bottom, transparent, #f8fafc)' }}
+        />
       </section>
 
       {/* Main Features */}

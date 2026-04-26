@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     BarChart3
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "Web Application Development | SaaS, Dashboards & Portals",
+    description: "Custom web application development for SaaS platforms, admin dashboards, client portals, and enterprise tools. Built with React, Next.js, and Node.js.",
+    keywords: ["web application development", "SaaS development", "dashboard development", "React app development", "Next.js development India", "enterprise web apps"],
+    alternates: { canonical: "https://amsitservices.com/services/web-app-development" },
+    openGraph: {
+        title: "Web App Development | AMS IT Services",
+        description: "Custom SaaS platforms, dashboards, and portals built with React and Next.js for high performance.",
+        url: "https://amsitservices.com/services/web-app-development",
+        images: [{ url: "/services/og-web-app.jpg", width: 1200, height: 630, alt: "Web App Development" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-web-app.jpg"] },
+}
 
 export default function WebAppDevPage() {
     const scopeItems = [

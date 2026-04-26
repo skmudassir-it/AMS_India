@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -19,6 +20,20 @@ import {
     Truck
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "E-commerce Development | Shopify, WooCommerce & Custom Stores",
+    description: "End-to-end e-commerce development with Shopify, WooCommerce, and custom platforms. AMS IT Services builds scalable, conversion-optimised online stores.",
+    keywords: ["e-commerce development", "Shopify development", "WooCommerce development", "online store development", "e-commerce solutions India"],
+    alternates: { canonical: "https://amsitservices.com/services/e-commerce-solutions" },
+    openGraph: {
+        title: "E-commerce Solutions | AMS IT Services",
+        description: "Launch and scale your online store with expert Shopify, WooCommerce, and custom e-commerce development.",
+        url: "https://amsitservices.com/services/e-commerce-solutions",
+        images: [{ url: "/services/og-ecommerce.jpg", width: 1200, height: 630, alt: "E-commerce Solutions" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-ecommerce.jpg"] },
+}
 
 export default function ECommercePage() {
     const scopeItems = [

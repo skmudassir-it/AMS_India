@@ -1,6 +1,21 @@
+import type { Metadata } from "next"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ShoppingCart, Server, Code, CheckCircle, Cpu, Shield, BarChart, FileJson, Database, RefreshCw, Smartphone, Search, Cloud } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "IT Services | Web, Mobile, SEO & Cloud Solutions",
+    description: "Full-cycle IT services: custom web development, mobile apps, e-commerce, SEO, digital marketing, AWS cloud, CRM, and backend automation. Based in India & USA.",
+    keywords: ["IT services", "web development services", "mobile app services", "SEO services", "cloud services India", "e-commerce development", "digital marketing agency"],
+    alternates: { canonical: "https://amsitservices.com/services" },
+    openGraph: {
+        title: "AMS IT Services | Complete IT Solutions",
+        description: "From web development to cloud infrastructure — explore all services offered by AMS IT Services.",
+        url: "https://amsitservices.com/services",
+        images: [{ url: "/services/og-web-development.jpg", width: 1200, height: 630, alt: "AMS IT Services" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-web-development.jpg"] },
+}
 
 export default function ServicesPage() {
     const allServices = [

@@ -1,13 +1,21 @@
 import Link from "next/link"
-import { SafeImage as Image } from "@/components/ui/safe-image"
 import { getBlogPosts } from "@/lib/blog"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, User, ArrowRight } from "lucide-react"
 
 export const metadata = {
-    title: "Blog | AMS IT Services",
-    description: "Insights, updates, and expert advice on web development, e-commerce, and digital transformation.",
+    title: "Blog | Web Development & Tech Insights",
+    description: "Expert insights on web development, mobile apps, SEO, e-commerce, and digital transformation from the AMS IT Services team.",
+    keywords: ["web development blog", "tech insights", "SEO tips", "e-commerce trends", "mobile app development", "IT services blog"],
+    alternates: { canonical: "https://amsitservices.com/blog" },
+    openGraph: {
+        title: "AMS IT Services Blog | Tech & Development Insights",
+        description: "Expert insights on web development, SEO, mobile apps, and digital business transformation.",
+        url: "https://amsitservices.com/blog",
+        images: [{ url: "/blog-og.jpg", width: 1200, height: 630, alt: "AMS IT Services Blog" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/blog-og.jpg"] },
 }
 
 export default async function BlogPage() {

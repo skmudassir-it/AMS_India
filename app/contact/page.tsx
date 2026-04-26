@@ -1,213 +1,25 @@
-"use client"
+import type { Metadata } from "next"
+import ContactFormClient from "./ContactFormClient"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Mail, MapPin, Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react"
+export const metadata: Metadata = {
+    title: "Contact Us | AMS IT Services",
+    description: "Get in touch with AMS IT Services for custom web development, mobile apps, SEO, and cloud solutions. Offices in Memphis, USA and Hyderabad, India.",
+    keywords: ["contact AMS IT Services", "IT services inquiry", "web development quote", "hire developers India", "Memphis IT company"],
+    alternates: { canonical: "https://amsitservices.com/contact" },
+    openGraph: {
+        title: "Contact AMS IT Services",
+        description: "Reach out to our team for a free consultation. We deliver premium web, mobile, and cloud solutions from India & USA.",
+        url: "https://amsitservices.com/contact",
+        images: [{ url: "/contact-og.jpg", width: 1200, height: 630, alt: "Contact AMS IT Services" }],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Contact AMS IT Services",
+        description: "Reach out to our team for a free consultation on web, mobile, and cloud solutions.",
+        images: ["/contact-og.jpg"],
+    },
+}
 
 export default function ContactPage() {
-    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
-    const [errorMessage, setErrorMessage] = useState("")
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault()
-        setStatus("loading")
-        setErrorMessage("")
-
-        const formData = new FormData(e.currentTarget)
-        const formUrl = `${process.env.NEXT_PUBLIC_MAUTIC_URL}/form/submit?formId=${process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID}`
-
-        try {
-            await fetch(formUrl, {
-                method: "POST",
-                body: formData,
-                mode: 'no-cors' // Use no-cors as Mautic redirect might cause CORS issues on the client
-            })
-
-            // With no-cors, we can't see the response status, but if the catch block isn't hit, 
-            // the request was sent successfully.
-            setStatus("success")
-            e.currentTarget.reset()
-        } catch (error) {
-            console.error("Form submission error:", error)
-            setStatus("error")
-            setErrorMessage("Something went wrong. Please try again or contact us directly.")
-        }
-    }
-
-    return (
-        <div className="container mx-auto px-4 py-20">
-            <div className="text-center mb-16 space-y-4">
-                <h1 className="text-4xl md:text-5xl font-bold text-primary">Get In Touch</h1>
-                <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-                    Have a project in mind or want to know more about our services? Our team is ready to help you.
-                </p>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                {/* Contact Form */}
-                <Card className="p-4 md:p-8">
-                    {status === "success" ? (
-                        <div className="flex flex-col items-center justify-center py-12 text-center space-y-4 animate-in fade-in zoom-in duration-300">
-                            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
-                                <CheckCircle2 className="h-8 w-8 text-green-600" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-primary">Thank You!</h3>
-                            <p className="text-foreground/70 max-w-sm mx-auto">
-                                Your message has been received. Our team will get back to you within 24 hours.
-                            </p>
-                            <Button
-                                variant="outline"
-                                onClick={() => setStatus("idle")}
-                                className="mt-4"
-                            >
-                                Send Another Message
-                            </Button>
-                        </div>
-                    ) : (
-                        <form
-                            onSubmit={handleSubmit}
-                            id="mautic_contact_form"
-                            className="space-y-6"
-                        >
-                            <input type="hidden" name="mauticform[formId]" value={process.env.NEXT_PUBLIC_MAUTIC_CONTACT_FORM_ID} />
-                            <input type="hidden" name="mauticform[messenger]" value="1" />
-
-                            {status === "error" && (
-                                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md flex items-center gap-3 animate-in fade-in slide-in-from-top-1">
-                                    <AlertCircle className="h-5 w-5" />
-                                    <p className="text-sm font-medium">{errorMessage}</p>
-                                </div>
-                            )}
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-foreground/80">First Name</label>
-                                    <Input
-                                        name="mauticform[firstname]"
-                                        placeholder="John"
-                                        required
-                                        disabled={status === "loading"}
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-foreground/80">Last Name</label>
-                                    <Input
-                                        name="mauticform[lastname]"
-                                        placeholder="Doe"
-                                        required
-                                        disabled={status === "loading"}
-                                    />
-                                </div>
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-foreground/80">Email Address</label>
-                                <Input
-                                    type="email"
-                                    name="mauticform[email]"
-                                    placeholder="john@example.com"
-                                    required
-                                    disabled={status === "loading"}
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-foreground/80">Service Interested In</label>
-                                <select
-                                    name="mauticform[service_interested_in]"
-                                    className="w-full h-10 px-3 rounded-md border border-input bg-background text-sm focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-50"
-                                    disabled={status === "loading"}
-                                >
-                                    <option value="Custom Web Development">Custom Web Development</option>
-                                    <option value="E-commerce Solutions">E-commerce Solutions</option>
-                                    <option value="Mobile App Development">Mobile App Development</option>
-                                    <option value="SEO Optimization">SEO Optimization</option>
-                                    <option value="Other Services">Other Services</option>
-                                </select>
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-foreground/80">Your Message</label>
-                                <textarea
-                                    name="mauticform[message]"
-                                    className="w-full min-h-[150px] p-3 rounded-md border border-input bg-background text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:opacity-50"
-                                    placeholder="How can we help you?"
-                                    required
-                                    disabled={status === "loading"}
-                                ></textarea>
-                            </div>
-                            <Button
-                                type="submit"
-                                className="w-full h-12 gap-2 text-lg font-bold shadow-lg hover:shadow-primary/20"
-                                disabled={status === "loading"}
-                            >
-                                {status === "loading" ? (
-                                    <>
-                                        Sending... <Loader2 className="h-5 w-5 animate-spin" />
-                                    </>
-                                ) : (
-                                    <>
-                                        Send Message <Send className="h-4 w-4" />
-                                    </>
-                                )}
-                            </Button>
-                        </form>
-                    )}
-                </Card>
-
-                {/* Contact info & Map placeholder */}
-                <div className="space-y-8">
-                    <div className="grid grid-cols-1 gap-6">
-                        <Card className="border-none bg-accent/20">
-                            <CardContent className="p-6 flex items-start gap-4">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                                    <Mail className="text-primary h-6 w-6" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-primary">Email Us</h4>
-                                    <p className="text-sm text-foreground/70">Our team will get back to you within 24 hours.</p>
-                                    <a href="mailto:mudassir@amsitservices.com" className="text-lg font-medium hover:text-primary transition-colors">
-                                        mudassir@amsitservices.com
-                                    </a>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="border-none bg-accent/20">
-                            <CardContent className="p-6 flex items-start gap-4">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                                    <MapPin className="text-primary h-6 w-6" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-primary">Head Office</h4>
-                                    <p className="text-sm text-foreground/70">Visit us or send us mail.</p>
-                                    <p className="text-lg font-medium">Memphis, Tennessee, USA</p>
-                                </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card className="border-none bg-accent/20">
-                            <CardContent className="p-6 flex items-start gap-4">
-                                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                                    <MapPin className="text-primary h-6 w-6" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-primary">India Office</h4>
-                                    <p className="text-sm text-foreground/70">Main development hub.</p>
-                                    <p className="text-lg font-medium">Hyderabad, India</p>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    </div>
-
-                    <div className="rounded-3xl overflow-hidden h-64 bg-secondary/30 relative flex items-center justify-center text-foreground/40 font-medium">
-                        <div className="text-center">
-                            <MapPin className="h-8 w-8 mx-auto mb-2 opacity-20" />
-                            Interactive Map Integration Coming Soon
-                        </div>
-                        <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+    return <ContactFormClient />
 }

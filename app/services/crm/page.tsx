@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     Briefcase
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "CRM Development Services | Custom Customer Management Systems",
+    description: "Custom CRM development and integration to streamline your sales pipeline, automate workflows, and improve customer relationships. Expert team at AMS IT Services.",
+    keywords: ["CRM development", "custom CRM", "CRM integration", "sales pipeline software", "customer management system India"],
+    alternates: { canonical: "https://amsitservices.com/services/crm" },
+    openGraph: {
+        title: "Custom CRM Development | AMS IT Services",
+        description: "Build a CRM tailored to your business — automate pipelines, track customers, and grow revenue.",
+        url: "https://amsitservices.com/services/crm",
+        images: [{ url: "/services/og-crm.jpg", width: 1200, height: 630, alt: "CRM Development" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-crm.jpg"] },
+}
 
 export default function CRMPage() {
     const scopeItems = [

@@ -57,7 +57,7 @@ const stats = [
     { label: 'Ecommerce website developed', value: 235, suffix: '+' },
 ];
 
-const AnimatedStats = () => {
+const AnimatedStats = ({ dark = false }: { dark?: boolean }) => {
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full max-w-6xl mx-auto px-4 py-12">
             {stats.map((stat, index) => (
@@ -66,7 +66,7 @@ const AnimatedStats = () => {
                         <AnimatedNumber value={stat.value} />
                         {stat.suffix}
                     </div>
-                    <p className="text-sm md:text-base font-bold text-foreground/80 leading-snug uppercase tracking-tight">
+                    <p className={`text-sm md:text-base font-bold leading-snug uppercase tracking-tight ${dark ? 'text-white/60' : 'text-foreground/80'}`}>
                         {stat.label.split(' ').map((word, i) => (
                             <React.Fragment key={i}>
                                 {word}

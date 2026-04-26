@@ -17,10 +17,39 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AMS IT Services | Expert Web & Mobile Solutions",
-  description: "AMS IT Services provides custom web development, e-commerce solutions, and web app development. Based in India with HQ in Memphis, TN.",
-  icons: {
-    icon: "/favicon.ico",
+  metadataBase: new URL("https://amsitservices.com"),
+  title: {
+    default: "AMS IT Services | Custom Web & Mobile Development",
+    template: "%s | AMS IT Services",
+  },
+  description:
+    "AMS IT Services delivers custom web development, mobile apps, e-commerce solutions, SEO optimization, and AWS cloud integration. Based in India & USA.",
+  keywords: [
+    "web development", "mobile app development", "e-commerce solutions", "SEO optimization",
+    "AWS cloud integration", "IT services", "software development India", "Memphis IT company",
+    "React Next.js development", "Shopify development", "digital marketing",
+  ],
+  authors: [{ name: "AMS IT Services", url: "https://amsitservices.com" }],
+  creator: "AMS IT Services",
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  icons: { icon: "/favicon.ico" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://amsitservices.com",
+    siteName: "AMS IT Services",
+    title: "AMS IT Services | Custom Web & Mobile Development",
+    description:
+      "Premium web development, mobile apps, SEO, and cloud integration services. Trusted by businesses worldwide.",
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "AMS IT Services" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@AMSITServices",
+    creator: "@AMSITServices",
+    title: "AMS IT Services | Custom Web & Mobile Development",
+    description: "Premium web development, mobile apps, SEO, and cloud integration services.",
+    images: ["/og-image.jpg"],
   },
 };
 

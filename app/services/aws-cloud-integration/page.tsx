@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -17,6 +18,20 @@ import {
     BarChart3
 } from "lucide-react"
 import Link from "next/link"
+
+export const metadata: Metadata = {
+    title: "AWS Cloud Integration & Migration Services",
+    description: "Expert AWS cloud integration, migration, and DevOps services. AMS IT Services builds secure, scalable cloud infrastructure for growing businesses.",
+    keywords: ["AWS cloud integration", "cloud migration", "AWS services", "DevOps India", "cloud infrastructure", "AWS consulting"],
+    alternates: { canonical: "https://amsitservices.com/services/aws-cloud-integration" },
+    openGraph: {
+        title: "AWS Cloud Integration | AMS IT Services",
+        description: "Secure cloud migration, AWS architecture, and DevOps automation for scalable business growth.",
+        url: "https://amsitservices.com/services/aws-cloud-integration",
+        images: [{ url: "/services/og-aws-cloud.jpg", width: 1200, height: 630, alt: "AWS Cloud Integration" }],
+    },
+    twitter: { card: "summary_large_image", images: ["/services/og-aws-cloud.jpg"] },
+}
 
 export default function AWSCloudPage() {
     const scopeItems = [
