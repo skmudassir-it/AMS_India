@@ -82,7 +82,7 @@ export default function BackendAutomationPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-slate-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/backend-automation.png"
+                                src="/services/og-backend-automation.jpg"
                                 alt="Backend Automation"
                                 className="w-full h-full object-cover"
                             />

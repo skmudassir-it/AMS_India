@@ -82,7 +82,7 @@ export default function WebContentPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/web-content.png"
+                                src="/services/og-content-writing.jpg"
                                 alt="Web Content"
                                 className="w-full h-full object-cover"
                             />

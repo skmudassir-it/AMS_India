@@ -82,7 +82,7 @@ export default function CRMPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/crm.png"
+                                src="/services/og-crm.jpg"
                                 alt="CRM Solutions"
                                 className="w-full h-full object-cover"
                             />

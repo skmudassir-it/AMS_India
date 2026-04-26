@@ -173,6 +173,45 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* About / Team Section */}
+      <section className="container mx-auto px-4 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="absolute -inset-6 bg-gradient-to-tr from-blue-500/10 to-orange-500/10 blur-3xl rounded-3xl" />
+            <img
+              src="/about-feature.jpg"
+              alt="AMS IT Services Team"
+              className="relative rounded-3xl shadow-2xl w-full object-cover aspect-[4/3]"
+            />
+          </div>
+          <div className="space-y-6 order-1 lg:order-2">
+            <div className="inline-block px-4 py-2 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest rounded-full">
+              Who We Are
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-primary leading-tight">
+              Your Trusted <br />Technology Partner
+            </h2>
+            <p className="text-foreground/60 text-lg leading-relaxed">
+              AMS IT Services is a full-cycle IT company with offices in Memphis, USA and Hyderabad, India.
+              We&apos;ve delivered 185+ websites, 21+ mobile apps, and 235+ e-commerce stores for clients worldwide.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 bg-white rounded-2xl shadow-sm border border-secondary/20">
+                <div className="text-3xl font-extrabold text-[#BB290E]">8+</div>
+                <div className="text-sm text-foreground/60 font-medium mt-1">Years Experience</div>
+              </div>
+              <div className="p-5 bg-white rounded-2xl shadow-sm border border-secondary/20">
+                <div className="text-3xl font-extrabold text-[#BB290E]">50+</div>
+                <div className="text-sm text-foreground/60 font-medium mt-1">Team Members</div>
+              </div>
+            </div>
+            <Button asChild className="bg-[#BB290E] hover:bg-[#96210b] shadow-lg hover:shadow-[#BB290E]/20 transition-all">
+              <Link href="/contact">Work With Us</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Portfolio Section */}
       <Portfolio />
 
@@ -219,10 +258,9 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {blogPosts.slice(0, 3).map((post) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex flex-col space-y-4">
-              <div className="relative h-24 rounded-2xl overflow-hidden shadow-md bg-accent/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
-                  <span className="text-primary/10 font-bold text-2xl">AMS</span>
-                </div>
+              <div className="relative h-44 rounded-2xl overflow-hidden shadow-md">
+                <img src="/blog-og.jpg" alt={post.category} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
                 <div className="absolute top-4 left-4">
                   <span className="bg-[#BB290E] text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">
                     {post.category}

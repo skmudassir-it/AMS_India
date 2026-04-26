@@ -83,7 +83,7 @@ export default function CustomWebDevPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-blue-500/20 to-cyan-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/custom-web-development.png"
+                                src="/services/og-web-development.jpg"
                                 alt="Custom Web Development"
                                 className="w-full h-full object-cover"
                             />

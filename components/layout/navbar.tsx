@@ -28,11 +28,11 @@ export function Navbar() {
             <div className="container mx-auto flex h-16 items-center justify-between px-4">
                 <Link href="/" className="flex items-center gap-2">
                     <Image
-                        src="/logo.jpg"
+                        src="/logo-icon.jpg"
                         alt="AMS IT Services"
                         width={40}
                         height={40}
-                        className="rounded-md"
+                        className="rounded-lg object-cover"
                     />
                     <span className="text-xl font-bold text-primary">AMS IT Services</span>
                 </Link>

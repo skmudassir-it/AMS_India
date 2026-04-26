@@ -41,14 +41,12 @@ export default function ContactFormClient() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
             {/* Page Header */}
-            <div
-                className="relative py-20 overflow-hidden"
-                style={{ background: 'linear-gradient(135deg, #050d1a 0%, #0c1a35 60%, #070f22 100%)' }}
-            >
-                <div
-                    className="absolute inset-0"
-                    style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(30,58,138,0.3) 0%, transparent 70%)' }}
-                />
+            <div className="relative py-24 overflow-hidden min-h-[280px] flex items-center">
+                <div className="absolute inset-0">
+                    <img src="/contact-og.jpg" alt="Contact AMS IT Services" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(5,13,26,0.88) 0%, rgba(12,26,53,0.78) 60%, rgba(7,15,34,0.88) 100%)' }} />
+                    <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(30,58,138,0.25) 0%, transparent 70%)' }} />
+                </div>
                 <div className="container mx-auto px-4 text-center relative z-10 space-y-4">
                     <div className="inline-block px-5 py-2 text-xs font-semibold tracking-widest text-blue-300 uppercase bg-blue-500/10 border border-blue-500/20 rounded-full">
                         Let&apos;s Work Together

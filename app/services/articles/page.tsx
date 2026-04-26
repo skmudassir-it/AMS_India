@@ -83,7 +83,7 @@ export default function ArticlesPage() {
                         <div className="absolute -inset-10 bg-gradient-to-tr from-amber-500/20 to-orange-500/20 blur-[100px] rounded-full" />
                         <div className="relative aspect-square rounded-[4rem] border-8 border-white shadow-3xl overflow-hidden">
                             <img
-                                src="/services/articles.png"
+                                src="/services/og-content-writing.jpg"
                                 alt="Industry Articles"
                                 className="w-full h-full object-cover"
                             />

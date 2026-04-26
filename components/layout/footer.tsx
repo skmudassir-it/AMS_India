@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Mail, MapPin } from "lucide-react"
@@ -9,7 +10,10 @@ export function Footer() {
             <div className="container mx-auto px-4 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div className="space-y-4">
-                        <h3 className="text-lg font-bold text-primary">AMS IT Services</h3>
+                        <Link href="/" className="flex items-center gap-2">
+                            <Image src="/logo-icon.jpg" alt="AMS IT Services" width={36} height={36} className="rounded-lg object-cover" />
+                            <h3 className="text-lg font-bold text-primary">AMS IT Services</h3>
+                        </Link>
                         <p className="text-sm text-foreground/80 leading-relaxed">
                             Leading IT solutions provider based in India, delivering excellence in web and mobile development globally.
                         </p>

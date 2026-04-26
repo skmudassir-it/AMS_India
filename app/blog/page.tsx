@@ -23,10 +23,17 @@ export default async function BlogPage() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
-            <section className="bg-[#BB290E] text-white py-20 px-4 relative overflow-hidden">
-                <div className="absolute inset-0 bg-black/10" />
+            <section className="relative text-white py-24 px-4 overflow-hidden min-h-[300px] flex items-center">
+                <div className="absolute inset-0">
+                    <img src="/blog-og.jpg" alt="AMS IT Services Blog" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-[#BB290E]/80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                </div>
                 <div className="container mx-auto relative z-10 text-center space-y-4">
-                    <h1 className="text-4xl md:text-6xl font-bold tracking-tight">Our Blog</h1>
+                    <div className="inline-block px-5 py-2 text-xs font-bold tracking-widest uppercase bg-white/10 border border-white/20 rounded-full mb-2">
+                        Insights & Updates
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Our Blog</h1>
                     <p className="text-xl text-white/80 max-w-2xl mx-auto">
                         Stay updated with the latest trends and insights from our team of technology experts.
                     </p>
@@ -38,10 +45,9 @@ export default async function BlogPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {blogPosts.map((post) => (
                         <Card key={post.slug} className="group border-none shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full bg-white">
-                            <div className="relative h-32 overflow-hidden bg-accent/20">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#BB290E]/5 to-transparent flex items-center justify-center">
-                                    <span className="text-primary/10 font-bold text-4xl">AMS</span>
-                                </div>
+                            <div className="relative h-48 overflow-hidden">
+                                <img src="/blog-og.jpg" alt={post.category} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
                                 <div className="absolute top-4 left-4">
                                     <span className="bg-[#BB290E] text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
                                         {post.category}

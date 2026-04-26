@@ -17,9 +17,27 @@ export const metadata: Metadata = {
 
 export default function PortfoliosPage() {
     return (
-        <div className="py-20">
-            <h1 className="text-4xl font-bold text-center mb-12">Our Portfolios</h1>
-            <Portfolio />
+        <div>
+            {/* Hero */}
+            <section className="relative text-white py-24 px-4 overflow-hidden min-h-[300px] flex items-center">
+                <div className="absolute inset-0">
+                    <img src="/portfolio-og.jpg" alt="AMS IT Services Portfolio" className="w-full h-full object-cover" />
+                    <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(5,13,26,0.82) 0%, rgba(12,26,53,0.72) 50%, rgba(7,15,34,0.82) 100%)' }} />
+                </div>
+                <div className="container mx-auto relative z-10 text-center space-y-4">
+                    <div className="inline-block px-5 py-2 text-xs font-bold tracking-widest uppercase bg-white/10 border border-white/20 rounded-full mb-2">
+                        185+ Projects Delivered
+                    </div>
+                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">Our Portfolio</h1>
+                    <p className="text-xl text-white/75 max-w-2xl mx-auto">
+                        Websites, mobile apps, and e-commerce stores built for clients across the globe.
+                    </p>
+                </div>
+            </section>
+
+            <div className="py-16">
+                <Portfolio />
+            </div>
         </div>
     )
 }
