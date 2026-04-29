@@ -1,5 +1,3 @@
-import { readFileSync } from "fs"
-import { join } from "path"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -8,25 +6,11 @@ import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Layers, Shie
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
 import AnimatedStats from "@/components/AnimatedStats"
-import HeroMotionGraph from "@/components/HeroMotionGraph"
-import HeroVideoBackground from "@/components/HeroVideoBackground"
+import Hero3DSceneWrapper from "@/components/Hero3DSceneWrapper"
 import { getBlogPosts } from "@/lib/blog"
 import { ArrowRight } from "lucide-react"
 
-function getHeroVideoUrl(): string | null {
-  try {
-    // Prefer local copy; fall back to CDN URL stored in meta JSON
-    const localPath = join(process.cwd(), "public/hero.mp4")
-    const localFs = readFileSync(localPath)
-    if (localFs) return "/hero.mp4"
-  } catch { /* no local file */ }
-  try {
-    const raw = readFileSync(join(process.cwd(), "public/hero-video-meta.json"), "utf-8")
-    return JSON.parse(raw).url ?? null
-  } catch {
-    return null
-  }
-}
+
 
 export const metadata = {
   title: "AMS IT Services | Custom Web & Mobile Development",
@@ -48,7 +32,6 @@ export const metadata = {
 
 export default async function Home() {
   const blogPosts = await getBlogPosts()
-  const heroVideoUrl = getHeroVideoUrl()
   const mainFeatures = [
     {
       title: "Custom Web Development",
@@ -85,17 +68,11 @@ export default async function Home() {
         className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #050d1a 0%, #0c1a35 50%, #070f22 100%)' }}
       >
-        {/* fal.ai generated video background (with canvas fallback overlay) */}
-        {heroVideoUrl
-          ? <HeroVideoBackground src={heroVideoUrl} />
-          : <HeroMotionGraph />
-        }
+        {/* 3D Three.js Scene - rockets, planets, stars */}
+        <Hero3DSceneWrapper />
 
-        {/* Radial glow (sits above video, below content) */}
-        <div
-          className="absolute inset-0 z-[2]"
-          style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 50%, rgba(30,58,138,0.2) 0%, transparent 70%)' }}
-        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/30 via-transparent to-[#050d1a]/60 z-[2]" />
 
         <div className="container px-4 text-center space-y-10 relative z-[3] pt-20">
           <div className="inline-block px-5 py-2 text-xs font-semibold tracking-widest text-blue-300 uppercase bg-blue-500/10 border border-blue-500/20 rounded-full backdrop-blur-sm">
