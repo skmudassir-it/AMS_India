@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, ArrowLeft } from "lucide-react"
+import { ExternalLink, Globe, Store, Building2, ShoppingBag, UtensilsCrossed, Heart, Users, Hotel, Briefcase } from "lucide-react"
 
 export const metadata = {
   title: "Recent Projects | AMS IT Services",
@@ -8,65 +8,94 @@ export const metadata = {
     "Explore our recent projects — websites and digital solutions delivered by AMS IT Services across diverse industries.",
 }
 
-const projects = [
+interface Project {
+  name: string
+  url: string
+  description: string
+  gradient: string
+  icon: React.ComponentType<{ className?: string }>
+  category: "Interview-Ready" | "Worth Including"
+}
+
+const projects: Project[] = [
   {
-    name: "BandC Online",
-    url: "https://bandconline.com/",
-    description: "Modern business website for BandC Online.",
-  },
-  {
-    name: "ShopherShe",
-    url: "https://shophershe.com",
-    description: "E-commerce fashion and lifestyle platform.",
-  },
-  {
-    name: "GoStickyIcky",
-    url: "https://gostickyicky.com",
-    description: "Creative brand and product showcase website.",
-  },
-  {
-    name: "BSW Sepia",
-    url: "https://bsw-sepia.vercel.app",
-    description: "Professional corporate website with modern design.",
-  },
-  {
-    name: "Property AMS",
+    name: "Aura Estate",
     url: "https://property.amsitservices.com",
-    description: "Real estate property listing and management platform.",
+    description: "Luxury real estate platform with property listings, image gallery, amenities showcase, Google Maps integration, and contact forms.",
+    gradient: "from-emerald-500 to-teal-600",
+    icon: Building2,
+    category: "Interview-Ready",
   },
   {
-    name: "Memphis Indian Restaurant",
-    url: "https://memphis-indian-restaurant.vercel.app",
-    description: "Restaurant website with menu, ordering, and location.",
+    name: "StockSwift",
+    url: "https://stockswift.amsitservices.com",
+    description: "Full SaaS inventory management dashboard with features, pricing tiers, audit logs, PWA support, and technical specifications.",
+    gradient: "from-blue-600 to-indigo-700",
+    icon: Store,
+    category: "Interview-Ready",
   },
   {
     name: "Mufasa Jeweler",
     url: "https://mufasa-jeweler.vercel.app",
-    description: "Luxury jewelry e-commerce storefront.",
+    description: "Luxury jewelry e-commerce storefront with 6 product categories, featured items carousel, shopping cart, and store locator.",
+    gradient: "from-amber-500 to-yellow-600",
+    icon: ShoppingBag,
+    category: "Interview-Ready",
   },
   {
-    name: "American Metal and Saw",
-    url: "https://americanmetalandsaw.com",
-    description: "Industrial manufacturing and metal fabrication website.",
+    name: "Newly Weds Foods",
+    url: "https://newly-weds-foods.vercel.app",
+    description: "Global corporate food ingredients website with dropdown navigation, product lines, innovation hub, and industry trends sections.",
+    gradient: "from-red-600 to-orange-600",
+    icon: Globe,
+    category: "Interview-Ready",
   },
   {
-    name: "Q107.5",
-    url: "https://q1075.com",
-    description: "Radio station website with live streaming and programming.",
+    name: "Memphis Indian Restaurant",
+    url: "https://memphis-indian-restaurant.vercel.app",
+    description: "Full restaurant website with categorized menu, pricing, restaurant story, location, hours of operation, and contact information.",
+    gradient: "from-orange-600 to-red-500",
+    icon: UtensilsCrossed,
+    category: "Interview-Ready",
   },
   {
-    name: "Hot 107.1",
-    url: "https://hot1071.com",
-    description: "Radio station website with music, shows, and events.",
+    name: "Baby Feeder",
+    url: "https://baby-feeder-rho.vercel.app",
+    description: "Maternal health tracking app with 30+ database tables, vaccination photo uploads, age-based milestones, and profile management.",
+    gradient: "from-pink-500 to-rose-600",
+    icon: Heart,
+    category: "Worth Including",
   },
   {
-    name: "Sunny 1210",
-    url: "https://sunny1210.com",
-    description: "Radio station website with broadcast schedule and content.",
+    name: "Social Platform",
+    url: "https://social.amsitservices.com",
+    description: "Custom social networking platform with user profiles, content sharing, and community engagement features.",
+    gradient: "from-purple-600 to-violet-700",
+    icon: Users,
+    category: "Worth Including",
+  },
+  {
+    name: "Hotel Booking",
+    url: "https://hotel-frontend-next.vercel.app",
+    description: "Modern hotel booking frontend with room listings, availability search, reservation management, and responsive design.",
+    gradient: "from-sky-500 to-cyan-600",
+    icon: Hotel,
+    category: "Worth Including",
+  },
+  {
+    name: "Portfolio",
+    url: "https://skmudassir.in",
+    description: "Personal portfolio website showcasing projects, skills, experience, and professional achievements with modern design.",
+    gradient: "from-slate-600 to-gray-700",
+    icon: Briefcase,
+    category: "Worth Including",
   },
 ]
 
 export default function RecentProjectsPage() {
+  const readyProjects = projects.filter(p => p.category === "Interview-Ready")
+  const worthProjects = projects.filter(p => p.category === "Worth Including")
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* Page Header */}
@@ -83,53 +112,50 @@ export default function RecentProjectsPage() {
             Recent Projects
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
-            Showcasing our latest web development and digital solutions delivered for clients across industries.
+            Explore our latest web applications, e-commerce platforms, and digital solutions — live and ready to showcase.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-green-500/15 border border-green-500/25 rounded-full text-xs font-semibold text-green-300">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+              {readyProjects.length} Interview-Ready
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-blue-500/15 border border-blue-500/25 rounded-full text-xs font-semibold text-blue-300">
+              {worthProjects.length} Worth Including
+            </span>
+          </div>
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section className="container mx-auto px-4 py-16">
+      {/* Interview-Ready Section */}
+      <section className="container mx-auto px-4 pt-16">
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">Interview-Ready</h2>
+          </div>
+          <p className="text-foreground/60">Polished, professional sites that demonstrate real business value — perfect for your portfolio.</p>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, idx) => (
-            <div
-              key={idx}
-              className="group relative bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:border-[#BB290E]/20 transition-all duration-300 overflow-hidden flex flex-col"
-            >
-              {/* Color accent bar on top */}
-              <div className="h-1.5 bg-gradient-to-r from-[#BB290E] to-blue-500" />
+          {readyProjects.map((project, idx) => (
+            <ProjectCard key={idx} project={project} />
+          ))}
+        </div>
+      </section>
 
-              <div className="p-6 flex flex-col flex-1 space-y-4">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-xl font-bold text-gray-900 group-hover:text-[#BB290E] transition-colors">
-                    {project.name}
-                  </h3>
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="shrink-0 w-9 h-9 flex items-center justify-center rounded-full bg-gray-100 group-hover:bg-[#BB290E] transition-colors"
-                    aria-label={`Visit ${project.name}`}
-                  >
-                    <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-white transition-colors" />
-                  </a>
-                </div>
+      {/* Worth Including Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-2">
+            <span className="w-3 h-3 bg-blue-400 rounded-full" />
+            <h2 className="text-2xl md:text-3xl font-bold text-primary">Worth Including</h2>
+          </div>
+          <p className="text-foreground/60">Strong projects that demonstrate technical depth and diverse skills.</p>
+        </div>
 
-                <p className="text-sm text-gray-500 leading-relaxed flex-1">
-                  {project.description}
-                </p>
-
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#BB290E] hover:text-[#96210b] transition-colors mt-auto"
-                >
-                  Visit Site
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {worthProjects.map((project, idx) => (
+            <ProjectCard key={idx} project={project} />
           ))}
         </div>
       </section>
@@ -153,5 +179,60 @@ export default function RecentProjectsPage() {
         </div>
       </section>
     </div>
+  )
+}
+
+function ProjectCard({ project }: { project: Project }) {
+  const Icon = project.icon
+
+  return (
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:border-[#BB290E]/20 transition-all duration-300 overflow-hidden"
+    >
+      {/* Square Thumbnail */}
+      <div className={`relative aspect-square bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
+        {/* Decorative circles */}
+        <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
+        <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/10 rounded-full" />
+
+        {/* Icon */}
+        <div className="relative z-10 flex flex-col items-center gap-3">
+          <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+            <Icon className="w-8 h-8 text-white" />
+          </div>
+          <span className="text-white font-bold text-lg tracking-tight opacity-90 group-hover:opacity-100 transition-opacity">
+            {project.name}
+          </span>
+        </div>
+
+        {/* Live badge */}
+        <div className="absolute top-3 right-3 z-10">
+          <span className="inline-flex items-center gap-1 px-2 py-1 bg-black/30 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+            <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
+            Live
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-5 space-y-3">
+        <h3 className="text-lg font-bold text-gray-900 group-hover:text-[#BB290E] transition-colors">
+          {project.name}
+        </h3>
+        <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+          {project.description}
+        </p>
+        <div className="flex items-center gap-2 pt-1">
+          <Globe className="w-3.5 h-3.5 text-gray-400 shrink-0" />
+          <span className="text-xs text-gray-400 truncate font-mono">
+            {project.url.replace("https://", "")}
+          </span>
+          <ExternalLink className="w-3 h-3 text-gray-300 group-hover:text-[#BB290E] transition-colors shrink-0 ml-auto" />
+        </div>
+      </div>
+    </a>
   )
 }
