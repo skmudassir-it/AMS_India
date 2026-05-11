@@ -61,6 +61,7 @@ export function Navbar() {
                     </div>
 
                     <Link href="/portfolios" className="text-sm font-semibold text-foreground/70 hover:text-[#BB290E] transition-colors">Portfolios</Link>
+                    <Link href="/recent-projects" className="text-sm font-semibold text-foreground/70 hover:text-[#BB290E] transition-colors">Recent Projects</Link>
                     <Link href="/blog" className="text-sm font-semibold text-foreground/70 hover:text-[#BB290E] transition-colors underline decoration-[#BB290E]/30 underline-offset-4">Blog</Link>
                 </nav>
 
@@ -123,6 +124,13 @@ export function Navbar() {
                             onClick={() => setIsMenuOpen(false)}
                         >
                             Portfolios
+                        </Link>
+                        <Link
+                            href="/recent-projects"
+                            className="px-4 py-3 text-sm font-bold text-foreground/70 hover:text-[#BB290E] transition-colors hover:bg-[#BB290E]/5 rounded-md"
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Recent Projects
                         </Link>
                         <Link
                             href="/blog"

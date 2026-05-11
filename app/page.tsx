@@ -6,7 +6,7 @@ import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Layers, Shie
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
 import AnimatedStats from "@/components/AnimatedStats"
-import Hero3DSceneWrapper from "@/components/Hero3DSceneWrapper"
+import HeroMotionGraph from "@/components/HeroMotionGraph"
 import { getBlogPosts } from "@/lib/blog"
 import { ArrowRight } from "lucide-react"
 
@@ -68,8 +68,8 @@ export default async function Home() {
         className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #050d1a 0%, #0c1a35 50%, #070f22 100%)' }}
       >
-        {/* 3D Three.js Scene - rockets, planets, stars */}
-        <Hero3DSceneWrapper />
+        {/* Particle Network Canvas - professional animated background */}
+        <HeroMotionGraph />
 
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/30 via-transparent to-[#050d1a]/60 z-[2]" />
