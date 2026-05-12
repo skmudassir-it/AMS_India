@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Globe, Store, Building2, ShoppingBag, UtensilsCrossed, Heart, Users, Hotel, Briefcase, Wrench } from "lucide-react"
+import { ExternalLink, Globe, Store, Building2, ShoppingBag, UtensilsCrossed, Heart, Users, Hotel, Briefcase, Settings } from "lucide-react"
 
 export const metadata = {
   title: "Recent Projects | AMS IT Services",
@@ -22,7 +22,7 @@ const projects: Project[] = [
     url: "https://building-coolers.vercel.app",
     description: "Modular HVAC solutions website — 10-page professional site with service details, product catalog, project gallery, and contact system. Precision-built, plug-and-play cooling for Memphis.",
     gradient: "from-blue-800 to-sky-600",
-    icon: Wrench,
+    icon: Settings,
   },
   {
     name: "Aura Estate",
