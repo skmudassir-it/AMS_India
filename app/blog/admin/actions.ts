@@ -8,6 +8,8 @@ import { BlogPost } from '@/lib/blog'
  * Server action to create a new blog post
  */
 export async function createBlogPostAction(post: Omit<BlogPost, 'id' | 'created_at'>) {
+    if (!supabaseAdmin) throw new Error('Supabase not configured — cannot create blog post')
+
     const { data, error } = await supabaseAdmin
         .from('blogs')
         .insert([post])
@@ -25,6 +27,8 @@ export async function createBlogPostAction(post: Omit<BlogPost, 'id' | 'created_
  * Server action to update an existing blog post
  */
 export async function updateBlogPostAction(id: string, updates: Partial<BlogPost>) {
+    if (!supabaseAdmin) throw new Error('Supabase not configured — cannot update blog post')
+
     // Remove individual fields that shouldn't be updated directly via Partial
     const { id: _, created_at: __, ...validUpdates } = updates as any;
 
@@ -47,6 +51,8 @@ export async function updateBlogPostAction(id: string, updates: Partial<BlogPost
  * Server action to delete a blog post
  */
 export async function deleteBlogPostAction(id: string) {
+    if (!supabaseAdmin) throw new Error('Supabase not configured — cannot delete blog post')
+
     const { error } = await supabaseAdmin
         .from('blogs')
         .delete()
