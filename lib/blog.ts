@@ -17,6 +17,10 @@ export interface BlogPost {
  * Fetch all blog posts from Supabase
  */
 export async function getBlogPosts(): Promise<BlogPost[]> {
+    if (!supabase) {
+        console.warn('Supabase not configured — returning empty blog posts')
+        return []
+    }
     const { data, error } = await supabase
         .from('blogs')
         .select('*')
@@ -34,6 +38,10 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
  * Fetch a single blog post by its slug
  */
 export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
+    if (!supabase) {
+        console.warn('Supabase not configured — returning undefined for blog post')
+        return undefined
+    }
     const { data, error } = await supabase
         .from('blogs')
         .select('*')
@@ -52,6 +60,7 @@ export async function getBlogPost(slug: string): Promise<BlogPost | undefined> {
  * Fetch a single blog post by its ID
  */
 export async function getBlogPostById(id: string): Promise<BlogPost | undefined> {
+    if (!supabase) return undefined
     const { data, error } = await supabase
         .from('blogs')
         .select('*')
@@ -70,6 +79,7 @@ export async function getBlogPostById(id: string): Promise<BlogPost | undefined>
  * Create a new blog post
  */
 export async function createBlogPost(post: Omit<BlogPost, 'id' | 'created_at'>) {
+    if (!supabase) throw new Error('Supabase not configured — cannot create blog post')
     const { data, error } = await supabase
         .from('blogs')
         .insert([post])
@@ -86,6 +96,7 @@ export async function createBlogPost(post: Omit<BlogPost, 'id' | 'created_at'>) 
  * Update an existing blog post
  */
 export async function updateBlogPost(id: string, updates: Partial<BlogPost>) {
+    if (!supabase) throw new Error('Supabase not configured — cannot update blog post')
     const { data, error } = await supabase
         .from('blogs')
         .update(updates)
@@ -103,6 +114,7 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>) {
  * Delete a blog post
  */
 export async function deleteBlogPost(id: string) {
+    if (!supabase) throw new Error('Supabase not configured — cannot delete blog post')
     const { error } = await supabase
         .from('blogs')
         .delete()
