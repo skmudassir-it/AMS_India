@@ -14,7 +14,6 @@ interface Project {
   description: string
   gradient: string
   icon: React.ComponentType<{ className?: string }>
-  category: "Interview-Ready" | "Worth Including"
 }
 
 const projects: Project[] = [
@@ -24,7 +23,6 @@ const projects: Project[] = [
     description: "Luxury real estate platform with property listings, image gallery, amenities showcase, Google Maps integration, and contact forms.",
     gradient: "from-emerald-500 to-teal-600",
     icon: Building2,
-    category: "Interview-Ready",
   },
   {
     name: "StockSwift",
@@ -32,7 +30,6 @@ const projects: Project[] = [
     description: "Full SaaS inventory management dashboard with features, pricing tiers, audit logs, PWA support, and technical specifications.",
     gradient: "from-blue-600 to-indigo-700",
     icon: Store,
-    category: "Interview-Ready",
   },
   {
     name: "Mufasa Jeweler",
@@ -40,7 +37,6 @@ const projects: Project[] = [
     description: "Luxury jewelry e-commerce storefront with 6 product categories, featured items carousel, shopping cart, and store locator.",
     gradient: "from-amber-500 to-yellow-600",
     icon: ShoppingBag,
-    category: "Interview-Ready",
   },
   {
     name: "Newly Weds Foods",
@@ -48,7 +44,6 @@ const projects: Project[] = [
     description: "Global corporate food ingredients website with dropdown navigation, product lines, innovation hub, and industry trends sections.",
     gradient: "from-red-600 to-orange-600",
     icon: Globe,
-    category: "Interview-Ready",
   },
   {
     name: "Memphis Indian Restaurant",
@@ -56,7 +51,6 @@ const projects: Project[] = [
     description: "Full restaurant website with categorized menu, pricing, restaurant story, location, hours of operation, and contact information.",
     gradient: "from-orange-600 to-red-500",
     icon: UtensilsCrossed,
-    category: "Interview-Ready",
   },
   {
     name: "Baby Feeder",
@@ -64,7 +58,6 @@ const projects: Project[] = [
     description: "Maternal health tracking app with 30+ database tables, vaccination photo uploads, age-based milestones, and profile management.",
     gradient: "from-pink-500 to-rose-600",
     icon: Heart,
-    category: "Worth Including",
   },
   {
     name: "Social Platform",
@@ -72,7 +65,6 @@ const projects: Project[] = [
     description: "Custom social networking platform with user profiles, content sharing, and community engagement features.",
     gradient: "from-purple-600 to-violet-700",
     icon: Users,
-    category: "Worth Including",
   },
   {
     name: "Hotel Booking",
@@ -80,7 +72,6 @@ const projects: Project[] = [
     description: "Modern hotel booking frontend with room listings, availability search, reservation management, and responsive design.",
     gradient: "from-sky-500 to-cyan-600",
     icon: Hotel,
-    category: "Worth Including",
   },
   {
     name: "Portfolio",
@@ -88,14 +79,10 @@ const projects: Project[] = [
     description: "Personal portfolio website showcasing projects, skills, experience, and professional achievements with modern design.",
     gradient: "from-slate-600 to-gray-700",
     icon: Briefcase,
-    category: "Worth Including",
   },
 ]
 
 export default function RecentProjectsPage() {
-  const readyProjects = projects.filter(p => p.category === "Interview-Ready")
-  const worthProjects = projects.filter(p => p.category === "Worth Including")
-
   return (
     <div className="flex flex-col min-h-screen">
       {/* Page Header */}
@@ -114,47 +101,19 @@ export default function RecentProjectsPage() {
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
             Explore our latest web applications, e-commerce platforms, and digital solutions — live and ready to showcase.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
+          <div className="mt-8">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-green-500/15 border border-green-500/25 rounded-full text-xs font-semibold text-green-300">
               <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              {readyProjects.length} Interview-Ready
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-blue-500/15 border border-blue-500/25 rounded-full text-xs font-semibold text-blue-300">
-              {worthProjects.length} Worth Including
+              {projects.length} Live Projects
             </span>
           </div>
         </div>
       </section>
 
-      {/* Interview-Ready Section */}
-      <section className="container mx-auto px-4 pt-16">
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">Interview-Ready</h2>
-          </div>
-          <p className="text-foreground/60">Polished, professional sites that demonstrate real business value — perfect for your portfolio.</p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {readyProjects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} />
-          ))}
-        </div>
-      </section>
-
-      {/* Worth Including Section */}
+      {/* Projects Grid */}
       <section className="container mx-auto px-4 py-16">
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="w-3 h-3 bg-blue-400 rounded-full" />
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">Worth Including</h2>
-          </div>
-          <p className="text-foreground/60">Strong projects that demonstrate technical depth and diverse skills.</p>
-        </div>
-
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {worthProjects.map((project, idx) => (
+          {projects.map((project, idx) => (
             <ProjectCard key={idx} project={project} />
           ))}
         </div>
