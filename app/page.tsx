@@ -6,7 +6,7 @@ import { Code2, Globe, Laptop, Smartphone, Search, Database, Cloud, Layers, Shie
 import { Portfolio } from "@/components/Portfolio"
 import StatsSection from "@/components/StatsSection"
 import AnimatedStats from "@/components/AnimatedStats"
-import HeroMotionGraph from "@/components/HeroMotionGraph"
+import HeroScrollVideo from "@/components/HeroScrollVideo"
 import { getBlogPosts } from "@/lib/blog"
 import { ArrowRight } from "lucide-react"
 
@@ -63,60 +63,60 @@ export default async function Home() {
     <div className="flex flex-col pb-20">
 
 
-      {/* Hero Section */}
+      {/* Hero Section — Scroll-Driven Cinematic Video */}
       <section
-        className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden"
+        className="relative min-h-[200vh] flex flex-col items-center justify-start overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #050d1a 0%, #0c1a35 50%, #070f22 100%)' }}
       >
-        {/* Particle Network Canvas - professional animated background */}
-        <HeroMotionGraph />
+        {/* Scroll-driven Kling video background */}
+        <HeroScrollVideo src="/hero-scroll.mp4" />
 
-        {/* Dark overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#050d1a]/30 via-transparent to-[#050d1a]/60 z-[2]" />
-
-        <div className="container px-4 text-center space-y-10 relative z-[3] pt-20">
-          <div className="inline-block px-5 py-2 text-xs font-semibold tracking-widest text-blue-300 uppercase bg-blue-500/10 border border-blue-500/20 rounded-full backdrop-blur-sm">
-            Driving Global Excellence through Innovation
-          </div>
-          <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight max-w-5xl mx-auto leading-tight text-white">
-            Empowering Your Business with{' '}
-            <br />
-            <span
-              className="inline-block"
-              style={{
-                background: 'linear-gradient(90deg, #f97316 0%, #BB290E 50%, #ef4444 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
-              AMS IT Services
-            </span>
-          </h1>
-          <p className="text-xl md:text-2xl text-white/60 max-w-3xl mx-auto font-medium leading-relaxed">
-            From Custom Web Development to AWS Cloud Integration, AMS IT Services delivers premium technology solutions tailored to your success.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
-            <Button
-              size="lg"
-              className="h-14 px-10 text-lg bg-[#BB290E] hover:bg-[#96210b] shadow-xl hover:shadow-[#BB290E]/30 transition-all"
-              asChild
-            >
-              <Link href="/services">Explore Services</Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-14 px-10 text-lg border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-all"
-              asChild
-            >
-              <Link href="/contact">Get in Touch</Link>
-            </Button>
+        {/* Sticky hero text overlay */}
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center z-[3] pointer-events-none">
+          <div className="container px-4 text-center space-y-10 pointer-events-auto">
+            <div className="inline-block px-5 py-2 text-xs font-semibold tracking-widest text-blue-300 uppercase bg-blue-500/10 border border-blue-500/20 rounded-full backdrop-blur-sm">
+              Driving Global Excellence through Innovation
+            </div>
+            <h1 className="text-5xl md:text-8xl font-extrabold tracking-tight max-w-5xl mx-auto leading-tight text-white">
+              Empowering Your Business with{' '}
+              <br />
+              <span
+                className="inline-block"
+                style={{
+                  background: 'linear-gradient(90deg, #f97316 0%, #BB290E 50%, #ef4444 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                }}
+              >
+                AMS IT Services
+              </span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/60 max-w-3xl mx-auto font-medium leading-relaxed">
+              From Custom Web Development to AWS Cloud Integration, AMS IT Services delivers premium technology solutions tailored to your success.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-4">
+              <Button
+                size="lg"
+                className="h-14 px-10 text-lg bg-[#BB290E] hover:bg-[#96210b] shadow-xl hover:shadow-[#BB290E]/30 transition-all"
+                asChild
+              >
+                <Link href="/services">Explore Services</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-14 px-10 text-lg border-white/20 text-white hover:bg-white/10 backdrop-blur-sm transition-all"
+                asChild
+              >
+                <Link href="/contact">Get in Touch</Link>
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="w-full relative z-[3] mt-12 mb-8">
+        {/* Stats Grid at bottom of hero */}
+        <div className="w-full relative z-[3] mt-auto mb-8">
           <AnimatedStats dark />
         </div>
 
@@ -125,6 +125,14 @@ export default async function Home() {
           className="absolute bottom-0 left-0 right-0 h-24 z-[2]"
           style={{ background: 'linear-gradient(to bottom, transparent, #f8fafc)' }}
         />
+
+        {/* Scroll hint */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[3] flex flex-col items-center gap-2 text-white/40 text-xs uppercase tracking-widest">
+          <span>Scroll to explore</span>
+          <div className="w-4 h-7 border-2 border-white/20 rounded-full flex justify-center pt-1">
+            <div className="w-1 h-1.5 bg-white/40 rounded-full animate-bounce" />
+          </div>
+        </div>
       </section>
 
       {/* Main Features */}
