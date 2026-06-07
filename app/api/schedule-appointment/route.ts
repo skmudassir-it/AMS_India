@@ -4,10 +4,11 @@ import { exec } from "child_process";
 import { promisify } from "util";
 import fs from "fs";
 import path from "path";
+import { sendSMS, appointmentSMS, FROM_NUMBER } from "@/lib/agentcall";
 
 const execAsync = promisify(exec);
 
-const PHONE_NUMBER = "+16456541857";
+const PHONE_NUMBER = FROM_NUMBER;
 const AMS_EMAIL = "skmudassir.it@gmail.com";
 
 // Production: use env vars. Local: fall back to Hermes token files.
@@ -244,6 +245,21 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    // Send SMS confirmation via agentcall
+    let smsSent = false;
+    if (phone && phone !== PHONE_NUMBER) {
+      try {
+        const smsBody = appointmentSMS(name, formatDate(date), formatTime(time));
+        const smsResult = await sendSMS(phone, smsBody);
+        smsSent = smsResult.success;
+        if (!smsResult.success) {
+          console.error("[schedule] SMS error:", smsResult.error);
+        }
+      } catch (err: any) {
+        console.error("[schedule] SMS send exception:", err.message);
+      }
+    }
+
     return NextResponse.json({
       success: true,
       message: "Appointment scheduled successfully",
@@ -252,6 +268,7 @@ export async function POST(request: NextRequest) {
         time: formatTime(time),
         calendarCreated,
         emailSent,
+        smsSent,
       },
     });
   } catch (error: any) {
