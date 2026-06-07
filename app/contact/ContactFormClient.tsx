@@ -4,13 +4,15 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
-import { Mail, MapPin, Phone, CheckCircle2, Loader2 } from "lucide-react"
+import { Mail, MapPin, Phone, CheckCircle2, Loader2, Calendar, Clock } from "lucide-react"
 
 const GOOGLE_FORM_ACTION =
     "https://docs.google.com/forms/d/e/1FAIpQLScU5ZJwJrlNXgHvSjs5bHmc92M43JZ2gX8FNhrObBu_kspoSw/formResponse"
 
 export default function ContactFormClient() {
     const [status, setStatus] = useState<"idle" | "loading" | "success">("idle")
+    const [scheduleStatus, setScheduleStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+    const [scheduleError, setScheduleError] = useState("")
 
     async function handleSubmit(e: { preventDefault(): void; currentTarget: HTMLFormElement }) {
         e.preventDefault()
@@ -38,6 +40,36 @@ export default function ContactFormClient() {
         setStatus("success")
     }
 
+    async function handleSchedule(e: { preventDefault(): void; currentTarget: HTMLFormElement }) {
+        e.preventDefault()
+        setScheduleStatus("loading")
+        setScheduleError("")
+
+        const data = new FormData(e.currentTarget)
+        const payload = {
+            name: data.get("sched-name") as string,
+            email: data.get("sched-email") as string,
+            phone: data.get("sched-phone") as string,
+            date: data.get("sched-date") as string,
+            time: data.get("sched-time") as string,
+            notes: data.get("sched-notes") as string,
+        }
+
+        try {
+            const res = await fetch("/api/schedule-appointment", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            })
+            const result = await res.json()
+            if (!res.ok) throw new Error(result.error || "Failed to schedule")
+            setScheduleStatus("success")
+        } catch (err: any) {
+            setScheduleStatus("error")
+            setScheduleError(err.message || "Something went wrong. Please try calling us directly.")
+        }
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
             {/* Page Header */}
@@ -58,11 +90,32 @@ export default function ContactFormClient() {
                 </div>
             </div>
 
+            {/* Call Now Banner */}
+            <div className="bg-gradient-to-r from-[#BB290E] to-[#8B1B08] py-8">
+                <div className="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <div className="flex items-center gap-3 text-white">
+                        <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center shrink-0">
+                            <Phone className="h-6 w-6" />
+                        </div>
+                        <div>
+                            <p className="text-sm text-white/70">Call Us Now</p>
+                            <a href="tel:+16456541857" className="text-2xl font-bold tracking-wide hover:underline">
+                                +1 (645) 654-1857
+                            </a>
+                        </div>
+                    </div>
+                    <span className="hidden sm:block text-white/30 text-lg">|</span>
+                    <p className="text-white/80 text-sm max-w-xs text-center sm:text-left">
+                        Speak directly with our team. Available Mon–Fri, 9 AM – 6 PM IST.
+                    </p>
+                </div>
+            </div>
+
             <div className="container mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start max-w-6xl mx-auto">
 
                     {/* Contact Form */}
-                    <div className="lg:col-span-3">
+                    <div className="lg:col-span-3 space-y-8">
                         <Card className="border-0 shadow-2xl shadow-slate-200/60">
                             <CardContent className="p-8 md:p-10">
                                 {status === "success" ? (
@@ -150,6 +203,134 @@ export default function ContactFormClient() {
                                 )}
                             </CardContent>
                         </Card>
+
+                        {/* Schedule Appointment Section */}
+                        <Card className="border-0 shadow-2xl shadow-slate-200/60">
+                            <CardContent className="p-8 md:p-10">
+                                {scheduleStatus === "success" ? (
+                                    <div className="flex flex-col items-center justify-center py-12 text-center space-y-5">
+                                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center">
+                                            <Calendar className="h-10 w-10 text-green-600" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold text-slate-800">Appointment Scheduled!</h3>
+                                        <p className="text-slate-500 max-w-sm">
+                                            You&apos;ll receive a calendar invitation and confirmation email shortly. We look forward to speaking with you!
+                                        </p>
+                                        <Button
+                                            variant="outline"
+                                            onClick={() => setScheduleStatus("idle")}
+                                            className="mt-2 border-[#BB290E] text-[#BB290E] hover:bg-[#BB290E]/5"
+                                        >
+                                            Schedule Another
+                                        </Button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleSchedule} className="space-y-6">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 bg-[#BB290E]/10 rounded-xl flex items-center justify-center shrink-0">
+                                                <Calendar className="h-5 w-5 text-[#BB290E]" />
+                                            </div>
+                                            <div className="space-y-0.5">
+                                                <h2 className="text-2xl font-bold text-slate-800">Schedule a Call</h2>
+                                                <p className="text-sm text-slate-500">Book a time that works for you — we&apos;ll confirm via email.</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-semibold text-slate-700">Full Name *</label>
+                                            <Input
+                                                name="sched-name"
+                                                placeholder="John Doe"
+                                                required
+                                                disabled={scheduleStatus === "loading"}
+                                                className="h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-semibold text-slate-700">Email *</label>
+                                                <Input
+                                                    type="email"
+                                                    name="sched-email"
+                                                    placeholder="john@example.com"
+                                                    required
+                                                    disabled={scheduleStatus === "loading"}
+                                                    className="h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-semibold text-slate-700">Phone *</label>
+                                                <Input
+                                                    type="tel"
+                                                    name="sched-phone"
+                                                    placeholder="+1 (555) 000-0000"
+                                                    required
+                                                    disabled={scheduleStatus === "loading"}
+                                                    className="h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                                                    <Calendar className="h-4 w-4 text-slate-400" />Date *
+                                                </label>
+                                                <Input
+                                                    type="date"
+                                                    name="sched-date"
+                                                    required
+                                                    disabled={scheduleStatus === "loading"}
+                                                    className="h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                                                    min={new Date().toISOString().split("T")[0]}
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-sm font-semibold text-slate-700 flex items-center gap-1.5">
+                                                    <Clock className="h-4 w-4 text-slate-400" />Time *
+                                                </label>
+                                                <Input
+                                                    type="time"
+                                                    name="sched-time"
+                                                    required
+                                                    disabled={scheduleStatus === "loading"}
+                                                    className="h-11 border-slate-200 focus:border-blue-500 focus:ring-blue-500/20"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label className="text-sm font-semibold text-slate-700">What would you like to discuss?</label>
+                                            <textarea
+                                                name="sched-notes"
+                                                className="w-full min-h-[80px] p-3 rounded-md border border-slate-200 bg-white text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/20 focus-visible:border-blue-500 disabled:opacity-50 resize-none transition-colors"
+                                                placeholder="Tell us briefly about your project or goals..."
+                                                disabled={scheduleStatus === "loading"}
+                                            />
+                                        </div>
+
+                                        {scheduleStatus === "error" && (
+                                            <div className="p-3 bg-red-50 border border-red-200 rounded-md text-sm text-red-700">
+                                                {scheduleError || "Failed to schedule. Please call us at +1 (645) 654-1857."}
+                                            </div>
+                                        )}
+
+                                        <Button
+                                            type="submit"
+                                            className="w-full h-12 text-base font-bold bg-gradient-to-r from-[#BB290E] to-[#8B1B08] hover:from-[#96210b] hover:to-[#6B1506] shadow-lg hover:shadow-[#BB290E]/20 transition-all"
+                                            disabled={scheduleStatus === "loading"}
+                                        >
+                                            {scheduleStatus === "loading" ? (
+                                                <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Scheduling...</>
+                                            ) : (
+                                                "Book Appointment"
+                                            )}
+                                        </Button>
+                                    </form>
+                                )}
+                            </CardContent>
+                        </Card>
                     </div>
 
                     {/* Contact Info */}
@@ -158,6 +339,23 @@ export default function ContactFormClient() {
                             <h3 className="text-xl font-bold text-slate-800">Contact Information</h3>
                             <p className="text-slate-500 text-sm">Reach out directly or use the form to get in touch.</p>
                         </div>
+
+                        {/* Call Card - Prominent */}
+                        <Card className="border-0 bg-gradient-to-br from-[#BB290E]/5 to-[#BB290E]/10 shadow-md hover:shadow-lg transition-shadow ring-2 ring-[#BB290E]/20">
+                            <CardContent className="p-6 flex items-start gap-4">
+                                <div className="w-12 h-12 bg-[#BB290E] rounded-xl flex items-center justify-center shrink-0">
+                                    <Phone className="text-white h-6 w-6" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-800 text-sm">Call Us Directly</h4>
+                                    <p className="text-xs text-slate-500 mt-0.5">Fastest response — speak to our team</p>
+                                    <a href="tel:+16456541857" className="text-lg font-bold text-[#BB290E] hover:underline mt-1 block tracking-wide">
+                                        +1 (645) 654-1857
+                                    </a>
+                                    <p className="text-xs text-slate-400 mt-0.5">Mon–Fri, 9 AM – 6 PM IST</p>
+                                </div>
+                            </CardContent>
+                        </Card>
 
                         <Card className="border-0 bg-white shadow-md hover:shadow-lg transition-shadow">
                             <CardContent className="p-6 flex items-start gap-4">
@@ -203,7 +401,7 @@ export default function ContactFormClient() {
                         <Card className="border-0 bg-white shadow-md hover:shadow-lg transition-shadow">
                             <CardContent className="p-6 flex items-start gap-4">
                                 <div className="w-11 h-11 bg-green-50 rounded-xl flex items-center justify-center shrink-0">
-                                    <Phone className="text-green-600 h-5 w-5" />
+                                    <Clock className="text-green-600 h-5 w-5" />
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-slate-800 text-sm">Business Hours</h4>
