@@ -1,21 +1,58 @@
 import { NextRequest, NextResponse } from "next/server";
+import { google } from "googleapis";
 import { exec } from "child_process";
 import { promisify } from "util";
+import fs from "fs";
+import path from "path";
 
 const execAsync = promisify(exec);
 
-const PYTHON_SCRIPT =
-  "/home/shaik/google-venv/bin/python3 /home/shaik/.hermes/skills/productivity/google-workspace/scripts/google_api.py";
-
 const PHONE_NUMBER = "+16456541857";
 const AMS_EMAIL = "skmudassir.it@gmail.com";
+
+// Production: use env vars. Local: fall back to Hermes token files.
+function getGoogleAuth() {
+  // Check for env vars first (Vercel production)
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const refreshToken = process.env.GOOGLE_REFRESH_TOKEN;
+
+  if (clientId && clientSecret && refreshToken) {
+    const auth = new google.auth.OAuth2(clientId, clientSecret);
+    auth.setCredentials({ refresh_token: refreshToken });
+    return auth;
+  }
+
+  // Local fallback: read from Hermes token files
+  try {
+    const hermesHome = process.env.HERMES_HOME || path.join(process.env.HOME || "/home/shaik", ".hermes");
+    const clientSecretPath = path.join(hermesHome, "google_client_secret.json");
+    const tokenPath = path.join(hermesHome, "google_token.json");
+
+    if (fs.existsSync(clientSecretPath) && fs.existsSync(tokenPath)) {
+      const clientSecret = JSON.parse(fs.readFileSync(clientSecretPath, "utf-8"));
+      const installed = clientSecret.installed || clientSecret.web || {};
+      const token = JSON.parse(fs.readFileSync(tokenPath, "utf-8"));
+
+      if (installed.client_id && installed.client_secret && token.refresh_token) {
+        const auth = new google.auth.OAuth2(installed.client_id, installed.client_secret);
+        auth.setCredentials({ refresh_token: token.refresh_token });
+        return auth;
+      }
+    }
+  } catch (e) {
+    console.error("[schedule] Failed to read local Google credentials:", e);
+  }
+
+  return null;
+}
 
 interface ScheduleBody {
   name: string;
   email: string;
   phone: string;
-  date: string; // YYYY-MM-DD
-  time: string; // HH:MM
+  date: string;
+  time: string;
   notes?: string;
 }
 
@@ -36,21 +73,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid email address" }, { status: 400 });
     }
 
-    // Parse date and time into ISO 8601
     const dateTimeStr = `${date}T${time}:00`;
     const startDate = new Date(dateTimeStr);
     if (isNaN(startDate.getTime())) {
-      return NextResponse.json(
-        { error: "Invalid date/time combination" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid date/time" }, { status: 400 });
     }
 
-    // 30-minute appointment
     const endDate = new Date(startDate.getTime() + 30 * 60 * 1000);
-    const tzOffset = "+05:30"; // IST
-    const startISO = startDate.toISOString().replace("Z", tzOffset);
-    const endISO = endDate.toISOString().replace("Z", tzOffset);
 
     const summary = `AMS IT Services - Call with ${name}`;
     const description = [
@@ -61,38 +90,64 @@ export async function POST(request: NextRequest) {
       `Phone: ${phone}`,
       notes ? `Notes: ${notes}` : "",
       ``,
-      `Call us at ${PHONE_NUMBER}`,
+      `Call us at ${formatPhone(PHONE_NUMBER)}`,
     ]
       .filter(Boolean)
       .join("\n");
 
-    // Create Google Calendar event
-    const calendarCmd = [
-      PYTHON_SCRIPT,
-      "calendar",
-      "create",
-      `--summary ${shellQuote(summary)}`,
-      `--start ${shellQuote(startISO)}`,
-      `--end ${shellQuote(endISO)}`,
-      `--description ${shellQuote(description)}`,
-      `--attendees ${shellQuote(email + "," + AMS_EMAIL)}`,
-      `--location "Phone: ${PHONE_NUMBER}"`,
-    ].join(" ");
+    // Try Node.js Google API first (works on Vercel)
+    let calendarCreated = false;
+    const auth = getGoogleAuth();
 
-    console.log("[schedule-appointment] Running:", calendarCmd);
-
-    let calendarResult: { stdout: string; stderr: string };
-    try {
-      calendarResult = await execAsync(calendarCmd, { timeout: 15000 });
-      if (calendarResult.stderr && !calendarResult.stderr.includes("Warning")) {
-        console.error("[schedule-appointment] Calendar stderr:", calendarResult.stderr);
+    if (auth) {
+      try {
+        const calendar = google.calendar({ version: "v3", auth });
+        await calendar.events.insert({
+          calendarId: "primary",
+          requestBody: {
+            summary,
+            description,
+            start: { dateTime: startDate.toISOString(), timeZone: "Asia/Kolkata" },
+            end: { dateTime: endDate.toISOString(), timeZone: "Asia/Kolkata" },
+            location: `Phone: ${formatPhone(PHONE_NUMBER)}`,
+            attendees: [{ email }, { email: AMS_EMAIL }],
+          },
+          sendUpdates: "all",
+        });
+        calendarCreated = true;
+      } catch (err: any) {
+        console.error("[schedule] Google Calendar API error:", err.message);
       }
-    } catch (err: any) {
-      console.error("[schedule-appointment] Calendar error:", err.message);
-      // Don't fail — calendar is best-effort
     }
 
-    // Send confirmation email to customer
+    // Fallback: Python script (local machine)
+    if (!calendarCreated) {
+      const tzOffset = "+05:30";
+      const startISO = startDate.toISOString().replace("Z", tzOffset);
+      const endISO = endDate.toISOString().replace("Z", tzOffset);
+
+      const pythonScript = "/home/shaik/google-venv/bin/python3";
+      const apiScript = "/home/shaik/.hermes/skills/productivity/google-workspace/scripts/google_api.py";
+
+      try {
+        const cmd = [
+          pythonScript, apiScript, "calendar", "create",
+          `--summary '${summary.replace(/'/g, "'\\''")}'`,
+          `--start '${startISO}'`,
+          `--end '${endISO}'`,
+          `--description '${description.replace(/'/g, "'\\''")}'`,
+          `--attendees '${email},${AMS_EMAIL}'`,
+          `--location 'Phone: ${formatPhone(PHONE_NUMBER)}'`,
+        ].join(" ");
+
+        await execAsync(cmd, { timeout: 15000 });
+        calendarCreated = true;
+      } catch (err: any) {
+        console.error("[schedule] Python fallback error:", err.message);
+      }
+    }
+
+    // Send confirmation email via Python script
     const emailBody = [
       `Hi ${name},`,
       ``,
@@ -114,26 +169,50 @@ export async function POST(request: NextRequest) {
       .filter(Boolean)
       .join("\n");
 
-    const emailCmd = [
-      PYTHON_SCRIPT,
-      "gmail",
-      "send",
-      `--to ${shellQuote(email)}`,
-      `--subject ${shellQuote(`Appointment Confirmed — ${formatDate(date)} at ${formatTime(time)}`)}`,
-      `--body ${shellQuote(emailBody)}`,
-    ].join(" ");
-
     let emailSent = false;
     try {
-      await execAsync(emailCmd, { timeout: 15000 });
-      emailSent = true;
+      // Try Node.js Gmail API
+      if (auth) {
+        const gmail = google.gmail({ version: "v1", auth });
+        const emailContent = [
+          `From: ${AMS_EMAIL}`,
+          `To: ${email}`,
+          `Subject: =?UTF-8?B?${Buffer.from(`Appointment Confirmed — ${formatDate(date)} at ${formatTime(time)}`).toString("base64")}?=`,
+          `Content-Type: text/plain; charset=UTF-8`,
+          ``,
+          emailBody,
+        ].join("\r\n");
+
+        await gmail.users.messages.send({
+          userId: "me",
+          requestBody: { raw: Buffer.from(emailContent).toString("base64url") },
+        });
+        emailSent = true;
+      }
     } catch (err: any) {
-      console.error("[schedule-appointment] Email error:", err.message);
-      // Continue even if email fails
+      console.error("[schedule] Gmail API error:", err.message);
+    }
+
+    // Fallback email via Python
+    if (!emailSent) {
+      try {
+        const pythonScript = "/home/shaik/google-venv/bin/python3";
+        const apiScript = "/home/shaik/.hermes/skills/productivity/google-workspace/scripts/google_api.py";
+        const cmd = [
+          pythonScript, apiScript, "gmail", "send",
+          `--to '${email.replace(/'/g, "'\\''")}'`,
+          `--subject 'Appointment Confirmed — ${formatDate(date)} at ${formatTime(time)}'`,
+          `--body '${emailBody.replace(/'/g, "'\\''")}'`,
+        ].join(" ");
+        await execAsync(cmd, { timeout: 15000 });
+        emailSent = true;
+      } catch (err: any) {
+        console.error("[schedule] Python email fallback error:", err.message);
+      }
     }
 
     // Notify AMS team
-    const teamEmailBody = [
+    const teamBody = [
       `New appointment scheduled via website:`,
       ``,
       `Customer: ${name}`,
@@ -142,23 +221,27 @@ export async function POST(request: NextRequest) {
       `Date: ${formatDate(date)}`,
       `Time: ${formatTime(time)} (IST)`,
       notes ? `Notes: ${notes}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n");
+    ].join("\n");
 
-    const teamEmailCmd = [
-      PYTHON_SCRIPT,
-      "gmail",
-      "send",
-      `--to ${shellQuote(AMS_EMAIL)}`,
-      `--subject ${shellQuote(`📅 New Appointment: ${name} — ${formatDate(date)}`)}`,
-      `--body ${shellQuote(teamEmailBody)}`,
-    ].join(" ");
+    if (auth) {
+      try {
+        const gmail = google.gmail({ version: "v1", auth });
+        const emailContent = [
+          `From: ${AMS_EMAIL}`,
+          `To: ${AMS_EMAIL}`,
+          `Subject: =?UTF-8?B?${Buffer.from(`📅 New Appointment: ${name} — ${formatDate(date)}`).toString("base64")}?=`,
+          `Content-Type: text/plain; charset=UTF-8`,
+          ``,
+          teamBody,
+        ].join("\r\n");
 
-    try {
-      await execAsync(teamEmailCmd, { timeout: 15000 });
-    } catch (err: any) {
-      console.error("[schedule-appointment] Team email error:", err.message);
+        await gmail.users.messages.send({
+          userId: "me",
+          requestBody: { raw: Buffer.from(emailContent).toString("base64url") },
+        });
+      } catch (err: any) {
+        console.error("[schedule] Team email error:", err.message);
+      }
     }
 
     return NextResponse.json({
@@ -167,20 +250,19 @@ export async function POST(request: NextRequest) {
       details: {
         date: formatDate(date),
         time: formatTime(time),
+        calendarCreated,
         emailSent,
       },
     });
   } catch (error: any) {
     console.error("[schedule-appointment] Unexpected error:", error);
     return NextResponse.json(
-      { error: "Internal server error. Please call us directly at " + formatPhone(PHONE_NUMBER) },
+      {
+        error: "Internal server error. Please call us directly at " + formatPhone(PHONE_NUMBER),
+      },
       { status: 500 }
     );
   }
-}
-
-function shellQuote(s: string): string {
-  return `'${s.replace(/'/g, "'\\''")}'`;
 }
 
 function formatDate(dateStr: string): string {
