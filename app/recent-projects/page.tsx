@@ -1,92 +1,42 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ExternalLink, Globe, Store, Building2, ShoppingBag, UtensilsCrossed, Heart, Users, Hotel, Briefcase, Settings } from "lucide-react"
+import { ExternalLink, Globe } from "lucide-react"
 
 export const metadata = {
   title: "Recent Projects | AMS IT Services",
   description:
-    "Explore our recent projects — websites and digital solutions delivered by AMS IT Services across diverse industries.",
+    "Explore our latest websites and digital solutions — 58+ live projects built with Next.js, React, and Tailwind CSS, deployed on Vercel.",
 }
 
-interface Project {
-  name: string
-  url: string
-  description: string
-  gradient: string
-  icon: React.ComponentType<{ className?: string }>
-}
-
-const projects: Project[] = [
-  {
-    name: "Building Coolers LLC",
-    url: "https://building-coolers.vercel.app",
-    description: "Modular HVAC solutions website — 10-page professional site with service details, product catalog, project gallery, and contact system. Precision-built, plug-and-play cooling for Memphis.",
-    gradient: "from-blue-800 to-sky-600",
-    icon: Settings,
-  },
-  {
-    name: "Aura Estate",
-    url: "https://property.amsitservices.com",
-    description: "Luxury real estate platform with property listings, image gallery, amenities showcase, Google Maps integration, and contact forms.",
-    gradient: "from-emerald-500 to-teal-600",
-    icon: Building2,
-  },
-  {
-    name: "StockSwift",
-    url: "https://stockswift.amsitservices.com",
-    description: "Full SaaS inventory management dashboard with features, pricing tiers, audit logs, PWA support, and technical specifications.",
-    gradient: "from-blue-600 to-indigo-700",
-    icon: Store,
-  },
-  {
-    name: "Mufasa Jeweler",
-    url: "https://mufasa-jeweler.vercel.app",
-    description: "Luxury jewelry e-commerce storefront with 6 product categories, featured items carousel, shopping cart, and store locator.",
-    gradient: "from-amber-500 to-yellow-600",
-    icon: ShoppingBag,
-  },
-  {
-    name: "Newly Weds Foods",
-    url: "https://newly-weds-foods.vercel.app",
-    description: "Global corporate food ingredients website with dropdown navigation, product lines, innovation hub, and industry trends sections.",
-    gradient: "from-red-600 to-orange-600",
-    icon: Globe,
-  },
-  {
-    name: "Memphis Indian Restaurant",
-    url: "https://memphis-indian-restaurant.vercel.app",
-    description: "Full restaurant website with categorized menu, pricing, restaurant story, location, hours of operation, and contact information.",
-    gradient: "from-orange-600 to-red-500",
-    icon: UtensilsCrossed,
-  },
-  {
-    name: "Baby Feeder",
-    url: "https://baby-feeder-rho.vercel.app",
-    description: "Maternal health tracking app with 30+ database tables, vaccination photo uploads, age-based milestones, and profile management.",
-    gradient: "from-pink-500 to-rose-600",
-    icon: Heart,
-  },
-  {
-    name: "Social Platform",
-    url: "https://social.amsitservices.com",
-    description: "Custom social networking platform with user profiles, content sharing, and community engagement features.",
-    gradient: "from-purple-600 to-violet-700",
-    icon: Users,
-  },
-  {
-    name: "Hotel Booking",
-    url: "https://hotel-frontend-next.vercel.app",
-    description: "Modern hotel booking frontend with room listings, availability search, reservation management, and responsive design.",
-    gradient: "from-sky-500 to-cyan-600",
-    icon: Hotel,
-  },
-  {
-    name: "Portfolio",
-    url: "https://skmudassir.in",
-    description: "Personal portfolio website showcasing projects, skills, experience, and professional achievements with modern design.",
-    gradient: "from-slate-600 to-gray-700",
-    icon: Briefcase,
-  },
+const projects = [
+  { name: "Peak Roofing", url: "https://peak-roofing.vercel.app", description: "Professional roofing company website with service pages, gallery, and contact forms.", gradient: "from-amber-600 to-orange-700" },
+  { name: "Spark Electric", url: "https://spark-electric.vercel.app", description: "Modern electrical services site with portfolio, reviews, and estimate requests.", gradient: "from-yellow-500 to-amber-600" },
+  { name: "Crystal Pools", url: "https://crystal-pools.vercel.app", description: "Pool construction and maintenance company with project showcase.", gradient: "from-cyan-500 to-blue-600" },
+  { name: "SunPath Solar", url: "https://solar-installation.vercel.app", description: "Solar installation company with calculator, benefits, and consultation booking.", gradient: "from-green-500 to-emerald-600" },
+  { name: "Terry Lawn Care", url: "https://terry-lawn.vercel.app", description: "Lawn care and landscaping services with seasonal packages and gallery.", gradient: "from-lime-500 to-green-600" },
+  { name: "Catering Chef", url: "https://catering-chef.vercel.app", description: "Premium catering service with menu showcase, event types, and online booking.", gradient: "from-red-500 to-rose-600" },
+  { name: "MealPrep Pro", url: "https://meal-prep-delivery.vercel.app", description: "Meal prep delivery service with plans, nutrition info, and subscription management.", gradient: "from-orange-500 to-red-500" },
+  { name: "Memphis Indian Restaurant", url: "https://memphis-indian-restaurant.vercel.app", description: "Full restaurant website with categorized menu, pricing, and online reservations.", gradient: "from-red-600 to-orange-600" },
+  { name: "Mobile Notary", url: "https://mobile-notary.vercel.app", description: "Mobile notary services with scheduling, service areas, and document preparation.", gradient: "from-blue-600 to-indigo-700" },
+  { name: "LedgerPro", url: "https://ledgerpro-bookkeeping.vercel.app", description: "Professional bookkeeping and tax services with pricing and client portal.", gradient: "from-slate-600 to-gray-700" },
+  { name: "ShieldPro Security", url: "https://shieldpro-security.vercel.app", description: "Security services company with solutions, monitoring, and quote requests.", gradient: "from-gray-700 to-slate-800" },
+  { name: "TaskFlow Concierge", url: "https://taskflow-concierge.vercel.app", description: "Virtual assistant and concierge services with task management and scheduling.", gradient: "from-purple-500 to-violet-600" },
+  { name: "LinguaBridge", url: "https://linguabridge-translation.vercel.app", description: "Translation and interpretation services with language pairs and booking.", gradient: "from-indigo-500 to-blue-600" },
+  { name: "NestKey", url: "https://nestkey.vercel.app", description: "Real estate platform with property listings, search, and agent profiles.", gradient: "from-teal-500 to-emerald-600" },
+  { name: "Nest & Dwell Interiors", url: "https://nest-dwell-interiors.vercel.app", description: "Interior design and home staging with portfolio gallery and consultations.", gradient: "from-rose-400 to-pink-500" },
+  { name: "Glow Mobile Spa", url: "https://glowmobile-spa.vercel.app", description: "Mobile spa and wellness services with treatments menu and online booking.", gradient: "from-pink-400 to-rose-500" },
+  { name: "Care Connect", url: "https://care-connect.vercel.app", description: "Healthcare connection platform linking patients with providers.", gradient: "from-sky-400 to-blue-500" },
+  { name: "Harmony Road Music", url: "https://harmony-road-music.vercel.app", description: "Music lessons academy with instructor profiles and class scheduling.", gradient: "from-violet-500 to-purple-600" },
+  { name: "Lens & Light Media", url: "https://lens-light-media.vercel.app", description: "Photography and videography services with stunning portfolio showcase.", gradient: "from-gray-600 to-slate-700" },
+  { name: "Drone Photography", url: "https://drone-photography.vercel.app", description: "Aerial drone photography and videography with gallery and booking.", gradient: "from-sky-600 to-cyan-700" },
+  { name: "Graphic Design Pro", url: "https://graphic-design.vercel.app", description: "Professional graphic design services with portfolio and service packages.", gradient: "from-fuchsia-500 to-pink-600" },
+  { name: "AutoPro Detailing", url: "https://auto-pro-detailing.vercel.app", description: "Auto detailing and car care services with packages and online booking.", gradient: "from-red-700 to-rose-800" },
+  { name: "TechServe Pro", url: "https://techserve-pro.vercel.app", description: "IT services and tech support with service plans and remote assistance.", gradient: "from-blue-700 to-indigo-800" },
+  { name: "Vehicle Wraps", url: "https://vehicle-wraps.vercel.app", description: "Custom vehicle wrap design and installation with portfolio gallery.", gradient: "from-orange-600 to-amber-700" },
+  { name: "Mufasa Jeweler", url: "https://mufasa-jeweler.vercel.app", description: "Luxury jewelry e-commerce with product catalog and shopping experience.", gradient: "from-amber-500 to-yellow-600" },
+  { name: "EverAfter Wedding", url: "https://everafter-wedding.vercel.app", description: "Wedding planning and event management with vendor coordination.", gradient: "from-pink-500 to-rose-600" },
+  { name: "Escape Room", url: "https://escape-room.vercel.app", description: "Entertainment venue website with room themes, booking, and pricing.", gradient: "from-purple-700 to-violet-800" },
+  { name: "Furniture Revival", url: "https://furniture-restoration.vercel.app", description: "Furniture restoration and custom pieces with portfolio and services.", gradient: "from-amber-700 to-yellow-800" },
 ]
 
 export default function RecentProjectsPage() {
@@ -106,7 +56,7 @@ export default function RecentProjectsPage() {
             Recent Projects
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto">
-            Explore our latest web applications, e-commerce platforms, and digital solutions — live and ready to showcase.
+            58+ live business websites — each one custom-built with Next.js, React, and Tailwind CSS, deployed on Vercel.
           </p>
           <div className="mt-8">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-green-500/15 border border-green-500/25 rounded-full text-xs font-semibold text-green-300">
@@ -119,7 +69,7 @@ export default function RecentProjectsPage() {
 
       {/* Projects Grid */}
       <section className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {projects.map((project, idx) => (
             <ProjectCard key={idx} project={project} />
           ))}
@@ -148,33 +98,24 @@ export default function RecentProjectsPage() {
   )
 }
 
-function ProjectCard({ project }: { project: Project }) {
-  const Icon = project.icon
-
+function ProjectCard({ project }: { project: any }) {
   return (
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:border-[#BB290E]/20 transition-all duration-300 overflow-hidden"
+      className="group block bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-md hover:shadow-xl hover:border-[#BB290E]/20 transition-all duration-300 overflow-hidden"
     >
-      {/* Square Thumbnail */}
-      <div className={`relative aspect-square bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
-        {/* Decorative circles */}
-        <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full" />
-        <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-white/10 rounded-full" />
-
-        {/* Icon */}
-        <div className="relative z-10 flex flex-col items-center gap-3">
-          <div className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <Icon className="w-8 h-8 text-white" />
-          </div>
+      {/* Thumbnail */}
+      <div className={`relative aspect-[4/3] bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
+        <div className="absolute -top-6 -right-6 w-24 h-24 bg-white/10 rounded-full" />
+        <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-white/10 rounded-full" />
+        <div className="relative z-10 text-center px-4">
+          <span className="text-white/60 text-xs font-bold uppercase tracking-widest block mb-1">PROJECT</span>
           <span className="text-white font-bold text-lg tracking-tight opacity-90 group-hover:opacity-100 transition-opacity">
             {project.name}
           </span>
         </div>
-
-        {/* Live badge */}
         <div className="absolute top-3 right-3 z-10">
           <span className="inline-flex items-center gap-1 px-2 py-1 bg-black/30 backdrop-blur-sm rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
             <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse" />
@@ -185,10 +126,10 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* Content */}
       <div className="p-5 space-y-3">
-        <h3 className="text-lg font-bold text-gray-900 group-hover:text-[#BB290E] transition-colors">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-[#BB290E] transition-colors">
           {project.name}
         </h3>
-        <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">
+        <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed line-clamp-2">
           {project.description}
         </p>
         <div className="flex items-center gap-2 pt-1">
